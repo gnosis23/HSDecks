@@ -83,10 +83,7 @@ namespace HSDecks
 
                 int count = 0;
                 foreach (Image item in currentPage) {
-                    Uri uri = new Uri(Board[count].img);
-                    BitmapImage image = new BitmapImage(uri);
-
-                    item.Source = image;
+                    item.Source = Board[count].image;
 
                     count++;
                 }

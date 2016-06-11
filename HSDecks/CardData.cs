@@ -12,6 +12,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks {
     class CardData {
@@ -172,6 +173,12 @@ namespace HSDecks {
 
                 cards.AddRange(selected);
             }
+
+            cards.ForEach(p => {
+                uri = new Uri(p.img);
+                BitmapImage img = new BitmapImage(uri);
+                p.image = img;
+            });
         }
     }
 

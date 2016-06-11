@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks.Models {
     public class AbstractCard {
@@ -22,5 +23,7 @@ namespace HSDecks.Models {
 
         public string img { get; set; }
         public string imgGold { get; set; }
+
+        public BitmapImage image { get; set; }
     }
 }
