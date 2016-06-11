@@ -127,5 +127,20 @@ namespace HSDecks
             refreshPageAsync();
         }
 
+        private void Image0_Tapped(object sender, TappedRoutedEventArgs e) {
+            // Data source.
+            List<String> itemsList = new List<string>();
+            itemsList.Add("Item 1");
+            itemsList.Add("Item 2");
+
+            // Create a new flip view, add content, 
+            // and add a SelectionChanged event handler.
+            FlipView flipView1 = new FlipView();
+            flipView1.ItemsSource = itemsList;
+            // flipView1.SelectionChanged += FlipView_SelectionChanged;
+
+            // Add the flip view to a parent container in the visual tree.
+            CostStackPanel.Children.Add(flipView1);
+        }
     }
 }

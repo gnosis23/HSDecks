@@ -5,6 +5,7 @@
     xmlns:local="using:HSDecks"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:HSDecks.Models"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Page.Resources>
@@ -15,7 +16,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="CoreGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -81,29 +82,29 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-                            <Image Name="Image0" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image0" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1" Margin="5" >
-                            <Image Name="Image1" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image1" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="5" >
-                            <Image Name="Image2" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image2" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" >
-                            <Image Name="Image3" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image3" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" >
-                            <Image Name="Image4" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image4" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.Column="1" Margin="5" >
-                            <Image Name="Image5" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image5" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.Column="2" Margin="5" >
-                            <Image Name="Image6" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image6" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.Column="3" Margin="5" >
-                            <Image Name="Image7" Style="{StaticResource CardImageStyle}"/>
+                            <Image Name="Image7" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
                         </StackPanel>
 
 
@@ -118,7 +119,8 @@
                                    FontSize="28" FontFamily="Segoe MDL2 Assets"/>
                         </Button>
 
-                        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <StackPanel Name="CostStackPanel" 
+                                    Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
                             <Button Name="Btn0" Content="0" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
                             <Button Name="Btn1" Content="1" Style="{StaticResource CostButtonStyle}" 
@@ -145,7 +147,25 @@
                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
                                   Visibility="Collapsed"/>
                 </Grid>
+
             </SplitView.Content>
         </SplitView>
+        <!--<FlipView x:Name="itemFlipView" Grid.RowSpan="2"
+                  Width="480" Height="270" BorderBrush="Black" BorderThickness="1"
+                  ItemsSource="{Binding Board}">
+            <FlipView.ItemTemplate>
+                <DataTemplate >
+                    <Grid>
+                        <Image Width="480" Height="270" Stretch="UniformToFill" 
+                               Source="{Binding image}"/>
+                        <Border Background="#A5000000" Height="80" VerticalAlignment="Bottom">
+                            <TextBlock Text="{Binding name}" 
+                               FontFamily="Segoe UI" FontSize="26.667" 
+                               Foreground="#CCFFFFFF" Padding="15,20"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>-->
     </Grid>
 </Page>
