@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HSDecks.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -12,7 +15,7 @@ using Windows.Storage;
 
 namespace HSDecks {
     class CardData {
-        public async static Task GetCards(List<BasicCard> cards, int cost) {
+        public async static Task GetCards(List<AbstractCard> cards, int cost) {
             var uri = new Uri("ms-appx:///Assets/cards.json");
             var sampleFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
 
@@ -28,16 +31,158 @@ namespace HSDecks {
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
 
             CardSets Fuck = (CardSets) serializer.ReadObject(ms);
-            var selected = from p in Fuck.Basic
-                           where p.cost == cost && p.img != null
-                           orderby p.playerClass
-                           select p;
 
             cards.Clear();
-            foreach (var item in selected) {
-                cards.Add(item);
+            List<AbstractCard> tempCards = new List<AbstractCard>();
+
+            Fuck.Basic.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.Classic.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.Naxxramas.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.GoblinsvsGnomes.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.TheGrandTournament.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.TheLeagueofExplorers.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+            Fuck.WhispersoftheOldGods.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
+
+            if (cost == 7) {
+                var selected = from p in tempCards
+                               where p.cost >= 7 && p.img != null && p.collectable == true
+                               && p.type != "Hero"
+                               orderby p.name
+                               select p; 
+
+                cards.AddRange(selected);
+            } else {
+                var selected = from p in tempCards
+                               where p.cost == cost && p.img != null && p.collectable == true
+                               && p.type != "Hero"
+                               orderby p.name
+                               select p;
+
+                cards.AddRange(selected);
             }
         }
+    }
+
+    public enum CardClass {
+        Basic, Classic,
+        Naxxramas, GoblinsvsGnomes,
+        BlackrockMountain,
+        TavernBrawl,
+        TheGrandTournament,
+        TheLeagueofExplorers,
+        WhispersoftheOldGods
     }
 
     public class Mechanic {

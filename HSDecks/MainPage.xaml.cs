@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HSDecks.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -25,8 +26,8 @@ namespace HSDecks
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public List<BasicCard> Cards;
-        public ObservableCollection<BasicCard> Board;
+        public List<AbstractCard> Cards;
+        public ObservableCollection<AbstractCard> Board;
 
         int _page = 0;
         int _cost = 0;
@@ -35,8 +36,8 @@ namespace HSDecks
         {
             this.InitializeComponent();
 
-            Cards = new List<BasicCard>();
-            Board = new ObservableCollection<BasicCard>();
+            Cards = new List<AbstractCard>();
+            Board = new ObservableCollection<AbstractCard>();
         }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e) {
@@ -67,7 +68,7 @@ namespace HSDecks
             };
 
             if (Cards.Count >= 8) {
-                BasicCard empty = new BasicCard();
+                AbstractCard empty = new AbstractCard();
                 Board.Clear();
 
                 for (int i = 0; i < 8; i++) {
