@@ -2,32 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace HSDecks
-{
+namespace HSDecks {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
         public List<AbstractCard> Cards;
-        public ObservableCollection<AbstractCard> Board;
+        public ObservableCollection<DetailViewModel> Board;
 
         int _page = 0;
         int _cost = 0;
@@ -37,7 +28,9 @@ namespace HSDecks
             this.InitializeComponent();
 
             Cards = new List<AbstractCard>();
-            Board = new ObservableCollection<AbstractCard>();
+            Board = new ObservableCollection<DetailViewModel>();
+
+            ImageViewer.Visibility = Visibility.Collapsed;
         }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e) {
@@ -73,17 +66,17 @@ namespace HSDecks
 
                 for (int i = 0; i < 8; i++) {
                     if (_page * 8 + i < Cards.Count) {
-                        Board.Add(Cards.ElementAt(_page * 8 + i));
+                        Board.Add(new DetailViewModel(Cards.ElementAt(_page * 8 + i)));
                     } 
                     else {
                         empty.img = "ms-appx:///Assets/yaoming.jpg";
-                        Board.Add(empty);
+                        Board.Add(new DetailViewModel(empty));
                     }
                 }
 
                 int count = 0;
                 foreach (Image item in currentPage) {
-                    item.Source = Board[count].image;
+                    item.Source = Board[count].CardImage;
 
                     count++;
                 }
@@ -129,18 +122,40 @@ namespace HSDecks
 
         private void Image0_Tapped(object sender, TappedRoutedEventArgs e) {
             // Data source.
-            List<String> itemsList = new List<string>();
-            itemsList.Add("Item 1");
-            itemsList.Add("Item 2");
+            ImageViewer.Visibility = Visibility.Visible;
 
-            // Create a new flip view, add content, 
-            // and add a SelectionChanged event handler.
-            FlipView flipView1 = new FlipView();
-            flipView1.ItemsSource = itemsList;
-            // flipView1.SelectionChanged += FlipView_SelectionChanged;
+            List<Image> currentPage = new List<Image>() {
+                    Image0, Image1, Image2, Image3,
+                    Image4, Image5, Image6, Image7
+            };
 
-            // Add the flip view to a parent container in the visual tree.
-            CostStackPanel.Children.Add(flipView1);
+            Image selectedItem = (Image)sender;
+
+            var count = 0;
+            foreach (var item in currentPage) {
+                if (item == selectedItem) {
+                    itemFlipView.SelectedIndex = count;
+                    break;
+                }
+
+                count++;
+            }
         }
+
+        private void ImageViewer_Tapped(object sender, TappedRoutedEventArgs e) {
+            ImageViewer.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    public class DetailViewModel {
+        private AbstractCard card;
+
+        public DetailViewModel(AbstractCard c) {
+            this.card = c;
+        }
+
+        public BitmapImage CardImage { get { return this.card.image; } }
+        public string Name { get { return this.card.name; } }
+        public string Text { get { return this.card.text; } }
     }
 }

@@ -5,7 +5,6 @@
     xmlns:local="using:HSDecks"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:data="using:HSDecks.Models"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Page.Resources>
@@ -16,7 +15,12 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Name="CoreGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="CoreGrid" 
+          RelativePanel.AlignLeftWithPanel="True"
+          RelativePanel.AlignRightWithPanel="True"
+          RelativePanel.AlignTopWithPanel="True"
+          RelativePanel.AlignBottomWithPanel="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -41,131 +45,145 @@
             </StackPanel>
         </RelativePanel>
 
-        <SplitView Name="MenuView" Grid.Row="1" CompactPaneLength="50" DisplayMode="CompactOverlay">
-            <SplitView.Pane>
-                <ListBox SelectionChanged="ListBox_SelectionChanged">
-                    <ListBoxItem Name="HomeListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#xE80F;" Margin="0, 5, 5, 0"
+            <SplitView Name="MenuView" Grid.Row="1" CompactPaneLength="50" DisplayMode="CompactOverlay">
+                <SplitView.Pane>
+                    <ListBox SelectionChanged="ListBox_SelectionChanged">
+                        <ListBoxItem Name="HomeListBoxItem">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE80F;" Margin="0, 5, 5, 0"
                                        FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                            <TextBlock Text="Warrior" FontSize="28" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Name="StarListBoxItem">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#xE734;" Margin="0, 5, 5, 0"
+                                <TextBlock Text="Warrior" FontSize="28" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="StarListBoxItem">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE734;" Margin="0, 5, 5, 0"
                                        FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                            <TextBlock Text="Mage" FontSize="28" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
-                </ListBox>
-            </SplitView.Pane>
+                                <TextBlock Text="Mage" FontSize="28" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </SplitView.Pane>
 
-            <SplitView.Content>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
+                <SplitView.Content>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="50" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-                            <Image Name="Image0" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5" >
-                            <Image Name="Image1" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="5" >
-                            <Image Name="Image2" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" >
-                            <Image Name="Image3" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
+                                <Image Name="Image0" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Margin="5" >
+                                <Image Name="Image1" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" Margin="5" >
+                                <Image Name="Image2" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" >
+                                <Image Name="Image3" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" >
-                            <Image Name="Image4" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5" >
-                            <Image Name="Image5" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="5" >
-                            <Image Name="Image6" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="3" Margin="5" >
-                            <Image Name="Image7" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
-                        </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" >
+                                <Image Name="Image4" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Margin="5" >
+                                <Image Name="Image5" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="2" Margin="5" >
+                                <Image Name="Image6" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="3" Margin="5" >
+                                <Image Name="Image7" Style="{StaticResource CardImageStyle}" Tapped="Image0_Tapped"/>
+                            </StackPanel>
 
 
-                        <Button  Name="PrevPageButton" Grid.Row="1"
+                            <Button  Name="PrevPageButton" Grid.Row="1"
                                  Click="PrevPageButton_Click">
-                            <TextBlock Text="&#xE72B;" FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                        </Button>
+                                <TextBlock Text="&#xE72B;" FontSize="28" FontFamily="Segoe MDL2 Assets"/>
+                            </Button>
 
-                        <Button Name="NextPageButton" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right"
+                            <Button Name="NextPageButton" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right"
                                 Click="NextPageButton_Click">
-                            <TextBlock Text="&#xE72A;" 
+                                <TextBlock Text="&#xE72A;" 
                                    FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                        </Button>
+                            </Button>
 
-                        <StackPanel Name="CostStackPanel" 
+                            <StackPanel Name="CostStackPanel" 
                                     Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
-                            <Button Name="Btn0" Content="0" Style="{StaticResource CostButtonStyle}" 
+                                <Button Name="Btn0" Content="0" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn1" Content="1" Style="{StaticResource CostButtonStyle}" 
+                                <Button Name="Btn1" Content="1" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn2" Content="2" Style="{StaticResource CostButtonStyle}"
+                                <Button Name="Btn2" Content="2" Style="{StaticResource CostButtonStyle}"
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn3" Content="3" Style="{StaticResource CostButtonStyle}"
+                                <Button Name="Btn3" Content="3" Style="{StaticResource CostButtonStyle}"
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn4" Content="4" Style="{StaticResource CostButtonStyle}"
+                                <Button Name="Btn4" Content="4" Style="{StaticResource CostButtonStyle}"
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn5" Content="5" Style="{StaticResource CostButtonStyle}"
+                                <Button Name="Btn5" Content="5" Style="{StaticResource CostButtonStyle}"
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn6" Content="6" Style="{StaticResource CostButtonStyle}" 
+                                <Button Name="Btn6" Content="6" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
-                            <Button Name="Btn7" Content="7" Style="{StaticResource CostButtonStyle}" 
+                                <Button Name="Btn7" Content="7" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
-                        </StackPanel>
-                    </Grid>
+                            </StackPanel>
+                        </Grid>
 
-                    <TextBlock Text="Trade Mark" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        <TextBlock Text="Trade Mark" VerticalAlignment="Center" HorizontalAlignment="Center"
                                Grid.Row="1"/>
 
-                    <ProgressRing Name="Progress" Width="45" Height="45"
+                        <ProgressRing Name="Progress" Width="45" Height="45"
                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
                                   Visibility="Collapsed"/>
-                </Grid>
-
-            </SplitView.Content>
-        </SplitView>
-        <!--<FlipView x:Name="itemFlipView" Grid.RowSpan="2"
-                  Width="480" Height="270" BorderBrush="Black" BorderThickness="1"
-                  ItemsSource="{Binding Board}">
-            <FlipView.ItemTemplate>
-                <DataTemplate >
-                    <Grid>
-                        <Image Width="480" Height="270" Stretch="UniformToFill" 
-                               Source="{Binding image}"/>
-                        <Border Background="#A5000000" Height="80" VerticalAlignment="Bottom">
-                            <TextBlock Text="{Binding name}" 
-                               FontFamily="Segoe UI" FontSize="26.667" 
-                               Foreground="#CCFFFFFF" Padding="15,20"/>
-                        </Border>
                     </Grid>
-                </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>-->
-    </Grid>
+
+                </SplitView.Content>
+            </SplitView>
+        </Grid>
+
+        <RelativePanel x:Name="ImageViewer" RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.AlignBottomWithPanel="True" Background="#7F808080" Tapped="ImageViewer_Tapped" d:IsHidden="True">
+            <FlipView x:Name="itemFlipView"
+                  RelativePanel.AlignHorizontalCenterWithPanel="True"
+                  RelativePanel.AlignVerticalCenterWithPanel="True"
+                  ItemsSource="{x:Bind Board}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate x:DataType="local:DetailViewModel">
+                        <Grid>
+                            <Image Stretch="None" Source="{x:Bind CardImage}"/>
+                            <Border Background="#A5000000" Height="100" VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{x:Bind Name}" 
+                                           FontFamily="Segoe UI" FontSize="32" Margin="10,10,10,0" 
+                                           Foreground="#CCFFFFFF" />
+                                    <TextBlock Text="{x:Bind Text}" 
+                                           FontFamily="Segoe UI" FontSize="16" 
+                                           Foreground="#CCFFFFFF" Margin="10,5,10,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </RelativePanel>
+
+    </RelativePanel>
+
 </Page>
