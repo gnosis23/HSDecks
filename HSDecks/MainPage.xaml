@@ -184,7 +184,7 @@
                                                             Width="200" Height="30">
                                                     <TextBlock Text="{x:Bind card.cost}" FontSize="20" Margin="0,0,10,0" />
                                                     <TextBlock Text="{x:Bind card.name}" FontSize="13" Width="100" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{x:Bind cardCount}" FontSize="20" />
+                                                    <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" FontSize="20" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>

@@ -1,17 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace HSDecks.Models {
-    public class DeckItem {
+    public class DeckItem : INotifyPropertyChanged {
         public AbstractCard card { get; set; }
-        public int cardCount { get; set; }
+        
+        private int _count = 0;
 
         public DeckItem(AbstractCard card) {
             this.card = card;
-            this.cardCount = 1;
+            this._count = 1;
+        }
+
+        public int cardCount {
+            get { return this._count; }
+            set {
+                this._count = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            // Raise the PropertyChanged event, passing the name of the property whose value has changed.
+            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

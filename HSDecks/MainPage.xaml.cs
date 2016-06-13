@@ -163,7 +163,25 @@ namespace HSDecks {
 
             var card = Board.First(p => p.CardImage == selectedItem.Source).card;
             var item = new DeckItem(card);
-            Deck.Add(item);
+
+            // NOTE: deck card logic
+            if (Deck.Sum(p => p.cardCount) < 30) {
+                var prevCard = Deck.FirstOrDefault(p => p.card.cardId == item.card.cardId);
+                if (prevCard == null) {
+                    // insert item order by cost
+                    var nextCard = Deck.FirstOrDefault(p => p.card.cost >= item.card.cost);
+                    if (nextCard == null) {
+                        Deck.Add(item);
+                    }
+                    else {
+                        var index = Deck.IndexOf(nextCard);
+                        Deck.Insert(index, item);
+                    }
+                } 
+                else if (prevCard.cardCount < 2) {
+                    prevCard.cardCount++;
+                }
+            }
             DeckCountChanged();
         }
 
@@ -174,7 +192,7 @@ namespace HSDecks {
         }
 
         private void DeckCountChanged() {
-            DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Count);
+            DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
         }
     }
 
