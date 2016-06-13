@@ -19,6 +19,7 @@ namespace HSDecks {
     {
         public List<AbstractCard> Cards;
         public ObservableCollection<DetailViewModel> Board;
+        public ObservableCollection<DeckItem> Deck;
 
         int _page = 0;
         int _cost = 0;
@@ -30,6 +31,7 @@ namespace HSDecks {
 
             Cards = new List<AbstractCard>();
             Board = new ObservableCollection<DetailViewModel>();
+            Deck = new ObservableCollection<DeckItem>();
 
             ImageViewer.Visibility = Visibility.Collapsed;
         }
@@ -111,7 +113,7 @@ namespace HSDecks {
             await refreshPageAsync();
         }
 
-        private void Image0_Tapped(object sender, TappedRoutedEventArgs e) {
+        private void Image0_Tapped(object sender, DoubleTappedRoutedEventArgs e) {
             // Data source.
             ImageViewer.Visibility = Visibility.Visible;
 
@@ -150,10 +152,34 @@ namespace HSDecks {
 
             await refreshPageAsync();
         }
+
+        private void Image0_Tapped_1(object sender, TappedRoutedEventArgs e) {
+            List<Image> currentPage = new List<Image>() {
+                    Image0, Image1, Image2, Image3,
+                    Image4, Image5, Image6, Image7
+            };
+
+            Image selectedItem = (Image)sender;
+
+            var card = Board.First(p => p.CardImage == selectedItem.Source).card;
+            var item = new DeckItem(card);
+            Deck.Add(item);
+            DeckCountChanged();
+        }
+
+        private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
+            var deckItem = (DeckItem)e.ClickedItem;
+            Deck.Remove(deckItem);
+            DeckCountChanged();
+        }
+
+        private void DeckCountChanged() {
+            DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Count);
+        }
     }
 
     public class DetailViewModel {
-        private AbstractCard card;
+        public AbstractCard card { get; }
 
         public DetailViewModel(AbstractCard c) {
             this.card = c;

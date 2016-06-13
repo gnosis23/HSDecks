@@ -104,6 +104,23 @@ namespace HSDecks {
                 aCard.img = p.img;
                 tempCards.Add(aCard);
             });
+            Fuck.BlackrockMountain.ForEach(p => {
+                AbstractCard aCard = new AbstractCard();
+                aCard.cardId = p.cardId;
+                aCard.collectable = p.collectible;
+                aCard.cost = p.cost;
+                aCard.attack = p.attack;
+                aCard.health = p.health;
+                aCard.name = p.name;
+                aCard.cardSet = p.cardSet;
+                aCard.type = p.type;
+                aCard.race = p.race;
+                aCard.rarity = p.rarity;
+                aCard.text = p.text;
+                aCard.playerClass = p.playerClass;
+                aCard.img = p.img;
+                tempCards.Add(aCard);
+            });
             Fuck.TheGrandTournament.ForEach(p => {
                 AbstractCard aCard = new AbstractCard();
                 aCard.cardId = p.cardId;
