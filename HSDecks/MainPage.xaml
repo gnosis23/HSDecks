@@ -194,12 +194,15 @@
                             <Image Stretch="None" Source="{x:Bind CardImage}"/>
                             <Border Background="#A5000000" Height="150" VerticalAlignment="Bottom">
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{x:Bind Name}" 
-                                           FontFamily="Segoe UI" FontSize="32" Margin="10,10,10,0" 
-                                           Foreground="#CCFFFFFF" />
-                                    <TextBlock Text="{x:Bind Hero}" 
-                                           FontFamily="Segoe UI" FontSize="16" Margin="10,10,10,0" 
-                                           Foreground="#CCFFFFFF" />
+                                    <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
+                                        <TextBlock Text="{x:Bind Name}" 
+                                           FontFamily="Comic Sans MS" FontSize="32" Foreground="#CCFFFFFF" />
+                                        <TextBlock Text="{x:Bind Hero}" 
+                                           FontFamily="Segoe UI" FontSize="32" Foreground="#CC179E61" Margin="10,0" />
+                                        <TextBlock Text="{x:Bind Id}" 
+                                           FontFamily="Segoe UI" FontSize="32" Foreground="#CCFFFFFF" />
+                                    </StackPanel>
+                                    
                                     <TextBlock Text="{x:Bind Text}" 
                                            FontFamily="Segoe UI" FontSize="16" 
                                            Foreground="#CCFFFFFF" Margin="10,5,10,0"/>

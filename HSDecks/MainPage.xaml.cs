@@ -126,15 +126,21 @@ namespace HSDecks {
             foreach (var item in currentPage) {
                 if (item == selectedItem) {
                     itemFlipView.SelectedIndex = count;
+                    Board[count].selected = true;
                     break;
                 }
 
                 count++;
             }
+            var id = Board.First(p => p.selected).Id;
         }
 
         private void ImageViewer_Tapped(object sender, TappedRoutedEventArgs e) {
             ImageViewer.Visibility = Visibility.Collapsed;
+            // unselect all
+            foreach (var item in Board) {
+                item.selected = false;
+            }
         }
 
         private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
@@ -151,11 +157,14 @@ namespace HSDecks {
 
         public DetailViewModel(AbstractCard c) {
             this.card = c;
+            this.selected = false;
         }
 
         public BitmapImage CardImage { get { return this.card.image; } }
         public string Name { get { return this.card.name; } }
         public string Text { get { return this.card.text; } }
         public string Hero { get { return this.card.playerClass; } }
+        public bool selected { get; set; }
+        public string  Id { get { return this.card.cardId; } }
     }
 }
