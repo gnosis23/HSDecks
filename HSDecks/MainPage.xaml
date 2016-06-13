@@ -88,29 +88,29 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-                                <Image Name="Image0" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image0" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="1" Margin="5" >
-                                <Image Name="Image1" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image1" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="2" Margin="5" >
-                                <Image Name="Image2" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image2" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" >
-                                <Image Name="Image3" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image3" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" >
-                                <Image Name="Image4" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image4" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="1" Margin="5" >
-                                <Image Name="Image5" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image5" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="2" Margin="5" >
-                                <Image Name="Image6" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image6" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="3" Margin="5" >
-                                <Image Name="Image7" Style="{StaticResource CardImageStyle}" DoubleTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
+                                <Image Name="Image7" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
                             </StackPanel>
 
 

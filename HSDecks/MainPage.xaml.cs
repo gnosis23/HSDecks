@@ -113,7 +113,7 @@ namespace HSDecks {
             await refreshPageAsync();
         }
 
-        private void Image0_Tapped(object sender, DoubleTappedRoutedEventArgs e) {
+        private void Image0_Tapped(object sender, RightTappedRoutedEventArgs e) {
             // Data source.
             ImageViewer.Visibility = Visibility.Visible;
 
