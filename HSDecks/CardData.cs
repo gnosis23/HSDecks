@@ -174,7 +174,16 @@ namespace HSDecks {
             });
 
             if (heroClass == "All") {
-                if (cost == 7) {
+                if (cost == -1) {
+                    var selected = from p in tempCards
+                                   where p.img != null && p.collectable == true
+                                   && p.type != "Hero"
+                                   orderby p.name
+                                   select p;
+
+                    cards.AddRange(selected);
+                }
+                else if (cost == 7) {
                     var selected = from p in tempCards
                                    where p.cost >= 7 && p.img != null && p.collectable == true
                                    && p.type != "Hero"

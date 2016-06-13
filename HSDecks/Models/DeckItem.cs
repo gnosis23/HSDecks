@@ -11,6 +11,10 @@ namespace HSDecks.Models {
             this.card = card;
             this._count = 1;
         }
+        public DeckItem(AbstractCard card, int _count) {
+            this.card = card;
+            this._count = _count;
+        }
 
         public int cardCount {
             get { return this._count; }
