@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks {
     class CardData {
-        public async static Task GetCards(List<AbstractCard> cards, int cost) {
+        public async static Task GetCards(List<AbstractCard> cards, int cost, string heroClass) {
             var uri = new Uri("ms-appx:///Assets/cards.json");
             var sampleFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
 
@@ -156,22 +156,45 @@ namespace HSDecks {
                 tempCards.Add(aCard);
             });
 
-            if (cost == 7) {
-                var selected = from p in tempCards
-                               where p.cost >= 7 && p.img != null && p.collectable == true
-                               && p.type != "Hero"
-                               orderby p.name
-                               select p; 
+            if (heroClass == "All") {
+                if (cost == 7) {
+                    var selected = from p in tempCards
+                                   where p.cost >= 7 && p.img != null && p.collectable == true
+                                   && p.type != "Hero"
+                                   orderby p.name
+                                   select p;
 
-                cards.AddRange(selected);
-            } else {
-                var selected = from p in tempCards
-                               where p.cost == cost && p.img != null && p.collectable == true
-                               && p.type != "Hero"
-                               orderby p.name
-                               select p;
+                    cards.AddRange(selected);
+                } else {
+                    var selected = from p in tempCards
+                                   where p.cost == cost && p.img != null && p.collectable == true
+                                   && p.type != "Hero"
+                                   orderby p.name
+                                   select p;
 
-                cards.AddRange(selected);
+                    cards.AddRange(selected);
+                }
+            } 
+            else {
+                if (cost == 7) {
+                    var selected = from p in tempCards
+                                   where p.cost >= 7 && p.img != null && p.collectable == true
+                                   && p.type != "Hero"
+                                   && (p.playerClass == heroClass || p.playerClass == null)
+                                   orderby p.playerClass descending, p.name
+                                   select p;
+
+                    cards.AddRange(selected);
+                } else {
+                    var selected = from p in tempCards
+                                   where p.cost == cost && p.img != null && p.collectable == true
+                                   && p.type != "Hero"
+                                   && (p.playerClass == heroClass || p.playerClass == null)
+                                   orderby p.playerClass descending, p.name
+                                   select p;
+
+                    cards.AddRange(selected);
+                }
             }
 
             cards.ForEach(p => {

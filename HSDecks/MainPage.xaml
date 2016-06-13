@@ -125,6 +125,30 @@
 
                             <StackPanel Name="CostStackPanel" 
                                     Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
+                                <Button Name="HeroMenu" Content="Hero" Style="{StaticResource CostButtonStyle}"
+                                        Width="120" FontSize="28">
+                                    <Button.Flyout>
+                                        <MenuFlyout >
+                                            <MenuFlyout.MenuFlyoutPresenterStyle>
+                                                <Style TargetType="MenuFlyoutPresenter">
+                                                    <Setter Property="BorderBrush" Value="CornflowerBlue"/>
+                                                    <Setter Property="BorderThickness" Value="2"/>
+                                                </Style>
+                                            </MenuFlyout.MenuFlyoutPresenterStyle>
+                                            <MenuFlyoutItem Text="All" Width="100" Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutSeparator />
+                                            <MenuFlyoutItem Text="Warrior"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Mage" Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Druid"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Priest"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Hunter"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Shaman"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Paladin"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Rogue"  Click="MenuFlyoutItem_Click"/>
+                                            <MenuFlyoutItem Text="Warlock"  Click="MenuFlyoutItem_Click"/>
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                </Button>
                                 <Button Name="Btn0" Content="0" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
                                 <Button Name="Btn1" Content="1" Style="{StaticResource CostButtonStyle}" 
@@ -168,10 +192,13 @@
                     <DataTemplate x:DataType="local:DetailViewModel">
                         <Grid>
                             <Image Stretch="None" Source="{x:Bind CardImage}"/>
-                            <Border Background="#A5000000" Height="100" VerticalAlignment="Bottom">
+                            <Border Background="#A5000000" Height="150" VerticalAlignment="Bottom">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{x:Bind Name}" 
                                            FontFamily="Segoe UI" FontSize="32" Margin="10,10,10,0" 
+                                           Foreground="#CCFFFFFF" />
+                                    <TextBlock Text="{x:Bind Hero}" 
+                                           FontFamily="Segoe UI" FontSize="16" Margin="10,10,10,0" 
                                            Foreground="#CCFFFFFF" />
                                     <TextBlock Text="{x:Bind Text}" 
                                            FontFamily="Segoe UI" FontSize="16" 

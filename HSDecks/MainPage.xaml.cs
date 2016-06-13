@@ -22,6 +22,7 @@ namespace HSDecks {
 
         int _page = 0;
         int _cost = 0;
+        string _class = "All";
 
         public MainPage()
         {
@@ -41,17 +42,19 @@ namespace HSDecks {
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) {
-            refreshPageAsync();
+        private async void Page_Loaded(object sender, RoutedEventArgs e) {
+            await refreshPageAsync();
         }
 
-        private async void refreshPageAsync() {
+        private async Task refreshPageAsync() {
             Progress.IsActive = true;
             Progress.Visibility = Visibility.Visible;
 
             if ((Cards.Count == 0) 
-                || (Cards[0].cost != _cost)) {
-                Task t = CardData.GetCards(Cards, _cost);
+                || (Cards[0].cost != _cost)
+                || (Cards.Exists(p => p.playerClass != _class))) 
+            {
+                Task t = CardData.GetCards(Cards, _cost, _class);
                 await t;
             }
 
@@ -60,64 +63,52 @@ namespace HSDecks {
                     Image4, Image5, Image6, Image7
             };
 
-            if (Cards.Count >= 8) {
-                AbstractCard empty = new AbstractCard();
-                Board.Clear();
+            AbstractCard empty = new AbstractCard();
+            Board.Clear();
 
-                for (int i = 0; i < 8; i++) {
-                    if (_page * 8 + i < Cards.Count) {
-                        Board.Add(new DetailViewModel(Cards.ElementAt(_page * 8 + i)));
-                    } 
-                    else {
-                        empty.img = "ms-appx:///Assets/yaoming.jpg";
-                        Board.Add(new DetailViewModel(empty));
-                    }
-                }
-
-                int count = 0;
-                foreach (Image item in currentPage) {
-                    item.Source = Board[count].CardImage;
-
-                    count++;
-                }
-            } 
-            else {
-                int count = 0;
-                foreach (Image item in currentPage) {
-                    Uri uri = new Uri("ms-appx:///Assets/yaoming.jpg");
-                    BitmapImage image = new BitmapImage(uri);
-
-                    item.Source = image;
-                    count++;
+            for (int i = 0; i < 8; i++) {
+                if (_page * 8 + i < Cards.Count) {
+                    Board.Add(new DetailViewModel(Cards.ElementAt(_page * 8 + i)));
+                } else {
+                    empty.img = null;
+                    Board.Add(new DetailViewModel(empty));
                 }
             }
+
+            int count = 0;
+            foreach (Image item in currentPage) {
+                item.Source = Board[count].CardImage;
+
+                count++;
+            }
+
 
             Progress.Visibility = Visibility.Collapsed;
             Progress.IsActive = false;
         }
 
-        private void NextPageButton_Click(object sender, RoutedEventArgs e) {
+        private async void NextPageButton_Click(object sender, RoutedEventArgs e) {
             if (Cards.Count > 0 && (_page + 1) * 8 < Cards.Count) {
                 _page++;
             }
 
-            refreshPageAsync();
+            await refreshPageAsync();
         }
 
-        private void PrevPageButton_Click(object sender, RoutedEventArgs e) {
+        private  async void PrevPageButton_Click(object sender, RoutedEventArgs e) {
             if (_page > 0) {
                 _page--;
             }
 
-            refreshPageAsync();
+            await refreshPageAsync();
         }
 
-        private void Btn0_Click(object sender, RoutedEventArgs e) {
+        private async void Btn0_Click(object sender, RoutedEventArgs e) {
             var item = (Button)sender;
             _cost = Int32.Parse(item.Content.ToString());
             _page = 0;
 
-            refreshPageAsync();
+            await refreshPageAsync();
         }
 
         private void Image0_Tapped(object sender, TappedRoutedEventArgs e) {
@@ -145,6 +136,14 @@ namespace HSDecks {
         private void ImageViewer_Tapped(object sender, TappedRoutedEventArgs e) {
             ImageViewer.Visibility = Visibility.Collapsed;
         }
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
+            var item = (MenuFlyoutItem)sender;
+            _class = item.Text;
+            HeroMenu.Content = item.Text;
+
+            await refreshPageAsync();
+        }
     }
 
     public class DetailViewModel {
@@ -157,5 +156,6 @@ namespace HSDecks {
         public BitmapImage CardImage { get { return this.card.image; } }
         public string Name { get { return this.card.name; } }
         public string Text { get { return this.card.text; } }
+        public string Hero { get { return this.card.playerClass; } }
     }
 }
