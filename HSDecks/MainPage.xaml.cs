@@ -165,7 +165,7 @@ namespace HSDecks {
             var item = new DeckItem(card);
 
             // NOTE: deck card logic
-            if (Deck.Sum(p => p.cardCount) < 30) {
+            if (Deck.Sum(p => p.cardCount) < 30 && _class != "All") {
                 var prevCard = Deck.FirstOrDefault(p => p.card.cardId == item.card.cardId);
                 if (prevCard == null) {
                     // insert item order by cost
@@ -178,7 +178,7 @@ namespace HSDecks {
                         Deck.Insert(index, item);
                     }
                 } 
-                else if (prevCard.cardCount < 2) {
+                else if (prevCard.cardCount < 2 && prevCard.card.rarity != "Legendary") {
                     prevCard.cardCount++;
                 }
             }

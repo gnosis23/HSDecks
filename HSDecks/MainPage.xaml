@@ -176,19 +176,30 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Name="DeckTitle" Text="Your Deck" FontSize="30" />
-                                    <ListView Grid.Row="1" ItemsSource="{x:Bind Deck}" Name="DeckList"
+                                <ListView Grid.Row="1" ItemsSource="{x:Bind Deck}" Name="DeckList"
                                               ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
                                     <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="dd:DeckItem">
-                                                <StackPanel Orientation="Horizontal" Background="Bisque" BorderBrush="DarkBlue" 
+                                        <DataTemplate x:DataType="dd:DeckItem">
+                                            <RelativePanel Background="Bisque" BorderBrush="DarkBlue" 
                                                             Width="200" Height="30">
-                                                    <TextBlock Text="{x:Bind card.cost}" FontSize="20" Margin="0,0,10,0" />
-                                                    <TextBlock Text="{x:Bind card.name}" FontSize="13" Width="100" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" FontSize="20" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                                                <TextBlock Text="{x:Bind card.cost}" Name="CostTextBlock"
+                                                               FontSize="20" Margin="0,0,10,0" Width="50"
+                                                               RelativePanel.AlignLeftWithPanel="True"/>
+                                                <TextBlock Text="{x:Bind card.name}" FontSize="13" Width="100" Margin="0,0,10,0" 
+                                                               RelativePanel.RightOf="CostTextBlock"
+                                                               RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" 
+                                                           Name="CardCountTextBlock"
+                                                           FontSize="20" 
+                                                           RelativePanel.AlignRightWithPanel="True"/>
+                                                <TextBlock Text="&#xE735;" FontFamily="Segoe MDL2 Assets" 
+                                                           RelativePanel.LeftOf="CardCountTextBlock"
+                                                           RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                                            </RelativePanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </Grid>
                         </Grid>
                         <TextBlock Text="Trade Mark" VerticalAlignment="Center" HorizontalAlignment="Center"
