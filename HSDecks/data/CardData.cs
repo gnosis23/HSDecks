@@ -240,7 +240,11 @@ namespace HSDecks {
         TheLeagueofExplorers,
         WhispersoftheOldGods
     }
-
+    public enum PlayerClass {
+        Druid, Rogue, Mage,
+        Shaman, Paladin, Warlock,
+        Warrior, Priest, Hunter
+    }
     public class Mechanic {
         public string name { get; set; }
     }

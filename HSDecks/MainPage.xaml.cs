@@ -58,6 +58,8 @@ namespace HSDecks {
             await refreshPageAsync();
             await CardData.GetCards(AllCards, -1, "All");
             DeckInitializing(AllCards);
+
+            DeckFrame.Navigate(typeof(DeckMenu));
         }
 
         private async Task refreshPageAsync() {
@@ -204,7 +206,7 @@ namespace HSDecks {
         }
 
         private void DeckCountChanged() {
-            DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
+            // DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e) {

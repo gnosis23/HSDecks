@@ -95,13 +95,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CardData.cs" />
-    <Compile Include="DeckSaver.cs" />
-    <Compile Include="FileStuff.cs" />
+    <Compile Include="data\CardData.cs" />
+    <Compile Include="data\DeckSaver.cs" />
+    <Compile Include="data\FileStuff.cs" />
+    <Compile Include="DeckMenu.xaml.cs">
+      <DependentUpon>DeckMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AbstractCard.cs" />
+    <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\DeckItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DeckMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
