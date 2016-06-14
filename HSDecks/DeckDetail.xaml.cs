@@ -47,5 +47,15 @@ namespace HSDecks {
         private void Button_Click(object sender, RoutedEventArgs e) {
             Frame.GoBack(new EntranceNavigationTransitionInfo());
         }
+
+        private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
+            var deckItem = (DeckItem)e.ClickedItem;
+            OneDeck.items.Remove(deckItem);
+            DeckCountChanged();
+        }
+
+        private void DeckCountChanged() {
+            // DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
+        }
     }
 }

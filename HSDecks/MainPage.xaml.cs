@@ -18,7 +18,6 @@ namespace HSDecks {
     public sealed partial class MainPage : Page
     {
         public List<AbstractCard> Cards;
-        public List<AbstractCard> AllCards;
         public ObservableCollection<DetailViewModel> Board;
         public ObservableCollection<DeckItem> Deck;
 
@@ -31,20 +30,13 @@ namespace HSDecks {
             this.InitializeComponent();
 
             Cards = new List<AbstractCard>();
-            AllCards = new List<AbstractCard>();
             Board = new ObservableCollection<DetailViewModel>();
             Deck = new ObservableCollection<DeckItem>();
 
             ImageViewer.Visibility = Visibility.Collapsed;
         }
 
-        private async void DeckInitializing(List<AbstractCard> CardPool) {
-            var str = await FileStuff.ReadFromFileAsync();
-            var oldDeckList = DeckSaver.StringToDeck(str, CardPool);
 
-            oldDeckList.ForEach(p => Deck.Add(p));
-            DeckCountChanged();
-        }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e) {
             MenuView.IsPaneOpen = !MenuView.IsPaneOpen;
@@ -56,8 +48,6 @@ namespace HSDecks {
 
         private async void Page_Loaded(object sender, RoutedEventArgs e) {
             await refreshPageAsync();
-            await CardData.GetCards(AllCards, -1, "All");
-            DeckInitializing(AllCards);
 
             DeckFrame.Navigate(typeof(DeckMenu));
         }
@@ -196,18 +186,10 @@ namespace HSDecks {
                     prevCard.cardCount++;
                 }
             }
-            DeckCountChanged();
+            // DeckCountChanged();
         }
 
-        private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
-            var deckItem = (DeckItem)e.ClickedItem;
-            Deck.Remove(deckItem);
-            DeckCountChanged();
-        }
 
-        private void DeckCountChanged() {
-            // DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
-        }
 
         private async void Button_Click(object sender, RoutedEventArgs e) {
             var str = DeckSaver.DeckToString(Deck.ToList());
