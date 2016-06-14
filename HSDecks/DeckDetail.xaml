@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{x:Bind OneDeck.name}" FontSize="24"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="Save"  FontSize="18" Margin="0,0,20,0" />
+            <Button Content="Save"  FontSize="18" Margin="0,0,20,0" Click="Button_Click_1" />
             <Button Content="Back"  FontSize="18" Click="Button_Click"/>
         </StackPanel>
         <ListView Grid.Row="2" ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"

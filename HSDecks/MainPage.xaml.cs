@@ -19,11 +19,13 @@ namespace HSDecks {
     {
         public List<AbstractCard> Cards;
         public ObservableCollection<DetailViewModel> Board;
-        public ObservableCollection<DeckItem> Deck;
+        public ObservableCollection<DeckItem> SelectedDeck;
+        public ObservableCollection<Deck> Decks;
 
         int _page = 0;
         int _cost = 0;
         string _class = "All";
+        List<AbstractCard> _AllCards;
 
         public MainPage()
         {
@@ -31,12 +33,22 @@ namespace HSDecks {
 
             Cards = new List<AbstractCard>();
             Board = new ObservableCollection<DetailViewModel>();
-            Deck = new ObservableCollection<DeckItem>();
+            // SelectedDeck = new ObservableCollection<DeckItem>();
+            Decks = new ObservableCollection<Deck>();
+            _AllCards = new List<AbstractCard>();
 
             ImageViewer.Visibility = Visibility.Collapsed;
         }
 
+        private async Task<ObservableCollection<DeckItem>> DeckInitializing(List<AbstractCard> CardPool) {
+            var str = await FileStuff.ReadFromFileAsync();
+            var oldDeckList = DeckSaver.StringToDeck(str, CardPool);
 
+            var ret = new ObservableCollection<DeckItem>();
+            oldDeckList.ForEach(p => ret.Add(p));
+            // DeckCountChanged();
+            return ret;
+        }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e) {
             MenuView.IsPaneOpen = !MenuView.IsPaneOpen;
@@ -49,7 +61,16 @@ namespace HSDecks {
         private async void Page_Loaded(object sender, RoutedEventArgs e) {
             await refreshPageAsync();
 
-            DeckFrame.Navigate(typeof(DeckMenu));
+            await CardData.GetCards(_AllCards, -1, "All");
+
+
+            var deck = new Deck(1, "shit hunter", PlayerClass.Hunter);
+            deck.items = await DeckInitializing(_AllCards);
+            Decks.Add(deck);
+
+            SelectedDeck = deck.items;
+
+            DeckFrame.Navigate(typeof(DeckMenu), Decks);
         }
 
         private async Task refreshPageAsync() {
@@ -169,17 +190,17 @@ namespace HSDecks {
             var item = new DeckItem(card);
 
             // NOTE: deck card logic
-            if (Deck.Sum(p => p.cardCount) < 30 && _class != "All") {
-                var prevCard = Deck.FirstOrDefault(p => p.card.cardId == item.card.cardId);
+            if (SelectedDeck.Sum(p => p.cardCount) < 30 && _class != "All") {
+                var prevCard = SelectedDeck.FirstOrDefault(p => p.card.cardId == item.card.cardId);
                 if (prevCard == null) {
                     // insert item order by cost
-                    var nextCard = Deck.FirstOrDefault(p => p.card.cost >= item.card.cost);
+                    var nextCard = SelectedDeck.FirstOrDefault(p => p.card.cost >= item.card.cost);
                     if (nextCard == null) {
-                        Deck.Add(item);
+                        SelectedDeck.Add(item);
                     }
                     else {
-                        var index = Deck.IndexOf(nextCard);
-                        Deck.Insert(index, item);
+                        var index = SelectedDeck.IndexOf(nextCard);
+                        SelectedDeck.Insert(index, item);
                     }
                 } 
                 else if (prevCard.cardCount < 2 && prevCard.card.rarity != "Legendary") {
@@ -189,22 +210,6 @@ namespace HSDecks {
             // DeckCountChanged();
         }
 
-
-
-        private async void Button_Click(object sender, RoutedEventArgs e) {
-            var str = DeckSaver.DeckToString(Deck.ToList());
-            await FileStuff.WriteToFileAsync(str);
-
-            ContentDialog saveDialog = new ContentDialog() {
-                Title = "Save Deck",
-                Content = "Deck saved!",
-                PrimaryButtonText = "Ok"
-            };
-
-            // saveDialog.Content = str;
-            
-            await saveDialog.ShowAsync();
-        }
     }
 
     public class DetailViewModel {

@@ -1,17 +1,8 @@
 ﻿using HSDecks.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -56,6 +47,21 @@ namespace HSDecks {
 
         private void DeckCountChanged() {
             // DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e) {
+            var str = DeckSaver.DeckToString(OneDeck.items.ToList());
+            await FileStuff.WriteToFileAsync(str);
+
+            ContentDialog saveDialog = new ContentDialog() {
+                Title = "Save Deck",
+                Content = "Deck saved!",
+                PrimaryButtonText = "Ok"
+            };
+
+            // saveDialog.Content = str;
+
+            await saveDialog.ShowAsync();
         }
     }
 }

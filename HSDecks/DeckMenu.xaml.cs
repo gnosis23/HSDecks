@@ -1,19 +1,6 @@
 ﻿using HSDecks.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -26,32 +13,16 @@ namespace HSDecks {
     public sealed partial class DeckMenu : Page {
         public ObservableCollection<Deck> Decks;
 
-        private List<AbstractCard> _AllCards;
 
         public DeckMenu() {
             this.InitializeComponent();
 
-            Decks = new ObservableCollection<Deck>();
-            _AllCards = new List<AbstractCard>();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e) {
-            await CardData.GetCards(_AllCards, -1, "All");
-            
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            base.OnNavigatedTo(e);
 
-            var deck = new Deck(1, "shit hunter", PlayerClass.Hunter);
-            deck.items = await DeckInitializing(_AllCards);
-            Decks.Add(deck);
-        }
-
-        private async Task<ObservableCollection<DeckItem>> DeckInitializing(List<AbstractCard> CardPool) {
-            var str = await FileStuff.ReadFromFileAsync();
-            var oldDeckList = DeckSaver.StringToDeck(str, CardPool);
-
-            var ret = new ObservableCollection<DeckItem>();
-            oldDeckList.ForEach(p => ret.Add(p));
-            // DeckCountChanged();
-            return ret;
+            Decks = (ObservableCollection<Deck>)e.Parameter;
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
