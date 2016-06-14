@@ -169,7 +169,7 @@
                                     Click="Btn0_Click"/>
                             </StackPanel>
 
-                            <Frame Name="DeckFrame" Grid.Column="4" Grid.RowSpan="3"  />
+                            <Frame Name="DeckFrame" Grid.Column="4" Grid.RowSpan="3" Margin="0,20,0,0" />
                         </Grid>
                         <TextBlock Text="Trade Mark" VerticalAlignment="Center" HorizontalAlignment="Center"
                                Grid.Row="1"/>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,13 +34,13 @@ namespace HSDecks {
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             for (int i = 0; i < 5; i++) {
                 Decks.Add(new Deck(1, "shit hunter", PlayerClass.Hunter));
-                Decks.Add(new Deck(1, "shit druid", PlayerClass.Druid));
-                Decks.Add(new Deck(1, "shit mage", PlayerClass.Mage));
+                Decks.Add(new Deck(2, "shit druid", PlayerClass.Druid));
+                Decks.Add(new Deck(3, "shit mage", PlayerClass.Mage));
             }
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-
+            this.Frame.Navigate(typeof(DeckDetail), e.ClickedItem, new DrillInNavigationTransitionInfo());
         }
     }
 }
