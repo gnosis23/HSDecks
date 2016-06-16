@@ -4,11 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HSDecks"
     xmlns:dd="using:HSDecks.Models"
+    xmlns:cc="using:HSDecks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="200" 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="250" 
           x:Name="shit" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -24,29 +25,7 @@
                   ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="dd:DeckItem">
-                    <RelativePanel BorderBrush="DarkBlue" 
-                                   Width="150" Height="30" Background="Gray">
-                        <TextBlock Text="{x:Bind card.cost}" Name="CostTextBlock"
-                                      FontSize="20" Margin="0,0,10,0" Width="20"
-                                      RelativePanel.AlignLeftWithPanel="True" Foreground="#FFC8C896"/>
-                        <TextBlock Text="{x:Bind card.name}" FontSize="13"  Margin="0,0,10,0" 
-                                      RelativePanel.RightOf="CostTextBlock"
-                                      RelativePanel.AlignVerticalCenterWithPanel="True"
-                                      VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFC8C896"/>
-                        <RelativePanel RelativePanel.AlignRightWithPanel="True" 
-                                       RelativePanel.AlignTopWithPanel="True"
-                                       RelativePanel.AlignBottomWithPanel="True"
-                                       Width="50">
-                            <RelativePanel.Background>
-                                <ImageBrush ImageSource="{x:Bind card.sImage}" Stretch="UniformToFill"/>
-                            </RelativePanel.Background>
-                            <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" 
-                                  Name="CardCountTextBlock"
-                                  FontSize="20" Width="30"
-                                  RelativePanel.AlignRightWithPanel="True" Foreground="#FFE7F112"/>
-                        </RelativePanel>
-
-                    </RelativePanel>
+                    <cc:DeckItemBlock VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

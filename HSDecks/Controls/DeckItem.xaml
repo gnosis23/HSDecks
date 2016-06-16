@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="HSDecks.Controls.DeckItemBlock"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HSDecks.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Height="40" Width="200" Margin="0">
+
+    <Border BorderThickness="1" BorderBrush="Black">
+        <RelativePanel>
+            <RelativePanel x:Name="CostGrid" RelativePanel.AlignLeftWithPanel="True" 
+                  Width="46" Height="40" Margin="0" Background="#FF335578">
+                <TextBlock  Text="{x:Bind Item.card.cost}" FontSize="20" Foreground="White" 
+                            RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                            RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            </RelativePanel>
+
+            <Viewbox RelativePanel.AlignRightWithPanel="True" 
+                     RelativePanel.AlignTopWithPanel="True"
+                     RelativePanel.AlignBottomWithPanel="True"
+                     x:Name="CountViewBox"
+                     Width="70" StretchDirection="DownOnly" Stretch="Fill" Visibility="Collapsed"
+                     HorizontalAlignment="Right" Margin="0,0,2,0">
+                <StackPanel>
+                    <TextBlock Text="1" HorizontalAlignment="Left"
+                               Foreground="{StaticResource GrayTextColorBrush}" FontSize="14" />
+                </StackPanel>
+            </Viewbox>
+
+            <RelativePanel Margin="0" RelativePanel.RightOf="CostGrid" RelativePanel.LeftOf="CountViewBox"
+                        RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
+                        Background="#FF313131" >
+                <RelativePanel Canvas.ZIndex="100" 
+                               RelativePanel.AlignVerticalCenterWithPanel="True"
+                               RelativePanel.AlignTopWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True" Opacity="0.6">
+                    <RelativePanel.Background>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+                            <GradientStop Color="#FF130707" Offset="0.361"/>
+                            <GradientStop Color="#FF706B6B"/>
+                            <GradientStop Color="#FF130707" Offset="0.187"/>
+                        </LinearGradientBrush>
+                    </RelativePanel.Background>
+                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Comic Sans" FontSize="16" Foreground="White"
+                               RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                </RelativePanel>
+                <Grid Width="150" Height="40" RelativePanel.AlignRightWithPanel="True">
+                    <Grid.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="{x:Bind Item.card.sImage}"/>
+                    </Grid.Background>
+                </Grid>
+            </RelativePanel>
+        </RelativePanel>
+    </Border>
+</UserControl>

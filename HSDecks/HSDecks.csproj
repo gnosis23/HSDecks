@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeckItem.xaml.cs">
+      <DependentUpon>DeckItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="data\CardData.cs" />
     <Compile Include="data\DeckSaver.cs" />
     <Compile Include="data\FileStuff.cs" />
@@ -1888,6 +1891,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DeckItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeckDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
