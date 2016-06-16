@@ -204,7 +204,7 @@ namespace HSDecks {
                     }
                 } 
                 else if (prevCard.cardCount < 2 && prevCard.card.rarity != "Legendary") {
-                    prevCard.cardCount++;
+                    prevCard.addCard();
                 }
             }
             // DeckCountChanged();

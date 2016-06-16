@@ -10,23 +10,26 @@
     <Border BorderThickness="1" BorderBrush="Black">
         <RelativePanel>
             <RelativePanel x:Name="CostGrid" RelativePanel.AlignLeftWithPanel="True" 
-                  Width="46" Height="40" Margin="0" Background="#FF335578">
+                  Width="30" Height="40" Margin="0" Background="#FF335578">
                 <TextBlock  Text="{x:Bind Item.card.cost}" FontSize="20" Foreground="White" 
+                            VerticalAlignment="Center"
                             RelativePanel.AlignHorizontalCenterWithPanel="True" 
-                            RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                            RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold" FontFamily="Segoe UI Black"/>
             </RelativePanel>
 
-            <Viewbox RelativePanel.AlignRightWithPanel="True" 
-                     RelativePanel.AlignTopWithPanel="True"
-                     RelativePanel.AlignBottomWithPanel="True"
-                     x:Name="CountViewBox"
-                     Width="70" StretchDirection="DownOnly" Stretch="Fill" Visibility="Collapsed"
-                     HorizontalAlignment="Right" Margin="0,0,2,0">
-                <StackPanel>
-                    <TextBlock Text="1" HorizontalAlignment="Left"
-                               Foreground="{StaticResource GrayTextColorBrush}" FontSize="14" />
-                </StackPanel>
-            </Viewbox>
+            <Grid RelativePanel.AlignRightWithPanel="True" 
+                  RelativePanel.AlignTopWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  x:Name="CountViewBox" 
+                  Width="20" 
+                  HorizontalAlignment="Right" Margin="0"
+                  Visibility="{x:Bind Path=Item.visible, Mode=OneWay}">
+                <RelativePanel  Background="#FF313131">
+                    <TextBlock Text="{x:Bind Path=Item.strCardCount,Mode=OneWay}" HorizontalAlignment="Left"
+                               Foreground="Yellow" FontSize="18" 
+                               RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5,0,0,0" />
+                </RelativePanel>
+            </Grid>
 
             <RelativePanel Margin="0" RelativePanel.RightOf="CostGrid" RelativePanel.LeftOf="CountViewBox"
                         RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
@@ -43,7 +46,7 @@
                             <GradientStop Color="#FF130707" Offset="0.187"/>
                         </LinearGradientBrush>
                     </RelativePanel.Background>
-                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Comic Sans" FontSize="16" Foreground="White"
+                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Comic Sans MS" FontSize="16" Foreground="White"
                                RelativePanel.AlignVerticalCenterWithPanel="True"/>
                 </RelativePanel>
                 <Grid Width="150" Height="40" RelativePanel.AlignRightWithPanel="True">

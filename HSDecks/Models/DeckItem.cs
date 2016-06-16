@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
 
 namespace HSDecks.Models {
     public class DeckItem : INotifyPropertyChanged {
@@ -22,6 +24,36 @@ namespace HSDecks.Models {
                 this._count = value;
                 this.OnPropertyChanged();
             }
+        }
+
+        public string strCardCount {
+            get {
+                if (this._count == 2) {
+                    return "2";
+                } else if (this.card.rarity == "Legendary") {
+                    return "*";
+                } else {
+                    return "";
+                }
+            }
+            set { this.OnPropertyChanged(); }
+        }
+
+        public Visibility visible {
+            get {
+                if (this.card.rarity == "Legendary" || this._count == 2) {
+                    return Visibility.Visible;
+                } else {
+                    return Visibility.Collapsed;
+                }
+            }
+            set { this.OnPropertyChanged(); }
+        }
+
+        public void addCard() {
+            this.cardCount = 2;
+            this.strCardCount = "";
+            this.visible = Visibility.Visible;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
