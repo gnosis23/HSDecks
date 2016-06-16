@@ -25,5 +25,6 @@ namespace HSDecks.Models {
         public string imgGold { get; set; }
 
         public BitmapImage image { get; set; }
+        public BitmapImage sImage { get; set; }
     }
 }

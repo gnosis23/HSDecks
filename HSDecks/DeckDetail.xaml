@@ -24,22 +24,28 @@
                   ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="dd:DeckItem">
-                    <RelativePanel Background="Bisque" BorderBrush="DarkBlue" 
-                                   Width="150" Height="30">
+                    <RelativePanel BorderBrush="DarkBlue" 
+                                   Width="150" Height="30" Background="Gray">
                         <TextBlock Text="{x:Bind card.cost}" Name="CostTextBlock"
                                       FontSize="20" Margin="0,0,10,0" Width="20"
-                                      RelativePanel.AlignLeftWithPanel="True"/>
+                                      RelativePanel.AlignLeftWithPanel="True" Foreground="#FFC8C896"/>
                         <TextBlock Text="{x:Bind card.name}" FontSize="13"  Margin="0,0,10,0" 
                                       RelativePanel.RightOf="CostTextBlock"
                                       RelativePanel.AlignVerticalCenterWithPanel="True"
-                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" 
+                                      VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFC8C896"/>
+                        <RelativePanel RelativePanel.AlignRightWithPanel="True" 
+                                       RelativePanel.AlignTopWithPanel="True"
+                                       RelativePanel.AlignBottomWithPanel="True"
+                                       Width="50">
+                            <RelativePanel.Background>
+                                <ImageBrush ImageSource="{x:Bind card.sImage}" Stretch="UniformToFill"/>
+                            </RelativePanel.Background>
+                            <TextBlock Text="{x:Bind Path=cardCount, Mode=OneWay}" 
                                   Name="CardCountTextBlock"
                                   FontSize="20" Width="30"
-                                  RelativePanel.AlignRightWithPanel="True"/>
-                        <TextBlock Text="&#xE735;" FontFamily="Segoe MDL2 Assets" 
-                                  RelativePanel.LeftOf="CardCountTextBlock"
-                                  RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                                  RelativePanel.AlignRightWithPanel="True" Foreground="#FFE7F112"/>
+                        </RelativePanel>
+
                     </RelativePanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

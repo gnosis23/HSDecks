@@ -227,6 +227,10 @@ namespace HSDecks {
                 uri = new Uri(p.img);
                 BitmapImage img = new BitmapImage(uri);
                 p.image = img;
+
+                uri = new Uri(String.Format("ms-appx:///Assets/bars/{0}.png", p.cardId));
+                img = new BitmapImage(uri);
+                p.sImage = img;
             });
         }
     }
