@@ -35,21 +35,7 @@ namespace HSDecks {
             OneDeck = (Deck)e.Parameter;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            Frame.GoBack(new EntranceNavigationTransitionInfo());
-        }
-
-        private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
-            var deckItem = (DeckItem)e.ClickedItem;
-            OneDeck.items.Remove(deckItem);
-            DeckCountChanged();
-        }
-
-        private void DeckCountChanged() {
-            // DeckTitle.Text = string.Format("Your Deck ({0})", Deck.Sum(p => p.cardCount));
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e) {
+        private async void Button_Click(object sender, RoutedEventArgs e) {
             var str = DeckSaver.DeckToString(OneDeck.items.ToList());
             await FileStuff.WriteToFileAsync(str);
 
@@ -62,6 +48,14 @@ namespace HSDecks {
             // saveDialog.Content = str;
 
             await saveDialog.ShowAsync();
+
+            Frame.GoBack(new EntranceNavigationTransitionInfo());
         }
+
+        private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
+            var deckItem = (DeckItem)e.ClickedItem;
+            OneDeck.Remove(deckItem);
+        }
+
     }
 }

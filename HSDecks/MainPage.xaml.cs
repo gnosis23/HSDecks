@@ -19,7 +19,7 @@ namespace HSDecks {
     {
         public List<AbstractCard> Cards;
         public ObservableCollection<DetailViewModel> Board;
-        public ObservableCollection<DeckItem> SelectedDeck;
+        public Deck SelectedDeck;
         public ObservableCollection<Deck> Decks;
 
         int _page = 0;
@@ -68,7 +68,7 @@ namespace HSDecks {
             deck.items = await DeckInitializing(_AllCards);
             Decks.Add(deck);
 
-            SelectedDeck = deck.items;
+            SelectedDeck = deck;
 
             DeckFrame.Navigate(typeof(DeckMenu), Decks);
         }
@@ -190,26 +190,11 @@ namespace HSDecks {
             var item = new DeckItem(card);
 
             // NOTE: deck card logic
-            if (SelectedDeck.Sum(p => p.cardCount) < 30 && _class != "All") {
-                var prevCard = SelectedDeck.FirstOrDefault(p => p.card.cardId == item.card.cardId);
-                if (prevCard == null) {
-                    // insert item order by cost
-                    var nextCard = SelectedDeck.FirstOrDefault(p => p.card.cost >= item.card.cost);
-                    if (nextCard == null) {
-                        SelectedDeck.Add(item);
-                    }
-                    else {
-                        var index = SelectedDeck.IndexOf(nextCard);
-                        SelectedDeck.Insert(index, item);
-                    }
-                } 
-                else if (prevCard.cardCount < 2 && prevCard.card.rarity != "Legendary") {
-                    prevCard.addCard();
-                }
+            if (SelectedDeck.cardCount < 30 && _class != "All") {
+                SelectedDeck.Add(item);
             }
-            // DeckCountChanged();
-        }
 
+        }
     }
 
     public class DetailViewModel {

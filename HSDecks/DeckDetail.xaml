@@ -9,25 +9,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="220" 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="230" 
           x:Name="shit" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{x:Bind OneDeck.name}" FontSize="24"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="Save"  FontSize="18" Margin="0,0,20,0" Click="Button_Click_1" />
+
+        <cc:DeckHeadBlock DataContext="{x:Bind OneDeck}">
+        </cc:DeckHeadBlock>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" DataContext="{x:Bind OneDeck}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{x:Bind Path=OneDeck.cardCount,Mode=OneWay}" />
+                <TextBlock Text="/ 30" />
+            </StackPanel>
             <Button Content="Back"  FontSize="18" Click="Button_Click"/>
         </StackPanel>
-        <ListView Grid.Row="2" ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
+
+        <Grid  Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="DimGray">
+            <ListView ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
                   ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="dd:DeckItem">
-                    <cc:DeckItemBlock Margin="0" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="dd:DeckItem">
+                        <cc:DeckItemBlock Margin="0" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>
