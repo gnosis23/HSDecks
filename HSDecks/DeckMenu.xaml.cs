@@ -1,4 +1,5 @@
 ﻿using HSDecks.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -25,7 +26,10 @@ namespace HSDecks {
             Decks = (ObservableCollection<Deck>)e.Parameter;
         }
 
+
+
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
+            App.SelectedDeck = (Deck)e.ClickedItem;
             this.Frame.Navigate(typeof(DeckDetail), e.ClickedItem, new DrillInNavigationTransitionInfo());
         }
     }

@@ -1,5 +1,6 @@
 ﻿using HSDecks.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -36,7 +37,7 @@ namespace HSDecks {
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e) {
-            var str = DeckSaver.DeckToString(OneDeck.items.ToList());
+            var str = DeckSaver.DeckListToString(new List<Deck>(App.Decks));
             await FileStuff.WriteToFileAsync(str);
 
             ContentDialog saveDialog = new ContentDialog() {
@@ -44,9 +45,6 @@ namespace HSDecks {
                 Content = "Deck saved!",
                 PrimaryButtonText = "Ok"
             };
-
-            // saveDialog.Content = str;
-
             await saveDialog.ShowAsync();
 
             Frame.GoBack(new EntranceNavigationTransitionInfo());

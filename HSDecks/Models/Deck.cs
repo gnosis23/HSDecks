@@ -26,6 +26,15 @@ namespace HSDecks.Models {
                 playerClass.ToString())));
         }
 
+        public Deck(int id, string name, PlayerClass playerClass, List<DeckItem> xxx) {
+            this.Id = id;
+            this.name = name;
+            this.playerClass = playerClass;
+            hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
+                playerClass.ToString())));
+            this._items = new ObservableCollection<DeckItem>(xxx);
+        }
+
         public void Add(DeckItem item) {
             if (cardCount < 30) {
                 var prevCard = items.FirstOrDefault(p => p.card.cardId == item.card.cardId);

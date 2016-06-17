@@ -19,13 +19,10 @@ namespace HSDecks {
     {
         public List<AbstractCard> Cards;
         public ObservableCollection<DetailViewModel> Board;
-        public Deck SelectedDeck;
-        public ObservableCollection<Deck> Decks;
 
         int _page = 0;
         int _cost = 0;
         string _class = "All";
-        List<AbstractCard> _AllCards;
 
         public MainPage()
         {
@@ -33,18 +30,15 @@ namespace HSDecks {
 
             Cards = new List<AbstractCard>();
             Board = new ObservableCollection<DetailViewModel>();
-            // SelectedDeck = new ObservableCollection<DeckItem>();
-            Decks = new ObservableCollection<Deck>();
-            _AllCards = new List<AbstractCard>();
 
             ImageViewer.Visibility = Visibility.Collapsed;
         }
 
-        private async Task<ObservableCollection<DeckItem>> DeckInitializing(List<AbstractCard> CardPool) {
+        private async Task<ObservableCollection<Deck>> DeckInitializing() {
             var str = await FileStuff.ReadFromFileAsync();
-            var oldDeckList = DeckSaver.StringToDeck(str, CardPool);
+            var oldDeckList = await DeckSaver.StringToDeckListAsync(str);
 
-            var ret = new ObservableCollection<DeckItem>();
+            var ret = new ObservableCollection<Deck>();
             oldDeckList.ForEach(p => ret.Add(p));
             // DeckCountChanged();
             return ret;
@@ -61,16 +55,9 @@ namespace HSDecks {
         private async void Page_Loaded(object sender, RoutedEventArgs e) {
             await refreshPageAsync();
 
-            await CardData.GetCards(_AllCards, -1, "All");
+            App.Decks = await DeckInitializing();
 
-
-            var deck = new Deck(1, "shit hunter", PlayerClass.Hunter);
-            deck.items = await DeckInitializing(_AllCards);
-            Decks.Add(deck);
-
-            SelectedDeck = deck;
-
-            DeckFrame.Navigate(typeof(DeckMenu), Decks);
+            DeckFrame.Navigate(typeof(DeckMenu), App.Decks);
         }
 
         private async Task refreshPageAsync() {
@@ -190,8 +177,8 @@ namespace HSDecks {
             var item = new DeckItem(card);
 
             // NOTE: deck card logic
-            if (SelectedDeck.cardCount < 30 && _class != "All") {
-                SelectedDeck.Add(item);
+            if (App.SelectedDeck.cardCount < 30 && _class != "All") {
+                App.SelectedDeck.Add(item);
             }
 
         }
