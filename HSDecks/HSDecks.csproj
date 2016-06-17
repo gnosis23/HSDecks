@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DeckHeadBlock.xaml.cs">
+      <DependentUpon>DeckHeadBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DeckItem.xaml.cs">
       <DependentUpon>DeckItem.xaml</DependentUpon>
     </Compile>
@@ -1874,6 +1877,16 @@
     <Content Include="Assets\bars\TU4f_005.png" />
     <Content Include="Assets\bars\TU4f_006.png" />
     <Content Include="Assets\bars\TU4f_007.png" />
+    <Content Include="Assets\control\border.png" />
+    <Content Include="Assets\control\Druid.jpg" />
+    <Content Include="Assets\control\hero.jpg" />
+    <Content Include="Assets\control\Hunter.jpg" />
+    <Content Include="Assets\control\Mage.jpg" />
+    <Content Include="Assets\control\Paladin.jpg" />
+    <Content Include="Assets\control\Priest.jpg" />
+    <Content Include="Assets\control\Rogue.jpg" />
+    <Content Include="Assets\control\Warlock.jpg" />
+    <Content Include="Assets\control\Warrior.jpg" />
     <Content Include="Assets\Warbot.png" />
     <Content Include="Assets\cards.json" />
     <Content Include="Assets\yaoming.jpg" />
@@ -1891,6 +1904,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DeckHeadBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DeckItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

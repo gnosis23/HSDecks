@@ -5,12 +5,12 @@
     xmlns:local="using:HSDecks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Height="40" Width="200" Margin="0">
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Height="30" Width="200" Margin="0">
 
     <Border BorderThickness="1" BorderBrush="Black">
         <RelativePanel>
             <RelativePanel x:Name="CostGrid" RelativePanel.AlignLeftWithPanel="True" 
-                  Width="30" Height="40" Margin="0" Background="#FF335578">
+                  Width="30" Height="30" Margin="0" Background="#FF335578">
                 <TextBlock  Text="{x:Bind Item.card.cost}" FontSize="20" Foreground="White" 
                             VerticalAlignment="Center"
                             RelativePanel.AlignHorizontalCenterWithPanel="True" 
@@ -46,10 +46,10 @@
                             <GradientStop Color="#FF130707" Offset="0.187"/>
                         </LinearGradientBrush>
                     </RelativePanel.Background>
-                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Comic Sans MS" FontSize="16" Foreground="White"
-                               RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Segoe UI Semibold" FontSize="12" Foreground="White"
+                               RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold"/>
                 </RelativePanel>
-                <Grid Width="150" Height="40" RelativePanel.AlignRightWithPanel="True">
+                <Grid Width="150" Height="30" RelativePanel.AlignRightWithPanel="True">
                     <Grid.Background>
                         <ImageBrush Stretch="Fill" ImageSource="{x:Bind Item.card.sImage}"/>
                     </Grid.Background>
