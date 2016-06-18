@@ -34,11 +34,11 @@
             <RelativePanel Margin="0" RelativePanel.RightOf="CostGrid" RelativePanel.LeftOf="CountViewBox"
                         RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
                         Background="#FF313131" >
-                <RelativePanel Canvas.ZIndex="100" 
+                <RelativePanel Canvas.ZIndex="100" Width="100"
                                RelativePanel.AlignVerticalCenterWithPanel="True"
                                RelativePanel.AlignTopWithPanel="True"
                                RelativePanel.AlignLeftWithPanel="True"
-                               RelativePanel.AlignBottomWithPanel="True" Opacity="0.6">
+                               RelativePanel.AlignBottomWithPanel="True" Opacity="0.8">
                     <RelativePanel.Background>
                         <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
                             <GradientStop Color="#FF130707" Offset="0.361"/>
@@ -49,7 +49,7 @@
                     <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Segoe UI Semibold" FontSize="12" Foreground="White"
                                RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold"/>
                 </RelativePanel>
-                <Grid Width="150" Height="30" RelativePanel.AlignRightWithPanel="True">
+                <Grid Width="90" Height="30" RelativePanel.AlignRightWithPanel="True">
                     <Grid.Background>
                         <ImageBrush Stretch="Fill" ImageSource="{x:Bind Item.card.sImage}"/>
                     </Grid.Background>
