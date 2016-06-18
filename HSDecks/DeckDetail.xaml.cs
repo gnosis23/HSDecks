@@ -40,12 +40,12 @@ namespace HSDecks {
             var str = DeckSaver.DeckListToString(new List<Deck>(App.Decks));
             await FileStuff.WriteToFileAsync(str);
 
-            ContentDialog saveDialog = new ContentDialog() {
-                Title = "Save Deck",
-                Content = "Deck saved!",
-                PrimaryButtonText = "Ok"
-            };
-            await saveDialog.ShowAsync();
+            //ContentDialog saveDialog = new ContentDialog() {
+            //    Title = "Save Deck",
+            //    Content = "Deck saved!",
+            //    PrimaryButtonText = "Ok"
+            //};
+            //await saveDialog.ShowAsync();
 
             Frame.GoBack(new EntranceNavigationTransitionInfo());
         }

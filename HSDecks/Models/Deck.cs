@@ -24,6 +24,7 @@ namespace HSDecks.Models {
             this.playerClass = playerClass;
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));
+            this._items = new ObservableCollection<DeckItem>();
         }
 
         public Deck(int id, string name, PlayerClass playerClass, List<DeckItem> xxx) {

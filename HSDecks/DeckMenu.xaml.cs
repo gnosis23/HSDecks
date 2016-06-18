@@ -1,4 +1,5 @@
 ﻿using HSDecks.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
@@ -31,6 +32,17 @@ namespace HSDecks {
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
             App.SelectedDeck = (Deck)e.ClickedItem;
             this.Frame.Navigate(typeof(DeckDetail), e.ClickedItem, new DrillInNavigationTransitionInfo());
+        }
+
+        private void MenuFlyoutItem_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
+            MenuFlyoutItem item = sender as MenuFlyoutItem;
+            PlayerClass _class = (PlayerClass)Enum.Parse(typeof(PlayerClass), item.Text, true);
+
+            Deck deck = new Deck(1, "123", _class);
+
+            App.Decks.Add(deck);
+            App.SelectedDeck = deck;
+            this.Frame.Navigate(typeof(DeckDetail), deck, new DrillInNavigationTransitionInfo());
         }
     }
 }

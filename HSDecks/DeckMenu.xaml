@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Text="Hello" FontSize="30" />
         <Grid Grid.Row="1">
@@ -31,5 +32,28 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <StackPanel Grid.Row="2">
+            <Button Content="Create" HorizontalAlignment="Center">
+                    <Button.Flyout>
+                        <MenuFlyout >
+                            <MenuFlyout.MenuFlyoutPresenterStyle>
+                                <Style TargetType="MenuFlyoutPresenter">
+                                    <Setter Property="BorderBrush" Value="CornflowerBlue"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                </Style>
+                            </MenuFlyout.MenuFlyoutPresenterStyle>
+                            <MenuFlyoutItem Text="Warrior"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Mage" Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Druid"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Priest"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Hunter"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Shaman"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Paladin"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Rogue"  Click="MenuFlyoutItem_Click"/>
+                            <MenuFlyoutItem Text="Warlock"  Click="MenuFlyoutItem_Click"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

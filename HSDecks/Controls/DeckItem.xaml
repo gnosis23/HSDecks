@@ -34,24 +34,32 @@
             <RelativePanel Margin="0" RelativePanel.RightOf="CostGrid" RelativePanel.LeftOf="CountViewBox"
                         RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" 
                         Background="#FF313131" >
-                <RelativePanel Canvas.ZIndex="100" Width="100"
+                <RelativePanel Canvas.ZIndex="100" MinWidth="50"
                                RelativePanel.AlignVerticalCenterWithPanel="True"
                                RelativePanel.AlignTopWithPanel="True"
                                RelativePanel.AlignLeftWithPanel="True"
-                               RelativePanel.AlignBottomWithPanel="True" Opacity="0.8">
-                    <RelativePanel.Background>
-                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
-                            <GradientStop Color="#FF130707" Offset="0.361"/>
-                            <GradientStop Color="#FF706B6B"/>
-                            <GradientStop Color="#FF130707" Offset="0.187"/>
-                        </LinearGradientBrush>
-                    </RelativePanel.Background>
-                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Segoe UI Semibold" FontSize="12" Foreground="White"
+                               RelativePanel.AlignBottomWithPanel="True" >
+                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Microsoft YaHei UI" FontSize="14" Foreground="White" Margin="10,0,0,0"
                                RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold"/>
                 </RelativePanel>
-                <Grid Width="90" Height="30" RelativePanel.AlignRightWithPanel="True">
+
+                <RelativePanel Canvas.ZIndex="50" Width="80"
+                               RelativePanel.AlignVerticalCenterWithPanel="True"
+                               RelativePanel.AlignTopWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True">
+                    <RelativePanel.Background>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+                            <GradientStop Color="#FF5B4141" Offset="0.906"/>
+                            <GradientStop Color="#339B9797"/>
+                            <GradientStop Color="#FF130707" Offset="0.796"/>
+                        </LinearGradientBrush>
+                    </RelativePanel.Background>
+                </RelativePanel>
+
+                <Grid Width="100" Height="30" RelativePanel.AlignRightWithPanel="True">
                     <Grid.Background>
-                        <ImageBrush Stretch="Fill" ImageSource="{x:Bind Item.card.sImage}"/>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind Item.card.sImage}"/>
                     </Grid.Background>
                 </Grid>
             </RelativePanel>
