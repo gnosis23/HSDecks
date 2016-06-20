@@ -1,25 +1,21 @@
-﻿using HSDecks.ViewModels;
+﻿using FuckUWP1.Common;
+using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks.Models {
-    public class Deck : INotifyPropertyChanged {
+    public class DeckViewModel : BindableBase {
         public int Id { get; set; }
         public string name { get; set; }
         public PlayerClass playerClass { get; set; }
-        public int _count = 0;
-        public ObservableCollection<DeckItemViewModel> _items;
+        public ObservableCollection<DeckItemViewModel> items { get; set; }
 
         public BitmapImage hImage { get; set; }
 
-        public Deck(int id, string name, PlayerClass playerClass) {
+        public DeckViewModel(int id, string name, PlayerClass playerClass) {
             this.Id = id;
             this.name = name;
             this.playerClass = playerClass;
@@ -28,7 +24,7 @@ namespace HSDecks.Models {
             this.items = new ObservableCollection<DeckItemViewModel>();
         }
 
-        public Deck(int id, string name, PlayerClass playerClass, List<DeckItemViewModel> xxx) {
+        public DeckViewModel(int id, string name, PlayerClass playerClass, List<DeckItemViewModel> xxx) {
             this.Id = id;
             this.name = name;
             this.playerClass = playerClass;
@@ -53,48 +49,27 @@ namespace HSDecks.Models {
                     prevCard.addCard();
                 }
 
-                this.cardCount = items.Sum(p => p.cardCount);
+                OnPropertyChanged(nameof(cardCount));
             }
         }
 
         public void Remove(DeckItemViewModel item) {
-            this._items.Remove(item);
-            this.cardCount = items.Sum(p => p.cardCount);
+            this.items.Remove(item);
+            OnPropertyChanged(nameof(cardCount));
         }
 
         private void _Add(DeckItemViewModel item) {
-            _items.Add(item);
-            this.cardCount++;
+            items.Add(item);
+            OnPropertyChanged(nameof(cardCount));
         }
 
         public void Insert(int Index, DeckItemViewModel item) {
-            _items.Insert(Index, item);
-            this.cardCount++;
+            items.Insert(Index, item);
+            OnPropertyChanged(nameof(cardCount));
         }
 
-        public int cardCount {
-            get { return this._count; }
-            set {
-                this._count = value;
-                this.OnPropertyChanged();
-            }
-        }
+        public int cardCount => items.Sum(p => p.cardCount);
 
-
-        public ObservableCollection<DeckItemViewModel> items {
-            get { return _items; }
-            set {
-                this._items = value;
-                this.cardCount = _items.Sum(p => p.cardCount);
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null) {
-            // Raise the PropertyChanged event, passing the name of the property whose value has changed.
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
 

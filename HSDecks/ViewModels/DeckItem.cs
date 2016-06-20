@@ -26,17 +26,7 @@ namespace HSDecks.ViewModels {
             }
         }
 
-        public string strCardCount {
-            get {
-                if (this._count == 2) {
-                    return "2";
-                } else if (this.card.rarity == "Legendary") {
-                    return "*";
-                } else {
-                    return "";
-                }
-            }
-        }
+        public string strCardCount => (_count == 2 ? "2" : "*");
 
         public bool visible => 
                 (this.card.rarity == "Legendary" || this._count == 2);

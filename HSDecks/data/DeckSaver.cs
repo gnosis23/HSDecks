@@ -18,7 +18,7 @@ namespace HSDecks {
             return str.Trim();
         }
 
-        public static string DeckListToString(List<Deck> deckList) {
+        public static string DeckListToString(List<DeckViewModel> deckList) {
             string str = "";
             foreach (var deck in deckList) {
                 str += String.Format("{0}+{1}+{2}+{3};", 
@@ -46,8 +46,8 @@ namespace HSDecks {
             return deck;
         }
 
-        public async static Task<List<Deck>> StringToDeckListAsync(string code) {
-            List<Deck> deckList = new List<Deck>();
+        public async static Task<List<DeckViewModel>> StringToDeckListAsync(string code) {
+            List<DeckViewModel> deckList = new List<DeckViewModel>();
             List<AbstractCard> CardsPool = new List<AbstractCard>();
             await CardData.GetCards(CardsPool, -1, "All");
 
@@ -58,7 +58,7 @@ namespace HSDecks {
                 PlayerClass pc =  (PlayerClass)int.Parse(pair[2]);
                 List<DeckItemViewModel> items = StringToDeck(pair[3], CardsPool);
 
-                Deck dk = new Deck(Id, Name, pc, items);
+                DeckViewModel dk = new DeckViewModel(Id, Name, pc, items);
                 deckList.Add(dk);
             }
 

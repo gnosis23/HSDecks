@@ -16,7 +16,7 @@ namespace HSDecks {
     /// </summary>
     public sealed partial class DeckMenu : Page {
         public MasterViewModel masterViewModel => App.Global.masterViewModel;
-        public ObservableCollection<Deck> Decks => masterViewModel.Decks;
+        public ObservableCollection<DeckViewModel> Decks => masterViewModel.Decks;
 
         public DeckMenu() {
             this.InitializeComponent();
@@ -25,7 +25,7 @@ namespace HSDecks {
 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-            masterViewModel.SelectedDeck = (Deck)e.ClickedItem;
+            masterViewModel.SelectedDeck = (DeckViewModel)e.ClickedItem;
             this.Frame.Navigate(typeof(DeckDetail), null, new DrillInNavigationTransitionInfo());
         }
 
@@ -33,7 +33,7 @@ namespace HSDecks {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
             PlayerClass _class = (PlayerClass)Enum.Parse(typeof(PlayerClass), item.Text, true);
 
-            Deck deck = new Deck(1, "123", _class);
+            DeckViewModel deck = new DeckViewModel(1, "123", _class);
 
             masterViewModel.Decks.Add(deck);
             masterViewModel.SelectedDeck = deck;

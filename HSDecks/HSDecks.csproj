@@ -116,7 +116,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AbstractCard.cs" />
-    <Compile Include="Models\Deck.cs" />
+    <Compile Include="ViewModels\Deck.cs" />
     <Compile Include="ViewModels\DeckItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />

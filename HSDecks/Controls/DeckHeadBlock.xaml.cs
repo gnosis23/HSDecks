@@ -23,6 +23,6 @@ namespace HSDecks.Controls {
             this.DataContextChanged += (s, e) => Bindings.Update();
         }
 
-        public Models.Deck Deck { get { return this.DataContext as Models.Deck; } }
+        public Models.DeckViewModel Deck { get { return this.DataContext as Models.DeckViewModel; } }
     }
 }

@@ -26,7 +26,7 @@
             <ListView ItemsSource="{x:Bind Path=Decks,Mode=OneWay}" IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="data:Deck">
+                    <DataTemplate x:DataType="data:DeckViewModel">
                         <ctrl:DeckHeadBlock Margin="0,10,0,10"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>

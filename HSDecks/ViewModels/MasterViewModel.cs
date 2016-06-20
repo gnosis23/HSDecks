@@ -9,14 +9,14 @@ namespace HSDecks.ViewModels {
     public class MasterViewModel: BindableBase {
         List<AbstractCard> Cards;
 
-        Deck _selectedDeck = null;
-        public Deck SelectedDeck {
+        DeckViewModel _selectedDeck = null;
+        public DeckViewModel SelectedDeck {
             get { return _selectedDeck; }
             set {
                 SetProperty(ref _selectedDeck, value);
             }
         }
-        public ObservableCollection<Deck> Decks { get; set; }
+        public ObservableCollection<DeckViewModel> Decks { get; set; }
 
         int _page = 0;
         int _cost = 0;
@@ -25,7 +25,7 @@ namespace HSDecks.ViewModels {
         public MasterViewModel() {
             Cards = new List<AbstractCard>();
             Board = new ObservableCollection<DetailViewModel>();
-            Decks = new ObservableCollection<Deck>();
+            Decks = new ObservableCollection<DeckViewModel>();
         }
 
         public async void OnLoaded() {
@@ -96,7 +96,7 @@ namespace HSDecks.ViewModels {
         }
 
         public async Task SaveDecks() {
-            var str = DeckSaver.DeckListToString(new List<Deck>(Decks));
+            var str = DeckSaver.DeckListToString(new List<DeckViewModel>(Decks));
             await FileStuff.WriteToFileAsync(str);
         }
 

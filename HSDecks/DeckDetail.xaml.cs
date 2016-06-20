@@ -17,7 +17,7 @@ namespace HSDecks {
     public sealed partial class DeckDetail : Page {
         public MasterViewModel masterViewModel => App.Global.masterViewModel;
 
-        public Deck OneDeck => masterViewModel.SelectedDeck;
+        public DeckViewModel OneDeck => masterViewModel.SelectedDeck;
 
         public DeckDetail() {
             this.InitializeComponent();
