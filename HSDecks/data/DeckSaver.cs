@@ -1,4 +1,5 @@
 ﻿using HSDecks.Models;
+using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HSDecks {
     public class DeckSaver {
-        public static string DeckToString(List<DeckItem> deck) {
+        public static string DeckToString(List<DeckItemViewModel> deck) {
             string str = "";
             foreach (var item in deck) {
                 str += String.Format("{0}^{1} ", item.card.cardId, item.cardCount);
@@ -28,8 +29,8 @@ namespace HSDecks {
             return str.Trim(new char[] { ' ', ';' });
         }
 
-        public static List<DeckItem> StringToDeck(string code, List<AbstractCard> CardsPool) {
-            List<DeckItem> deck = new List<DeckItem>();
+        public static List<DeckItemViewModel> StringToDeck(string code, List<AbstractCard> CardsPool) {
+            List<DeckItemViewModel> deck = new List<DeckItemViewModel>();
             if (code == "") return deck;
 
             foreach (var name in code.Split(' ')) {
@@ -38,7 +39,7 @@ namespace HSDecks {
                 int count = Int32.Parse(pair[1]);
 
                 var selected = CardsPool.First(p => p.cardId == id);
-                var t = new DeckItem(selected, count);
+                var t = new DeckItemViewModel(selected, count);
                 deck.Add(t);
             }
 
@@ -55,7 +56,7 @@ namespace HSDecks {
                 int Id = int.Parse(pair[0]);
                 string Name = pair[1];
                 PlayerClass pc =  (PlayerClass)int.Parse(pair[2]);
-                List<DeckItem> items = StringToDeck(pair[3], CardsPool);
+                List<DeckItemViewModel> items = StringToDeck(pair[3], CardsPool);
 
                 Deck dk = new Deck(Id, Name, pc, items);
                 deckList.Add(dk);

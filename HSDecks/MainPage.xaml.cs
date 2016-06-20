@@ -109,7 +109,7 @@ namespace HSDecks {
             Image selectedItem = (Image)sender;
 
             var card = masterViewModel.Board.First(p => p.CardImage == selectedItem.Source).card;
-            var item = new DeckItem(card);
+            var item = new DeckItemViewModel(card);
 
             masterViewModel.SelectedDeck.Add(item);
         }

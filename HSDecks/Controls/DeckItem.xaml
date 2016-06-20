@@ -5,7 +5,13 @@
     xmlns:local="using:HSDecks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:HSDecks.Common"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Height="30" Width="200" Margin="0">
+
+    <UserControl.Resources>
+        <common:BoolToVisibility x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+
 
     <Border BorderThickness="1" BorderBrush="Black">
         <RelativePanel>
@@ -23,7 +29,7 @@
                   x:Name="CountViewBox" 
                   Width="20" 
                   HorizontalAlignment="Right" Margin="0"
-                  Visibility="{x:Bind Path=Item.visible, Mode=OneWay}">
+                  Visibility="{x:Bind Path=Item.visible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                 <RelativePanel  Background="#FF313131">
                     <TextBlock Text="{x:Bind Path=Item.strCardCount,Mode=OneWay}" HorizontalAlignment="Left"
                                Foreground="Yellow" FontSize="18" 

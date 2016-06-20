@@ -35,7 +35,7 @@ namespace HSDecks {
         }
 
         private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
-            var deckItem = (DeckItem)e.ClickedItem;
+            var deckItem = (DeckItemViewModel)e.ClickedItem;
             OneDeck.Remove(deckItem);
         }
 

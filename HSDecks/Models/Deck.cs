@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HSDecks.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace HSDecks.Models {
         public string name { get; set; }
         public PlayerClass playerClass { get; set; }
         public int _count = 0;
-        public ObservableCollection<DeckItem> _items;
+        public ObservableCollection<DeckItemViewModel> _items;
 
         public BitmapImage hImage { get; set; }
 
@@ -24,19 +25,19 @@ namespace HSDecks.Models {
             this.playerClass = playerClass;
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));
-            this.items = new ObservableCollection<DeckItem>();
+            this.items = new ObservableCollection<DeckItemViewModel>();
         }
 
-        public Deck(int id, string name, PlayerClass playerClass, List<DeckItem> xxx) {
+        public Deck(int id, string name, PlayerClass playerClass, List<DeckItemViewModel> xxx) {
             this.Id = id;
             this.name = name;
             this.playerClass = playerClass;
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));
-            this.items = new ObservableCollection<DeckItem>(xxx);
+            this.items = new ObservableCollection<DeckItemViewModel>(xxx);
         }
 
-        public void Add(DeckItem item) {
+        public void Add(DeckItemViewModel item) {
             if (cardCount < 30) {
                 var prevCard = items.FirstOrDefault(p => p.card.cardId == item.card.cardId);
                 if (prevCard == null) {
@@ -56,17 +57,17 @@ namespace HSDecks.Models {
             }
         }
 
-        public void Remove(DeckItem item) {
+        public void Remove(DeckItemViewModel item) {
             this._items.Remove(item);
             this.cardCount = items.Sum(p => p.cardCount);
         }
 
-        private void _Add(DeckItem item) {
+        private void _Add(DeckItemViewModel item) {
             _items.Add(item);
             this.cardCount++;
         }
 
-        public void Insert(int Index, DeckItem item) {
+        public void Insert(int Index, DeckItemViewModel item) {
             _items.Insert(Index, item);
             this.cardCount++;
         }
@@ -80,7 +81,7 @@ namespace HSDecks.Models {
         }
 
 
-        public ObservableCollection<DeckItem> items {
+        public ObservableCollection<DeckItemViewModel> items {
             get { return _items; }
             set {
                 this._items = value;
