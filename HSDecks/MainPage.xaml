@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HSDecks"
     xmlns:dd="using:HSDecks.Models"
+    xmlns:vm="using:HSDecks.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
@@ -190,9 +191,9 @@
             <FlipView x:Name="itemFlipView"
                   RelativePanel.AlignHorizontalCenterWithPanel="True"
                   RelativePanel.AlignVerticalCenterWithPanel="True"
-                  ItemsSource="{x:Bind Board}">
+                  ItemsSource="{x:Bind masterViewModel.Board}">
                 <FlipView.ItemTemplate>
-                    <DataTemplate x:DataType="local:DetailViewModel">
+                    <DataTemplate x:DataType="vm:DetailViewModel">
                         <Grid>
                             <Image Stretch="None" Source="{x:Bind CardImage}"/>
                             <Border Background="#A5000000" Height="150" VerticalAlignment="Bottom">

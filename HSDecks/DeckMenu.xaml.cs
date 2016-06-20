@@ -1,7 +1,9 @@
 ﻿using HSDecks.Models;
+using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -13,25 +15,18 @@ namespace HSDecks {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class DeckMenu : Page {
-        public ObservableCollection<Deck> Decks;
-
+        public MasterViewModel masterViewModel => App.Global.masterViewModel;
+        public ObservableCollection<Deck> Decks => masterViewModel.Decks;
 
         public DeckMenu() {
             this.InitializeComponent();
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
-            base.OnNavigatedTo(e);
-
-            Decks = (ObservableCollection<Deck>)e.Parameter;
-        }
-
-
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
-            App.SelectedDeck = (Deck)e.ClickedItem;
-            this.Frame.Navigate(typeof(DeckDetail), e.ClickedItem, new DrillInNavigationTransitionInfo());
+            masterViewModel.SelectedDeck = (Deck)e.ClickedItem;
+            this.Frame.Navigate(typeof(DeckDetail), null, new DrillInNavigationTransitionInfo());
         }
 
         private void MenuFlyoutItem_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
@@ -40,9 +35,9 @@ namespace HSDecks {
 
             Deck deck = new Deck(1, "123", _class);
 
-            App.Decks.Add(deck);
-            App.SelectedDeck = deck;
-            this.Frame.Navigate(typeof(DeckDetail), deck, new DrillInNavigationTransitionInfo());
+            masterViewModel.Decks.Add(deck);
+            masterViewModel.SelectedDeck = deck;
+            this.Frame.Navigate(typeof(DeckDetail), null, new DrillInNavigationTransitionInfo());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HSDecks.Models;
+using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +25,9 @@ namespace HSDecks
     /// </summary>
     sealed partial class App : Application
     {
-        public static Deck SelectedDeck;
-        public static ObservableCollection<Deck> Decks;
+        public static App Global = null;
+
+        public MasterViewModel masterViewModel = new MasterViewModel();
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -33,6 +35,7 @@ namespace HSDecks
         public App()
         {
             this.InitializeComponent();
+            Global = this;
             this.Suspending += OnSuspending;
         }
 

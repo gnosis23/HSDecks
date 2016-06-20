@@ -1,4 +1,5 @@
 ﻿using HSDecks.Models;
+using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,9 @@ namespace HSDecks {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class DeckDetail : Page {
-        private static DependencyProperty s_deckProperty =
-            DependencyProperty.Register("OneDeck", typeof(Deck), typeof(DeckDetail), new PropertyMetadata(null));
+        public MasterViewModel masterViewModel => App.Global.masterViewModel;
 
-        public static DependencyProperty DeckProperty {
-            get { return s_deckProperty; }
-        }
-
-        public Deck OneDeck {
-            get { return (Deck)GetValue(s_deckProperty); }
-            set { SetValue(s_deckProperty, value); }
-        }
+        public Deck OneDeck => masterViewModel.SelectedDeck;
 
         public DeckDetail() {
             this.InitializeComponent();
@@ -33,19 +26,10 @@ namespace HSDecks {
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             base.OnNavigatedTo(e);
 
-            OneDeck = (Deck)e.Parameter;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e) {
-            var str = DeckSaver.DeckListToString(new List<Deck>(App.Decks));
-            await FileStuff.WriteToFileAsync(str);
-
-            //ContentDialog saveDialog = new ContentDialog() {
-            //    Title = "Save Deck",
-            //    Content = "Deck saved!",
-            //    PrimaryButtonText = "Ok"
-            //};
-            //await saveDialog.ShowAsync();
+            await masterViewModel.SaveDecks();
 
             Frame.GoBack(new EntranceNavigationTransitionInfo());
         }

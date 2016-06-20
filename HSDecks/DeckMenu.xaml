@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Hello" FontSize="30" />
         <Grid Grid.Row="1">
-            <ListView ItemsSource="{x:Bind Decks}" IsItemClickEnabled="True"
+            <ListView ItemsSource="{x:Bind Path=Decks,Mode=OneWay}" IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:Deck">
