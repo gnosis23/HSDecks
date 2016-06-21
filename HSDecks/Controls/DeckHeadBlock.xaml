@@ -19,7 +19,8 @@
             </RelativePanel.Background>
 
             <StackPanel Width="150" RelativePanel.AlignBottomWithPanel="True" Opacity="0.7">
-                <TextBlock Text="{x:Bind Deck.name}"  Margin="20,0,0,10" Foreground="LightGreen" FontSize="16" FontWeight="Bold" FontFamily="Arial"/>
+                <TextBlock Text="{x:Bind Path=Deck.name, Mode=OneWay}"  Margin="20,0,0,10" Foreground="LightGreen" 
+                           FontSize="16" FontWeight="Bold" FontFamily="Arial"/>
             </StackPanel>
         </RelativePanel>
     </Grid>

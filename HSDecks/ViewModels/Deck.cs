@@ -9,7 +9,12 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace HSDecks.Models {
     public class DeckViewModel : BindableBase {
         public int Id { get; set; }
-        public string name { get; set; }
+        string _name;
+        public string name {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
         public PlayerClass playerClass { get; set; }
         public ObservableCollection<DeckItemViewModel> items { get; set; }
 
@@ -17,7 +22,7 @@ namespace HSDecks.Models {
 
         public DeckViewModel(int id, string name, PlayerClass playerClass) {
             this.Id = id;
-            this.name = name;
+            this._name = name;
             this.playerClass = playerClass;
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));
@@ -26,7 +31,7 @@ namespace HSDecks.Models {
 
         public DeckViewModel(int id, string name, PlayerClass playerClass, List<DeckItemViewModel> xxx) {
             this.Id = id;
-            this.name = name;
+            this._name = name;
             this.playerClass = playerClass;
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));

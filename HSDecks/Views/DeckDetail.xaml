@@ -22,11 +22,12 @@
         </cc:DeckHeadBlock>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" DataContext="{x:Bind OneDeck}">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="50">
                 <TextBlock Text="{x:Bind Path=OneDeck.cardCount,Mode=OneWay}" />
                 <TextBlock Text="/ 30" />
             </StackPanel>
-            <Button Content="Back"  FontSize="18" Click="Button_Click"/>
+            <Button Content="Back"  FontSize="18" Click="Button_Click" Margin="10,0,10,0"/>
+            <Button Name="RenameBtn" Content="Rename"  FontSize="18" Click="RenameBtn_Click"/>
         </StackPanel>
 
         <Grid  Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="DimGray">

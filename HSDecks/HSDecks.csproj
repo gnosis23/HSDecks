@@ -103,16 +103,19 @@
     <Compile Include="Controls\DeckItem.xaml.cs">
       <DependentUpon>DeckItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="data\CardData.cs" />
     <Compile Include="data\DeckSaver.cs" />
     <Compile Include="data\FileStuff.cs" />
-    <Compile Include="DeckDetail.xaml.cs">
+    <Compile Include="Views\DeckDetail.xaml.cs">
       <DependentUpon>DeckDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeckMenu.xaml.cs">
+    <Compile Include="Views\DeckMenu.xaml.cs">
       <DependentUpon>DeckMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AbstractCard.cs" />
@@ -1915,20 +1918,24 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeckDetail.xaml">
+    <Page Include="Controls\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeckMenu.xaml">
+    <Page Include="Views\DeckDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionary1.xaml">
+    <Page Include="Views\DeckMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

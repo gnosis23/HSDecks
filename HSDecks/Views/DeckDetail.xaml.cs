@@ -1,4 +1,5 @@
-﻿using HSDecks.Models;
+﻿using HSDecks.Controls;
+using HSDecks.Models;
 using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -40,5 +41,14 @@ namespace HSDecks {
             OneDeck.Remove(deckItem);
         }
 
+        private async void RenameBtn_Click(object sender, RoutedEventArgs e) {
+            InputDialog dlg = new InputDialog(OneDeck.name);
+            dlg.DataContext = OneDeck;
+            await dlg.ShowAsync();
+
+            if (dlg.Confirm) {
+                OneDeck.name = dlg.MyInput;
+            }
+        }
     }
 }
