@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="HSDecks.Views.DeckSharingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HSDecks.Views"
+    xmlns:ctrl="using:HSDecks.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  
+    <Grid Background="#FF354A5F" Width="500" Height="700">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <RelativePanel Height="100" Margin="10">
+            <Image Name="HeroHead" Width="100" Height="100" Stretch="UniformToFill"
+                   RelativePanel.AlignLeftWithPanel="True" Source="ms-appx:///Assets/bars/GVG_041b.png"/>
+            <TextBlock Name="DeckName" Text="{x:Bind Deck.name}" FontSize="25" Margin="10,0,0,0"
+                       Foreground="White"
+                       RelativePanel.RightOf="HeroHead"/>
+            <TextBlock Text="沧沧沧之霜临" FontSize="20" Margin="10,0,0,0"
+                       Foreground="White"
+                       RelativePanel.RightOf="HeroHead" RelativePanel.Below="DeckName"/>
+            <StackPanel Orientation="Horizontal" 
+                        RelativePanel.RightOf="HeroHead" RelativePanel.AlignBottomWithPanel="True">
+                <TextBlock Text="9500" FontSize="20" Margin="10,0,10,0" Foreground="White"/>
+                <TextBlock Text="32800" FontSize="20" Foreground="Yellow"/>
+            </StackPanel>
+        </RelativePanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" >
+                <ctrl:DeckItemBlock x:Name="Item0" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item1" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item2" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item3" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item4" Margin="0,0,0,15"/>
+
+                <ctrl:DeckItemBlock x:Name="Item5" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item6" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item7" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item8" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item9" Margin="0,0,0,15"/>
+
+                <ctrl:DeckItemBlock x:Name="Item10" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item11" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item12" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item13" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item14" Margin="0,0,0,5"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <ctrl:DeckItemBlock x:Name="Item15" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item16" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item17" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item18" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item19" Margin="0,0,0,15"/>
+
+                <ctrl:DeckItemBlock x:Name="Item20" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item21" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item22" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item23" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item24" Margin="0,0,0,15"/>
+
+                <ctrl:DeckItemBlock x:Name="Item25" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item26" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item27" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item28" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item29" Margin="0,0,0,5"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -26,8 +26,9 @@
                 <TextBlock Text="{x:Bind Path=OneDeck.cardCount,Mode=OneWay}" />
                 <TextBlock Text="/ 30" />
             </StackPanel>
-            <Button Content="Back"  FontSize="18" Click="Button_Click" Margin="10,0,10,0"/>
-            <Button Name="RenameBtn" Content="Rename"  FontSize="18" Click="RenameBtn_Click"/>
+            <Button Content="Back"  FontSize="14" Click="Button_Click" Margin="5,0,5,0"/>
+            <Button Name="RenameBtn" Content="Rename"  FontSize="14" Click="RenameBtn_Click"/>
+            <Button Name="ShareBtn" Content="Share"  FontSize="14" Click="ShareBtn_Click"/>
         </StackPanel>
 
         <Grid  Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="DimGray">

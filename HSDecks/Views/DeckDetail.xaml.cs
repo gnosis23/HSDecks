@@ -1,9 +1,13 @@
 ﻿using HSDecks.Controls;
 using HSDecks.Models;
 using HSDecks.ViewModels;
+using HSDecks.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -17,7 +21,6 @@ namespace HSDecks {
     /// </summary>
     public sealed partial class DeckDetail : Page {
         public MasterViewModel masterViewModel => App.Global.masterViewModel;
-
         public DeckViewModel OneDeck => masterViewModel.SelectedDeck;
 
         public DeckDetail() {
@@ -49,6 +52,22 @@ namespace HSDecks {
             if (dlg.Confirm) {
                 OneDeck.name = dlg.MyInput;
             }
+        }
+
+        private async void ShareBtn_Click(object sender, RoutedEventArgs e) {
+            CoreApplicationView newView = CoreApplication.CreateNewView();
+            int WndId = 0;
+            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+                var frame = new Frame();
+                frame.Navigate(typeof(DeckSharingPage), null);
+
+                Window.Current.Content = frame;
+                Window.Current.Activate();
+
+                WndId = ApplicationView.GetForCurrentView().Id;
+            });
+
+            var viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(WndId);
         }
     }
 }
