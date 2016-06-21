@@ -13,14 +13,27 @@ namespace HSDecks.ViewModels {
         public DeckViewModel SelectedDeck {
             get { return _selectedDeck; }
             set {
-                SetProperty(ref _selectedDeck, value);
+                _selectedDeck = value;
+                if (value != null) {
+                    HeroClass = value.playerClass.ToString();
+                }
+                else {
+                    HeroClass = "All";
+                }
             }
         }
         public ObservableCollection<DeckViewModel> Decks { get; set; }
 
         int _page = 0;
         int _cost = 0;
+
         string _class = "All";
+        public string HeroClass {
+            get { return _class; }
+            set { SetProperty(ref _class, value); }
+        }
+
+        public bool IsHeroClassEnabled => SelectedDeck == null;
 
         public MasterViewModel() {
             Cards = new List<AbstractCard>();
@@ -90,7 +103,7 @@ namespace HSDecks.ViewModels {
         }
 
         public async Task SelectHero(string heroClass) {
-            _class = heroClass;
+            HeroClass = heroClass;
 
             await refreshPageAsync();
         }
@@ -100,6 +113,12 @@ namespace HSDecks.ViewModels {
             await FileStuff.WriteToFileAsync(str);
         }
 
+        public async Task SaveDecksAndExit() {
+            await SaveDecks();
+            HeroClass = "All";
+
+            await refreshPageAsync();
+        }
     }
 
     public class DetailViewModel {

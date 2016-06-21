@@ -128,7 +128,8 @@
 
                             <StackPanel Name="CostStackPanel" 
                                     Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
-                                <Button Name="HeroMenu" Content="Hero" Style="{StaticResource CostButtonStyle}"
+                                <Button Name="HeroMenu" Content="{x:Bind Path=masterViewModel.HeroClass,Mode=OneWay}" 
+                                        Style="{StaticResource CostButtonStyle}"
                                         Width="120" FontSize="28">
                                     <Button.Flyout>
                                         <MenuFlyout >

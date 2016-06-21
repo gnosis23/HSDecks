@@ -21,6 +21,7 @@ namespace HSDecks {
 
         public DeckDetail() {
             this.InitializeComponent();
+            this.Loaded += async (s, e) => { await masterViewModel.refreshPageAsync(); };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -29,7 +30,7 @@ namespace HSDecks {
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e) {
-            await masterViewModel.SaveDecks();
+            await masterViewModel.SaveDecksAndExit();
 
             Frame.GoBack(new EntranceNavigationTransitionInfo());
         }
