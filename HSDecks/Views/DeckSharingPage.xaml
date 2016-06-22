@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
   
-    <Grid Background="#FF354A5F" Width="500" Height="700">
+    <Grid Name="ElementToRender" Background="#FF354A5F" Width="500" Height="700">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -28,6 +28,10 @@
                 <TextBlock Text="9500" FontSize="20" Margin="10,0,10,0" Foreground="White"/>
                 <TextBlock Text="32800" FontSize="20" Foreground="Yellow"/>
             </StackPanel>
+            <StackPanel Orientation="Vertical"  RelativePanel.AlignRightWithPanel="True" >
+                <Button Name="BackBtn" Content="Back" Foreground="Yellow" Click="BackBtn_Click"></Button>
+                <Button Name="ShareBtn" Content="Share" Foreground="Yellow" Click="ShareBtn_Click"></Button>
+            </StackPanel>
         </RelativePanel>
 
         <Grid Grid.Row="1">
@@ -36,42 +40,42 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" >
-                <ctrl:DeckItemBlock x:Name="Item0" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item1" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item2" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item3" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item4" Margin="0,0,0,15"/>
+                <ctrl:DeckItemBlock x:Name="Item0" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item1" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item2" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item3" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item4" Item="{Binding}" Margin="0,0,0,15"/>
 
-                <ctrl:DeckItemBlock x:Name="Item5" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item6" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item7" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item8" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item9" Margin="0,0,0,15"/>
+                <ctrl:DeckItemBlock x:Name="Item5" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item6" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item7" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item8" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item9" Item="{Binding}" Margin="0,0,0,15"/>
 
-                <ctrl:DeckItemBlock x:Name="Item10" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item11" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item12" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item13" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item14" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item10" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item11" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item12" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item13" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item14" Item="{Binding}" Margin="0,0,0,5"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1">
-                <ctrl:DeckItemBlock x:Name="Item15" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item16" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item17" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item18" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item19" Margin="0,0,0,15"/>
+                <ctrl:DeckItemBlock x:Name="Item15" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item16" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item17" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item18" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item19" Item="{Binding}" Margin="0,0,0,15"/>
 
-                <ctrl:DeckItemBlock x:Name="Item20" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item21" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item22" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item23" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item24" Margin="0,0,0,15"/>
+                <ctrl:DeckItemBlock x:Name="Item20" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item21" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item22" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item23" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item24" Item="{Binding}" Margin="0,0,0,15"/>
 
-                <ctrl:DeckItemBlock x:Name="Item25" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item26" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item27" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item28" Margin="0,0,0,5"/>
-                <ctrl:DeckItemBlock x:Name="Item29" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item25" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item26" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item27" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item28" Item="{Binding}" Margin="0,0,0,5"/>
+                <ctrl:DeckItemBlock x:Name="Item29" Item="{Binding}" Margin="0,0,0,5"/>
             </StackPanel>
         </Grid>
     </Grid>

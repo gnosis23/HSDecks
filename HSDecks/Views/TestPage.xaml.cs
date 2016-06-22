@@ -15,17 +15,18 @@ namespace HSDecks.Views {
     public sealed partial class TestPage : Page {
         public MasterViewModel masterViewModel => App.Global.masterViewModel;
         public DeckViewModel Deck => masterViewModel.SelectedDeck;
-        public DeckItemViewModel Item { get; set; }
 
         public TestPage() {
             this.InitializeComponent();
 
-            this.Loaded += (s, e) => { this.OnLoaded(); };
         }
 
 
         private void OnLoaded() {
-            this.Item = Deck.items[0];
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            masterViewModel.GotoMainPage();
         }
     }
 }

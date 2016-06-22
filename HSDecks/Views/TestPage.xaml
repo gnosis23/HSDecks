@@ -11,15 +11,16 @@
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock FontSize="50" Text="{x:Bind Deck.name}" />
-        <ListView ItemsSource="{x:Bind Deck.items}">
+        <ListView ItemsSource="{x:Bind Path=Deck.items}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="vm:DeckItemViewModel">
                     <StackPanel>
                         <TextBlock Text="{x:Bind card.name}" FontSize="20"/>
+                        <ctrl:DeckItemBlock x:Name="Item0" Item="{Binding}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ctrl:DeckItemBlock x:Name="Item0" Item="{x:Bind Item}"/>
+        <Button Content="GoBack" Click="Button_Click" />
     </StackPanel>
 </Page>

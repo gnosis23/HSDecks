@@ -8,6 +8,12 @@ namespace HSDecks.Controls {
     public sealed partial class DeckItemBlock : UserControl {
         public DeckItemBlock() {
             this.InitializeComponent();
+
+            this.DataContextChanged += DeckItemBlock_DataContextChanged;
+        }
+
+        private void DeckItemBlock_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args) {
+            this.Bindings.Update();
         }
 
         public DeckItemViewModel Item {

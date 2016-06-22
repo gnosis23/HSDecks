@@ -3,6 +3,11 @@ using HSDecks.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks.ViewModels {
@@ -119,6 +124,21 @@ namespace HSDecks.ViewModels {
 
             await refreshPageAsync();
         }
+
+        bool _IsSharedPage = false;
+        public bool IsSharedPage {
+            get { return _IsSharedPage; }
+            set { SetProperty(ref _IsSharedPage, value, nameof(IsSharedPage)); }
+        }
+
+        public void GotoSharedPage() {
+            IsSharedPage = true;
+        }
+        public void GotoMainPage() {
+            IsSharedPage = false;
+        }
+
+ 
     }
 
     public class DetailViewModel {

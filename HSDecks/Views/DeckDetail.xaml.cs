@@ -54,20 +54,8 @@ namespace HSDecks {
             }
         }
 
-        private async void ShareBtn_Click(object sender, RoutedEventArgs e) {
-            CoreApplicationView newView = CoreApplication.CreateNewView();
-            int WndId = 0;
-            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
-                var frame = new Frame();
-                frame.Navigate(typeof(TestPage), null);
-
-                Window.Current.Content = frame;
-                Window.Current.Activate();
-
-                WndId = ApplicationView.GetForCurrentView().Id;
-            });
-
-            var viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(WndId);
+        private void ShareBtn_Click(object sender, RoutedEventArgs e) {
+            masterViewModel.GotoSharedPage();
         }
     }
 }
