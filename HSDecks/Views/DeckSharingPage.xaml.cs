@@ -34,7 +34,7 @@ namespace HSDecks.Views {
             List<DeckItemBlock> items = new List<DeckItemBlock> {
                 Item0, Item1, Item2, Item3, Item4,
                 Item5, Item6, Item7, Item8, Item9,
-                Item10, Item11, Item12, Item13, Item15,
+                Item10, Item11, Item12, Item13, Item14,
                 Item15, Item16, Item17, Item18, Item19,
                 Item20, Item21, Item22, Item23, Item24,
                 Item25, Item26, Item27, Item28, Item29,
