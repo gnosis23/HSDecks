@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HSDecks.Views"
     xmlns:vm="using:HSDecks.ViewModels"
+    xmlns:ctrl="using:HSDecks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -19,5 +20,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ctrl:DeckItemBlock x:Name="Item0" Item="{x:Bind Item}"/>
     </StackPanel>
 </Page>

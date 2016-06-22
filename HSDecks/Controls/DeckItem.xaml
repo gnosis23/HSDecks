@@ -17,7 +17,7 @@
         <RelativePanel>
             <RelativePanel x:Name="CostGrid" RelativePanel.AlignLeftWithPanel="True" 
                   Width="30" Height="30" Margin="0" Background="#FF335578">
-                <TextBlock  Text="{x:Bind Item.card.cost}" FontSize="20" Foreground="White" 
+                <TextBlock  Text="{x:Bind Path=Item.card.cost,Mode=OneWay}" FontSize="20" Foreground="White" 
                             VerticalAlignment="Center"
                             RelativePanel.AlignHorizontalCenterWithPanel="True" 
                             RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold" FontFamily="Segoe UI Black"/>
@@ -45,7 +45,7 @@
                                RelativePanel.AlignTopWithPanel="True"
                                RelativePanel.AlignLeftWithPanel="True"
                                RelativePanel.AlignBottomWithPanel="True" >
-                    <TextBlock Text="{x:Bind Item.card.name}" FontFamily="Microsoft YaHei UI" FontSize="14" Foreground="White" Margin="10,0,0,0"
+                    <TextBlock Text="{x:Bind Path=Item.card.name,Mode=OneWay}" FontFamily="Microsoft YaHei UI" FontSize="14" Foreground="White" Margin="10,0,0,0"
                                RelativePanel.AlignVerticalCenterWithPanel="True" FontWeight="Bold"/>
                 </RelativePanel>
 
@@ -65,7 +65,7 @@
 
                 <Grid Width="100" Height="30" RelativePanel.AlignRightWithPanel="True">
                     <Grid.Background>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind Item.card.sImage}"/>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind Path=Item.card.sImage,Mode=OneWay}"/>
                     </Grid.Background>
                 </Grid>
             </RelativePanel>

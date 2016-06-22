@@ -59,7 +59,7 @@ namespace HSDecks {
             int WndId = 0;
             await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
                 var frame = new Frame();
-                frame.Navigate(typeof(DeckSharingPage), null);
+                frame.Navigate(typeof(TestPage), null);
 
                 Window.Current.Content = frame;
                 Window.Current.Activate();

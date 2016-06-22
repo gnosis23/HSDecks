@@ -33,10 +33,10 @@
 
         <Grid  Grid.Row="1" BorderBrush="Black" BorderThickness="2" Background="DimGray">
             <ListView ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
-                  ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
+                      ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:DeckItemViewModel">
-                        <cc:DeckItemBlock Margin="0" />
+                        <cc:DeckItemBlock Margin="0" Item="{Binding}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
