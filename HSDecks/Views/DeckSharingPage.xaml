@@ -15,12 +15,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <RelativePanel Height="100" Margin="10">
-            <Image Name="HeroHead" Width="100" Height="100" Stretch="UniformToFill"
-                   RelativePanel.AlignLeftWithPanel="True" Source="ms-appx:///Assets/bars/GVG_041b.png"/>
+            <Image Name="HeroHead" Width="160" Height="60" Stretch="UniformToFill"
+                   RelativePanel.AlignLeftWithPanel="True" Source="{x:Bind Deck.hImage}"/>
             <TextBlock Name="DeckName" Text="{x:Bind Deck.name}" FontSize="25" Margin="10,0,0,0"
                        Foreground="White"
                        RelativePanel.RightOf="HeroHead"/>
-            <TextBlock Text="沧沧沧之霜临" FontSize="20" Margin="10,0,0,0"
+            <TextBlock Text="匿名" FontSize="20" Margin="10,0,0,0"
                        Foreground="White"
                        RelativePanel.RightOf="HeroHead" RelativePanel.Below="DeckName"/>
             <StackPanel Orientation="Horizontal" 
