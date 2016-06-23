@@ -55,7 +55,7 @@ namespace HSDecks.Views {
         }
 
 
-        public async void ShareBtn_Click(object sender, RoutedEventArgs e) {
+        public async void SaveBtn_Click(object sender, RoutedEventArgs e) {
             RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap();
             await renderTargetBitmap.RenderAsync(ElementToRender);
             IBuffer pixelBuffer = await renderTargetBitmap.GetPixelsAsync();

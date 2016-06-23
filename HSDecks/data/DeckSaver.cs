@@ -51,6 +51,10 @@ namespace HSDecks {
             List<AbstractCard> CardsPool = new List<AbstractCard>();
             await CardData.GetCards(CardsPool, -1, "All");
 
+            if (code == "") {
+                return deckList;
+            }
+
             foreach (var deckStr in code.Split(';')) {
                 var pair = deckStr.Split('+');
                 int Id = int.Parse(pair[0]);
