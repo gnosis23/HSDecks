@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Common\Bindbase.cs" />
     <Compile Include="Common\BoolToVisible.cs" />
+    <Compile Include="Common\ZipHelper.cs" />
     <Compile Include="Controls\DeckHeadBlock.xaml.cs">
       <DependentUpon>DeckHeadBlock.xaml</DependentUpon>
     </Compile>

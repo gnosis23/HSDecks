@@ -1,4 +1,5 @@
-﻿using HSDecks.Models;
+﻿using FuckUWP1.Common;
+using HSDecks.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,30 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks {
     class CardData {
+        public readonly static string CARD_VER = "cards_20160624";
+        public static bool _IsDownloading = false;
+
         public async static Task GetCards(List<AbstractCard> cards, int cost, string heroClass) {
+            bool ImageFolderExists = true;
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            try {
+                await localFolder.GetFolderAsync(CARD_VER);
+            } catch (FileNotFoundException) {
+                ImageFolderExists = false;
+            }
+
+            if (!ImageFolderExists && !_IsDownloading) {
+#pragma warning disable CS4014 // 
+                Task.Factory.StartNew(() => StartDownload(BackgroundTransferPriority.Default, false));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+
             var uri = new Uri("ms-appx:///Assets/cards.json");
             var sampleFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
 
@@ -224,7 +243,11 @@ namespace HSDecks {
             }
 
             cards.ForEach(p => {
-                uri = new Uri(p.img);
+                if (ImageFolderExists) {
+                    uri = new Uri(String.Format("ms-appdata:///local/{1}/{0}.png", p.cardId, CARD_VER));
+                } else {
+                    uri = new Uri(p.img);
+                }
                 BitmapImage img = new BitmapImage(uri);
                 p.image = img;
 
@@ -233,6 +256,49 @@ namespace HSDecks {
                 p.sImage = img;
             });
         }
+
+        private static async Task StartDownload(BackgroundTransferPriority priority, bool requestUnconstrainedDownload) {
+            _IsDownloading = true;
+            var ZipFileUrl = String.Format("http://localhost/HSDecks/Home/Download?ImageName={0}.zip", CARD_VER);
+
+            // The URI is validated by calling Uri.TryCreate() that will return 'false' for strings that are not valid URIs. 
+            // Note that when enabling the text box users may provide URIs to machines on the intrAnet that require 
+            // the "Home or Work Networking" capability. 
+            Uri source;
+            if (!Uri.TryCreate(ZipFileUrl, UriKind.Absolute, out source)) {
+                // NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
+                return;
+            }
+            StorageFolder destinationFolder = ApplicationData.Current.LocalFolder;
+
+
+            try {
+                StorageFile localFile = await destinationFolder.CreateFileAsync(CARD_VER + ".zip",
+                    CreationCollisionOption.GenerateUniqueName);
+                BackgroundDownloader downloader = new BackgroundDownloader();
+                DownloadOperation download = downloader.CreateDownload(source, localFile);
+                download.Priority = priority;
+                // In this sample, we do not show how to request unconstrained download. 
+                // For more information about background transfer, please refer to the SDK Background transfer sample: 
+                // http://code.msdn.microsoft.com/windowsapps/Background-Transfer-Sample-d7833f61 
+                if (!requestUnconstrainedDownload) {
+                    // Attach progress and completion handlers. 
+                    await HandleDownloadAsync(download, true);
+                    StorageFolder unzipFolder =
+                        await destinationFolder.CreateFolderAsync(Path.GetFileNameWithoutExtension(localFile.Name),
+                        CreationCollisionOption.GenerateUniqueName);
+                    await ZipHelper.UnZipFileAsync(localFile, unzipFolder);
+                    return;
+                }
+            } catch (Exception ex) {
+                // LogStatus(ex.Message, NotifyType.ErrorMessage);
+            }
+        }
+
+        private static async Task HandleDownloadAsync(DownloadOperation download, bool v) {
+            await download.StartAsync();
+        }
+
     }
 
     public enum CardClass {
