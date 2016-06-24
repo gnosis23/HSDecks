@@ -101,6 +101,10 @@ namespace HSDecks {
         }
 
         private void Image0_Tapped_1(object sender, TappedRoutedEventArgs e) {
+            if (masterViewModel.SelectedDeck == null) {
+                return;
+            }
+
             List<Image> currentPage = new List<Image>() {
                     Image0, Image1, Image2, Image3,
                     Image4, Image5, Image6, Image7
