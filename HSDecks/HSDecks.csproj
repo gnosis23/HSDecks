@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Common\Bindbase.cs" />
     <Compile Include="Common\BoolToVisible.cs" />
+    <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\ZipHelper.cs" />
     <Compile Include="Controls\DeckHeadBlock.xaml.cs">
       <DependentUpon>DeckHeadBlock.xaml</DependentUpon>
@@ -110,6 +111,7 @@
     <Compile Include="data\CardData.cs" />
     <Compile Include="data\DeckSaver.cs" />
     <Compile Include="data\FileStuff.cs" />
+    <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="Views\AppFrame.xaml.cs">
       <DependentUpon>AppFrame.xaml</DependentUpon>
     </Compile>
@@ -121,6 +123,9 @@
     </Compile>
     <Compile Include="Views\DeckSharingPage.xaml.cs">
       <DependentUpon>DeckSharingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DownloadPage.xaml.cs">
+      <DependentUpon>DownloadPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -1952,6 +1957,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\DownloadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>

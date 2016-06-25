@@ -28,6 +28,9 @@ namespace HSDecks.Views {
                     AppFrame.GoBack();
                 }
             }
+            if (e.PropertyName == nameof(masterViewModel.IsDownloadPage)) {
+                AppFrame.Navigate(typeof(DownloadPage));
+            }
         }
     }
 }

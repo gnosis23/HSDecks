@@ -131,6 +131,12 @@ namespace HSDecks.ViewModels {
             set { SetProperty(ref _IsSharedPage, value, nameof(IsSharedPage)); }
         }
 
+        bool _IsDownloadPage = false;
+        public bool IsDownloadPage {
+            get { return _IsDownloadPage; }
+            set { SetProperty(ref _IsDownloadPage, value, nameof(IsDownloadPage)); }
+        }
+
         public void GotoSharedPage() {
             IsSharedPage = true;
         }

@@ -80,19 +80,19 @@ namespace FuckUWP1.Common {
                 // Create sub folder
                 string subFolderName = Path.GetDirectoryName(filePath);
 
-                bool isSubFolderExist = await IfFolderExistsAsync(unzipFolder, subFolderName);
+                // bool isSubFolderExist = await IfFolderExistsAsync(unzipFolder, subFolderName);
 
-                StorageFolder subFolder;
+                StorageFolder subFolder = unzipFolder;
 
-                if (!isSubFolderExist) {
-                    // Create the sub folder.
-                    subFolder =
-                        await unzipFolder.CreateFolderAsync(subFolderName, CreationCollisionOption.ReplaceExisting);
-                } else {
-                    // Just get the folder.
-                    subFolder =
-                        await unzipFolder.GetFolderAsync(subFolderName);
-                }
+                //if (!isSubFolderExist) {
+                //    // Create the sub folder.
+                //    subFolder =
+                //        await unzipFolder.CreateFolderAsync(subFolderName, CreationCollisionOption.ReplaceExisting);
+                //} else {
+                //    // Just get the folder.
+                //    subFolder =
+                //        await unzipFolder.GetFolderAsync(subFolderName);
+                //}
 
                 // All sub folders have been created yet. Just pass the file name to the Unzip function.
                 string newFilePath = Path.GetFileName(filePath);

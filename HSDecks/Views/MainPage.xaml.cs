@@ -37,7 +37,9 @@ namespace HSDecks {
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+            if (StarListBoxItem.IsSelected) {
+                masterViewModel.IsDownloadPage = true;
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) {
@@ -134,6 +136,7 @@ namespace HSDecks {
             }
         }
 
+ 
     }
 
 }
