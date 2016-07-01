@@ -14,9 +14,10 @@ namespace HSDecks.Views {
 
         public AppPage() {
             this.InitializeComponent();
+            this.Loaded += (s, e) => { masterViewModel.OnLoaded(); };
             masterViewModel.PropertyChanged += this.OnPageNavigation;
 
-            AppFrame.Navigate(typeof(MainPage));
+            AppFrame.Navigate(typeof(FirstPage));
         }
 
         private void OnPageNavigation(object sender, PropertyChangedEventArgs e) {

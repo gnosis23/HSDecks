@@ -39,5 +39,10 @@ namespace HSDecks {
             masterViewModel.SelectedDeck = deck;
             this.Frame.Navigate(typeof(DeckDetail), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void BackBtn_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

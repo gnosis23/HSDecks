@@ -57,5 +57,11 @@ namespace HSDecks {
         private void ShareBtn_Click(object sender, RoutedEventArgs e) {
             masterViewModel.GotoSharedPage();
         }
+
+        private async void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await masterViewModel.SaveDecksAndExit();
+            this.Frame.GoBack();
+        }
     }
 }

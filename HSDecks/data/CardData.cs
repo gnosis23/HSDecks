@@ -259,7 +259,7 @@ namespace HSDecks {
 
         private static async Task StartDownload(BackgroundTransferPriority priority, bool requestUnconstrainedDownload) {
             _IsDownloading = true;
-            var ZipFileUrl = String.Format("http://localhost/HSDecks/Home/Download?ImageName={0}.zip", CARD_VER);
+            var ZipFileUrl = String.Format("http://10.0.0.4/HSDecks/Home/Download?ImageName={0}.zip", CARD_VER);
 
             // The URI is validated by calling Uri.TryCreate() that will return 'false' for strings that are not valid URIs. 
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet that require 

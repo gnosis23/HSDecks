@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="HSDecks.Views.FirstPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HSDecks.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="dictionary1.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Name="CoreGrid" 
+          RelativePanel.AlignLeftWithPanel="True"
+          RelativePanel.AlignRightWithPanel="True"
+          RelativePanel.AlignTopWithPanel="True"
+          RelativePanel.AlignBottomWithPanel="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <RelativePanel Background="#FF82B0F3" >
+                <Button Content="&#xE700;" Width="50"
+                    FontFamily="Segoe MDL2 Assets" FontSize="36" 
+                    Name="IconTextBlock"
+                    RelativePanel.AlignLeftWithPanel="True" 
+                    Click="IconTextBlock_Click"/>
+
+                <TextBlock Text="我的套牌" FontSize="30" Name="TitleTextBlock" 
+                           Margin="20, 0, 10, 0"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                           FontWeight="Bold"/>
+
+                <StackPanel RelativePanel.AlignRightWithPanel="True" 
+                        RelativePanel.AlignTopWithPanel="True"
+                        RelativePanel.AlignBottomWithPanel="True" 
+                        Orientation="Horizontal" Background="LightGray">
+                    <Button Content="&#xE71E;" FontSize="36" FontFamily="Segoe MDL2 Assets" 
+                        Name="SearchIcon" Background="#FF3A75DC" BorderBrush="{x:Null}" />
+                </StackPanel>
+            </RelativePanel>
+
+            <SplitView Name="MenuView" Grid.Row="1" CompactPaneLength="50"
+                       DisplayMode="Overlay" OpenPaneLength="250">
+                <SplitView.Pane>
+                    <ListBox SelectionChanged="ListBox_SelectionChanged">
+                        <ListBoxItem Name="HomeListBoxItem">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE80F;" Margin="0, 5, 5, 0"
+                                       FontSize="28" FontFamily="Segoe MDL2 Assets"/>
+                                <TextBlock Text="我的套牌" FontSize="28" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="StarListBoxItem">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE734;" Margin="0, 5, 5, 0"
+                                       FontSize="28" FontFamily="Segoe MDL2 Assets"/>
+                                <TextBlock Text="下载" FontSize="28" Margin="20,0,0,0" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </SplitView.Pane>
+
+                <SplitView.Content>
+                    <Grid>
+                        <Button Content="Fuck" FontSize="30" Click="Button_Click"></Button>
+                    </Grid>
+                </SplitView.Content>
+            </SplitView>
+        </Grid>
+
+    </RelativePanel>
+</Page>
