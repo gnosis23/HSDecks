@@ -30,6 +30,7 @@ namespace HSDecks.ViewModels {
 
         public bool visible => 
                 (this.card.rarity == "Legendary" || this._count == 2);
+        public bool twoNumberVisible => (this._count == 2);
 
         public void addCard() {
             this.cardCount = 2;

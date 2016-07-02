@@ -5,9 +5,14 @@
     xmlns:local="using:HSDecks"
     xmlns:vm="using:HSDecks.ViewModels"
     xmlns:cc="using:HSDecks.Controls"
+    xmlns:common="using:HSDecks.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <common:BoolToVisibility x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
 
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="shit" >
@@ -48,7 +53,7 @@
             <Button Name="ShareBtn" Content="Share"  FontSize="14" Click="ShareBtn_Click"/>
         </StackPanel>
 
-        <Grid  Grid.Row="2" BorderBrush="Black" BorderThickness="2" >
+        <Grid  Grid.Row="2" >
             <ListView ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
                       ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
                 <ListView.ItemContainerStyle>
@@ -66,7 +71,12 @@
                             <RelativePanel RelativePanel.RightOf="CardImage" RelativePanel.AlignTopWithPanel="True"
                                            RelativePanel.AlignBottomWithPanel="True"
                                            Margin="10,0,0,0">
-                                <TextBlock x:Name="NameText" Text="{x:Bind card.name}" FontSize="24"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="2x" FontSize="24" Margin="0,0,10,0"
+                                               Visibility="{x:Bind Path=twoNumberVisible,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
+                                    </TextBlock>
+                                    <TextBlock x:Name="NameText" Text="{x:Bind card.name}" FontSize="24"/>
+                                </StackPanel>
                                 <TextBlock Text="更改时间: 07.01 16:00" FontSize="12" 
                                        RelativePanel.AlignBottomWithPanel="True"/>
                             </RelativePanel>
