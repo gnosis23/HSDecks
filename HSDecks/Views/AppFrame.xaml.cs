@@ -20,18 +20,8 @@ namespace HSDecks.Views {
             AppFrame.Navigate(typeof(FirstPage));
         }
 
-        private void OnPageNavigation(object sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName == nameof(masterViewModel.IsSharedPage)) {
-                if (masterViewModel.IsSharedPage) {
-                    AppFrame.Navigate(typeof(DeckSharingPage));
-                }
-                else {
-                    AppFrame.GoBack();
-                }
-            }
-            if (e.PropertyName == nameof(masterViewModel.IsDownloadPage)) {
-                AppFrame.Navigate(typeof(DownloadPage));
-            }
+        private void OnPageNavigation(object sender, PropertyChangedEventArgs e)
+        {
         }
     }
 }

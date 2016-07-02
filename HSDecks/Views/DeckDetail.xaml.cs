@@ -63,5 +63,10 @@ namespace HSDecks {
             await masterViewModel.SaveDecksAndExit();
             this.Frame.GoBack();
         }
+
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
     }
 }

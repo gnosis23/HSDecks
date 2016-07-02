@@ -154,7 +154,7 @@ namespace HSDecks.Views {
                 await ZipHelper.UnZipFileAsync(zipFile, unzipFolder);
             } catch (TaskCanceledException) {
                 // LogStatus("Canceled: " + download.Guid, NotifyType.StatusMessage);
-            } catch (Exception ex) {
+            } catch (Exception ) {
                 // if (!IsExceptionHandled("Execution error", ex, download)) {
                 //     throw;
                 // }

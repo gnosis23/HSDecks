@@ -23,27 +23,22 @@ namespace HSDecks {
         public MainPage()
         {
             this.InitializeComponent();
-            this.Loaded += (s,e) => { masterViewModel.OnLoaded(); };
             // TODO: auto two-way binding with the images
-            masterViewModel.PropertyChanged += OnImageRefresh;
 
-            ImageViewer.Visibility = Visibility.Collapsed;
         }
 
  
 
-        private void IconTextBlock_Click(object sender, RoutedEventArgs e) {
-            MenuView.IsPaneOpen = !MenuView.IsPaneOpen;
+        private async void BackBtn_Click(object sender, RoutedEventArgs e) {
+            // save before quit
+            await masterViewModel.SaveDecks();
+            this.Frame.GoBack();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (StarListBoxItem.IsSelected) {
-                masterViewModel.IsDownloadPage = true;
-            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) {
-            DeckFrame.Navigate(typeof(DeckMenu));
         }
 
 
@@ -63,80 +58,38 @@ namespace HSDecks {
             await masterViewModel.Select(_cost, _page);
         }
 
-        private void Image0_Tapped(object sender, RightTappedRoutedEventArgs e) {
-            // Data source.
-            ImageViewer.Visibility = Visibility.Visible;
-
-            List<Image> currentPage = new List<Image>() {
-                    Image0, Image1, Image2, Image3,
-                    Image4, Image5, Image6, Image7
-            };
-
-            Image selectedItem = (Image)sender;
-
-            var count = 0;
-            foreach (var item in currentPage) {
-                if (item == selectedItem) {
-                    itemFlipView.SelectedIndex = count;
-                    masterViewModel.Board[count].selected = true;
-                    break;
-                }
-
-                count++;
-            }
-        }
-
-        private void ImageViewer_Tapped(object sender, TappedRoutedEventArgs e) {
-            ImageViewer.Visibility = Visibility.Collapsed;
-            // unselect all
-            foreach (var item in masterViewModel.Board) {
-                item.selected = false;
-            }
-        }
-
         private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e) {
             var item = (MenuFlyoutItem)sender;
             string _class = item.Text;
-            HeroMenu.Content = item.Text;
 
             await masterViewModel.SelectHero(_class);
         }
 
-        private void Image0_Tapped_1(object sender, TappedRoutedEventArgs e) {
+        private void Card_Tapped(object sender, TappedRoutedEventArgs e) {
+
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
             if (masterViewModel.SelectedDeck == null) {
                 return;
             }
 
-            List<Image> currentPage = new List<Image>() {
-                    Image0, Image1, Image2, Image3,
-                    Image4, Image5, Image6, Image7
-            };
+            var selectedItem = e.ClickedItem as DetailViewModel;
 
-            Image selectedItem = (Image)sender;
-
-            var card = masterViewModel.Board.First(p => p.CardImage == selectedItem.Source).card;
-            var item = new DeckItemViewModel(card);
-
-            masterViewModel.SelectedDeck.Add(item);
+            masterViewModel.SelectedDeck.Add(new DeckItemViewModel(selectedItem.card));
         }
 
-        public void OnImageRefresh(object sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName == nameof(masterViewModel.Board)) {
-                List<Image> currentPage = new List<Image>() {
-                    Image0, Image1, Image2, Image3,
-                    Image4, Image5, Image6, Image7
-                };
-
-                int count = 0;
-                foreach (Image item in currentPage) {
-                    item.Source = masterViewModel.Board[count].CardImage;
-
-                    count++;
-                }
-            }
+        private void QueryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DeckView.IsPaneOpen = !DeckView.IsPaneOpen;
         }
 
- 
+        private void CurrentDeckView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var ClickedItem = e.ClickedItem as DeckItemViewModel;
+            masterViewModel.SelectedDeck.Remove(ClickedItem);
+        }
     }
 
 }

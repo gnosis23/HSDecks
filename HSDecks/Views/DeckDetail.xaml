@@ -25,7 +25,8 @@
                        RelativePanel.AlignHorizontalCenterWithPanel="True"></TextBlock>
             <Button Name="EditBtn" Content="&#xE70F;" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets"
-                    RelativePanel.AlignRightWithPanel="True"></Button>
+                    RelativePanel.AlignRightWithPanel="True"
+                    Click="EditBtn_Click"></Button>
         </RelativePanel>
 
 

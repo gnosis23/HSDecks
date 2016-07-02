@@ -9,8 +9,9 @@
     </Style>
 
     <Style TargetType="Button" x:Key="CostButtonStyle">
-        <Setter Property="FontSize" Value="32" />
-        <Setter Property="Margin" Value="10,0,0,0" />
-        <Setter Property="Width" Value="50" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="5,5,0,5" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
     </Style>
 </ResourceDictionary>

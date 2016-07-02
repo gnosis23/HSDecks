@@ -72,13 +72,8 @@ namespace HSDecks.ViewModels {
             AbstractCard empty = new AbstractCard();
             Board.Clear();
 
-            for (int i = 0; i < 8; i++) {
-                if (_page * 8 + i < Cards.Count) {
-                    Board.Add(new DetailViewModel(Cards[_page * 8 + i]));
-                } else {
-                    empty.img = null;
-                    Board.Add(new DetailViewModel(empty));
-                }
+            for (int i = 0; i < Cards.Count; i++) {
+                    Board.Add(new DetailViewModel(Cards[i]));
             }
 
             OnPropertyChanged(nameof(this.Board));

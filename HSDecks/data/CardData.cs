@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks {
     class CardData {
-        public readonly static string CARD_VER = "cards_20160624";
+        public readonly static string CARD_VER = "cards";
         public static bool _IsDownloading = false;
 
         public async static Task GetCards(List<AbstractCard> cards, int cost, string heroClass) {
@@ -290,7 +290,7 @@ namespace HSDecks {
                     await ZipHelper.UnZipFileAsync(localFile, unzipFolder);
                     return;
                 }
-            } catch (Exception ex) {
+            } catch (Exception ) {
                 // LogStatus(ex.Message, NotifyType.ErrorMessage);
             }
         }

@@ -5,6 +5,7 @@
     xmlns:local="using:HSDecks"
     xmlns:dd="using:HSDecks.Models"
     xmlns:vm="using:HSDecks.ViewModels"
+    xmlns:ctrl="using:HSDecks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
@@ -28,131 +29,71 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <RelativePanel Background="LightGray" >
-            <Button Content="&#xE700;" Width="50"
+            <Button Content="&#xE72B;" Width="50"
                     FontFamily="Segoe MDL2 Assets" FontSize="36" 
                     Name="IconTextBlock"
                     RelativePanel.AlignLeftWithPanel="True" 
-                    Click="IconTextBlock_Click"/>
+                    Click="BackBtn_Click"/>
 
-            <TextBlock Text="炉石组牌器" FontSize="36" Name="TitleTextBlock" Margin="20, 0, 10, 0"
-                       RelativePanel.RightOf="IconTextBlock" FontWeight="Bold"/>
+            <TextBlock Text="炉石组牌器" FontSize="30" Name="TitleTextBlock"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold"/>
 
             <StackPanel RelativePanel.AlignRightWithPanel="True" 
                         RelativePanel.AlignTopWithPanel="True"
                         RelativePanel.AlignBottomWithPanel="True" 
                         Orientation="Horizontal" Background="LightGray">
-                <TextBox Width="200" PlaceholderText="Search" FontSize="24" />
-                <Button Content="&#xE71E;" FontSize="36" FontFamily="Segoe MDL2 Assets" 
-                        Name="SearchIcon" />
+                <Button Content="{x:Bind Path=masterViewModel.SelectedDeck.cardCount,Mode=OneWay}" 
+                        FontSize="30" Width="50"
+                        Name="QueryBtn" Click="QueryBtn_Click" />
             </StackPanel>
         </RelativePanel>
 
-            <SplitView Name="MenuView" Grid.Row="1" CompactPaneLength="50" DisplayMode="CompactOverlay">
+            <SplitView Name="DeckView" Grid.Row="1"  DisplayMode="Overlay" PanePlacement="Right" OpenPaneLength="250">
                 <SplitView.Pane>
-                    <ListBox SelectionChanged="ListBox_SelectionChanged">
-                        <ListBoxItem Name="HomeListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#xE80F;" Margin="0, 5, 5, 0"
-                                       FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                                <TextBlock Text="Warrior" FontSize="28" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="StarListBoxItem">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#xE734;" Margin="0, 5, 5, 0"
-                                       FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                                <TextBlock Text="Download" FontSize="28" Margin="20,0,0,0" />
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
+                    <ListView IsItemClickEnabled="True" 
+                              ItemsSource="{x:Bind Path=masterViewModel.SelectedDeck.items,Mode=OneWay}"
+                              ItemClick="CurrentDeckView_ItemClick">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DeckItemViewModel">
+                                <ctrl:DeckItemBlock Item="{Binding}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </SplitView.Pane>
 
                 <SplitView.Content>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="50" />
-                        </Grid.RowDefinitions>
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="50" />
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-                                <Image Name="Image0" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Grid.Column="1" Margin="5" >
-                                <Image Name="Image1" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Grid.Column="2" Margin="5" >
-                                <Image Name="Image2" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" >
-                                <Image Name="Image3" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" >
-                                <Image Name="Image4" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="2" Grid.Column="1" Margin="5" >
-                                <Image Name="Image5" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="2" Grid.Column="2" Margin="5" >
-                                <Image Name="Image6" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="2" Grid.Column="3" Margin="5" >
-                                <Image Name="Image7" Style="{StaticResource CardImageStyle}" RightTapped="Image0_Tapped" Tapped="Image0_Tapped_1"/>
-                            </StackPanel>
-
-
-                            <Button  Name="PrevPageButton" Grid.Row="1"
-                                 Click="PrevPageButton_Click">
-                                <TextBlock Text="&#xE72B;" FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                            </Button>
-
-                            <Button Name="NextPageButton" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right"
-                                Click="NextPageButton_Click">
-                                <TextBlock Text="&#xE72A;" 
-                                   FontSize="28" FontFamily="Segoe MDL2 Assets"/>
-                            </Button>
+                            <GridView Grid.Column="1" IsItemClickEnabled="True"
+                                      ItemClick="GridView_ItemClick"
+                                      ItemsSource="{x:Bind masterViewModel.Board}">
+                                <GridView.ItemContainerStyle>
+                                    <Style TargetType="GridViewItem">
+                                        <Setter Property="Margin" Value="5,0,0,0" />
+                                    </Style>
+                                </GridView.ItemContainerStyle>
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:DetailViewModel">
+                                        <Image Name="Image0" Style="{StaticResource CardImageStyle}" 
+                                               Stretch="UniformToFill" Width="150" Height="230"
+                                               Source="{x:Bind card.image}"
+                                               Tapped="Card_Tapped"/>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
 
                             <StackPanel Name="CostStackPanel" 
-                                    Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
-                                <Button Name="HeroMenu" Content="{x:Bind Path=masterViewModel.HeroClass,Mode=OneWay}" 
-                                        Style="{StaticResource CostButtonStyle}"
-                                        Width="120" FontSize="28">
-                                    <Button.Flyout>
-                                        <MenuFlyout >
-                                            <MenuFlyout.MenuFlyoutPresenterStyle>
-                                                <Style TargetType="MenuFlyoutPresenter">
-                                                    <Setter Property="BorderBrush" Value="CornflowerBlue"/>
-                                                    <Setter Property="BorderThickness" Value="2"/>
-                                                </Style>
-                                            </MenuFlyout.MenuFlyoutPresenterStyle>
-                                            <MenuFlyoutItem Text="All" Width="100" Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutSeparator />
-                                            <MenuFlyoutItem Text="Warrior"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Mage" Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Druid"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Priest"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Hunter"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Shaman"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Paladin"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Rogue"  Click="MenuFlyoutItem_Click"/>
-                                            <MenuFlyoutItem Text="Warlock"  Click="MenuFlyoutItem_Click"/>
-                                        </MenuFlyout>
-                                    </Button.Flyout>
-                                </Button>
+                                        Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical">
+
                                 <Button Name="Btn0" Content="0" Style="{StaticResource CostButtonStyle}" 
                                     Click="Btn0_Click"/>
                                 <Button Name="Btn1" Content="1" Style="{StaticResource CostButtonStyle}" 
@@ -171,10 +112,7 @@
                                     Click="Btn0_Click"/>
                             </StackPanel>
 
-                            <Frame Name="DeckFrame" Grid.Column="4" Grid.RowSpan="3" Margin="0,20,0,0" />
                         </Grid>
-                        <TextBlock Text="Trade Mark" VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Grid.Row="1"/>
 
                         <ProgressRing Name="Progress" Width="45" Height="45"
                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -184,40 +122,6 @@
                 </SplitView.Content>
             </SplitView>
         </Grid>
-
-        <RelativePanel x:Name="ImageViewer" RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                       RelativePanel.AlignTopWithPanel="True"
-                       RelativePanel.AlignBottomWithPanel="True" Background="#7F808080" Tapped="ImageViewer_Tapped" d:IsHidden="True">
-            <FlipView x:Name="itemFlipView"
-                  RelativePanel.AlignHorizontalCenterWithPanel="True"
-                  RelativePanel.AlignVerticalCenterWithPanel="True"
-                  ItemsSource="{x:Bind masterViewModel.Board}">
-                <FlipView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:DetailViewModel">
-                        <Grid>
-                            <Image Stretch="None" Source="{x:Bind CardImage}"/>
-                            <Border Background="#A5000000" Height="150" VerticalAlignment="Bottom">
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
-                                        <TextBlock Text="{x:Bind Name}" 
-                                           FontFamily="Comic Sans MS" FontSize="32" Foreground="#CCFFFFFF" />
-                                        <TextBlock Text="{x:Bind Hero}" 
-                                           FontFamily="Segoe UI" FontSize="32" Foreground="#CC179E61" Margin="10,0" />
-                                        <TextBlock Text="{x:Bind Id}" 
-                                           FontFamily="Segoe UI" FontSize="32" Foreground="#CCFFFFFF" />
-                                    </StackPanel>
-                                    
-                                    <TextBlock Text="{x:Bind Text}" 
-                                           FontFamily="Segoe UI" FontSize="16" 
-                                           Foreground="#CCFFFFFF" Margin="10,5,10,0"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </FlipView.ItemTemplate>
-            </FlipView>
-        </RelativePanel>
 
     </RelativePanel>
 
