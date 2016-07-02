@@ -13,9 +13,19 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="10">
-            <TextBlock Text="Download" FontSize="30" ></TextBlock>
-        </StackPanel>
+        <RelativePanel Background="#FF82B0F3" >
+            <Button Content="&#xE72B;" Width="50"
+                    FontFamily="Segoe MDL2 Assets" FontSize="36" 
+                    Name="IconTextBlock"
+                    RelativePanel.AlignLeftWithPanel="True" 
+                    Click="IconTextBlock_Click"/>
+
+            <TextBlock Text="下载" FontSize="30" Name="TitleTextBlock" 
+                           Margin="20, 0, 10, 0"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                           FontWeight="Bold"/>
+        </RelativePanel>
+
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <ListView x:Name="list_Downing" SelectionMode="Extended"
                       ItemsSource="{x:Bind Downloads}">

@@ -57,7 +57,7 @@
                                 <TextBlock Text="我的套牌" FontSize="28" Margin="20,0,0,0" />
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="StarListBoxItem">
+                        <ListBoxItem Name="DownloadListBoxItem">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#xE734;" Margin="0, 5, 5, 0"
                                        FontSize="28" FontFamily="Segoe MDL2 Assets"/>

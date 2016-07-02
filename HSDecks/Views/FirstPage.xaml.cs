@@ -34,12 +34,15 @@ namespace HSDecks.Views
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (DownloadListBoxItem.IsTapEnabled)
+            {
+                this.Frame.Navigate(typeof(DownloadPage));
+            }
         }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e)
         {
-
+            MenuView.IsPaneOpen = !MenuView.IsPaneOpen;
         }
     }
 }

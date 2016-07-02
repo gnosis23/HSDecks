@@ -29,6 +29,7 @@ namespace HSDecks.Views {
     /// </summary>
     public sealed partial class DownloadPage : Page {
         public ObservableCollection<DownloadViewModel> Downloads;
+        private readonly string HOST = "10.0.0.4";
 
         private CancellationTokenSource cts;
 
@@ -39,49 +40,49 @@ namespace HSDecks.Views {
             Downloads.Add(new DownloadViewModel("Basic") {
                 FileName = "BASIC",
                 FullFileName = "BASIC.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=BASIC.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BASIC.zip",HOST),
                 Progress = 0,
                 Size = 85,
             });
             Downloads.Add(new DownloadViewModel("BRM") {
                 FileName = "BRM",
                 FullFileName = "BRM.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=BRM.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BRM.zip",HOST),
                 Progress = 0,
                 Size = 5,
             });
             Downloads.Add(new DownloadViewModel("GVG") {
                 FileName = "GVG",
                 FullFileName = "GVG.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=GVG.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=GVG.zip",HOST),
                 Progress = 0,
                 Size = 25,
             });
             Downloads.Add(new DownloadViewModel("LOE") {
                 FileName = "LOE",
                 FullFileName = "LOE.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=LOE.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=LOE.zip",HOST),
                 Progress = 0,
                 Size = 9,
             });
             Downloads.Add(new DownloadViewModel("NAX") {
                 FileName = "NAX",
                 FullFileName = "NAX.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=NAX.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=NAX.zip",HOST),
                 Progress = 0,
                 Size = 5,
             });
             Downloads.Add(new DownloadViewModel("OG") {
                 FileName = "OG",
                 FullFileName = "OG.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=OG.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=OG.zip",HOST),
                 Progress = 0,
                 Size = 28,
             });
             Downloads.Add(new DownloadViewModel("AT") {
                 FileName = "AT",
                 FullFileName = "AT.zip",
-                Address = "http://localhost/HSDecks/Home/Download?ImageName=AT.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=AT.zip",HOST),
                 Progress = 0,
                 Size = 26,
             });
@@ -219,6 +220,11 @@ namespace HSDecks.Views {
             // Init;
             SelectedSet.Status = "";
             SelectedSet.Progress = 0;
+        }
+
+        private void IconTextBlock_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
         }
     }
 }
