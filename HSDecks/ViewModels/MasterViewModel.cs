@@ -29,6 +29,16 @@ namespace HSDecks.ViewModels {
         }
         public ObservableCollection<DeckViewModel> Decks { get; set; }
 
+        DeckItemViewModel _selectedCard = null;
+        public DeckItemViewModel SelectedCard
+        {
+            get { return _selectedCard; }
+            set
+            {
+                SetProperty(ref _selectedCard, value);
+            }
+        }
+
         int _page = 0;
         int _cost = 0;
 

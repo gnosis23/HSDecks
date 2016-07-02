@@ -20,6 +20,8 @@ namespace HSDecks.Models {
         public string rarity { get; set; }
         public string text { get; set; }
         public string playerClass { get; set; }
+        public string flavor { get; set; }
+        public string artist { get; set; }
 
         public string img { get; set; }
         public string imgGold { get; set; }

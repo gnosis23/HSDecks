@@ -70,6 +70,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.Classic.ForEach(p => {
@@ -87,6 +89,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.Naxxramas.ForEach(p => {
@@ -104,6 +108,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.GoblinsvsGnomes.ForEach(p => {
@@ -121,6 +127,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.BlackrockMountain.ForEach(p => {
@@ -138,6 +146,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.TheGrandTournament.ForEach(p => {
@@ -155,6 +165,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.TheLeagueofExplorers.ForEach(p => {
@@ -172,6 +184,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
             Fuck.WhispersoftheOldGods.ForEach(p => {
@@ -189,6 +203,8 @@ namespace HSDecks {
                 aCard.text = p.text;
                 aCard.playerClass = p.playerClass;
                 aCard.img = p.img;
+                aCard.flavor = p.flavor;
+                aCard.artist = p.artist;
                 tempCards.Add(aCard);
             });
 

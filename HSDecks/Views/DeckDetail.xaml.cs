@@ -41,7 +41,8 @@ namespace HSDecks {
 
         private void DeckList_ItemClick(object sender, ItemClickEventArgs e) {
             var deckItem = (DeckItemViewModel)e.ClickedItem;
-            OneDeck.Remove(deckItem);
+            masterViewModel.SelectedCard = deckItem;
+            this.Frame.Navigate(typeof(CardDetailPage));
         }
 
         private async void RenameBtn_Click(object sender, RoutedEventArgs e) {
