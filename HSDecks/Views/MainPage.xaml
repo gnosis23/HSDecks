@@ -78,15 +78,17 @@
                                       ItemsSource="{x:Bind masterViewModel.Board}">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
-                                        <Setter Property="Margin" Value="5,0,0,0" />
+                                        <Setter Property="Margin" Value="5,0,0,5" />
                                     </Style>
                                 </GridView.ItemContainerStyle>
                                 <GridView.ItemTemplate>
                                     <DataTemplate x:DataType="vm:DetailViewModel">
-                                        <Image Name="Image0" Style="{StaticResource CardImageStyle}" 
-                                               Stretch="UniformToFill" Width="150" Height="230"
-                                               Source="{x:Bind card.image}"
-                                               Tapped="Card_Tapped"/>
+                                        <RelativePanel BorderBrush="LightGray" BorderThickness="1" >
+                                            <Image Name="Image0" Style="{StaticResource CardImageStyle}" 
+                                                   Stretch="UniformToFill" Width="150" Height="230"
+                                                   Source="{x:Bind card.image}"
+                                                   Tapped="Card_Tapped"/>
+                                        </RelativePanel>
                                     </DataTemplate>
                                 </GridView.ItemTemplate>
                             </GridView>

@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
- 
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="shit" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -48,7 +48,7 @@
             <Button Name="ShareBtn" Content="Share"  FontSize="14" Click="ShareBtn_Click"/>
         </StackPanel>
 
-        <Grid  Grid.Row="2" BorderBrush="Black" BorderThickness="2" Background="DimGray">
+        <Grid  Grid.Row="2" BorderBrush="Black" BorderThickness="2" >
             <ListView ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
                       ItemClick="DeckList_ItemClick" IsItemClickEnabled="True">
                 <ListView.ItemContainerStyle>
@@ -60,20 +60,26 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:DeckItemViewModel">
                         <RelativePanel Height="80" BorderBrush="Black" BorderThickness="0,1,0,0">
-                            <Image Name="CardImage" Width="100" Height="60" Stretch="UniformToFill"
+                            <Image Name="CardImage" Width="100" Height="50" Stretch="Uniform"
+                                   Source="{x:Bind card.sImage}"
                                    RelativePanel.AlignVerticalCenterWithPanel="True" />
                             <RelativePanel RelativePanel.RightOf="CardImage" RelativePanel.AlignTopWithPanel="True"
                                            RelativePanel.AlignBottomWithPanel="True"
                                            Margin="10,0,0,0">
-                                <TextBlock x:Name="NameText" Text="{x:Bind card.name}" FontSize="30"/>
-                                <TextBlock Text="更改时间: 07.01 16:00" FontSize="16" 
+                                <TextBlock x:Name="NameText" Text="{x:Bind card.name}" FontSize="24"/>
+                                <TextBlock Text="更改时间: 07.01 16:00" FontSize="12" 
                                        RelativePanel.AlignBottomWithPanel="True"/>
                             </RelativePanel>
-                            <StackPanel Height="50" Width="50" Background="LightBlue"
+                            <RelativePanel Height="60" Width="50"
                                         RelativePanel.AlignVerticalCenterWithPanel="True"
                                         RelativePanel.AlignRightWithPanel="True">
-                                <TextBlock Text="{x:Bind card.cost}" FontSize="30" ></TextBlock>
-                            </StackPanel>
+                                <RelativePanel.Background>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/cost.png" Stretch="None"/>
+                                </RelativePanel.Background>
+                                <TextBlock Text="{x:Bind card.cost}" FontSize="28" Foreground="White"
+                                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold" FontFamily="Segoe UI Black"></TextBlock>
+                            </RelativePanel>
                         </RelativePanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
