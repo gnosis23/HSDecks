@@ -28,80 +28,15 @@ namespace HSDecks.Views {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class DownloadPage : Page {
-        public ObservableCollection<DownloadViewModel> Downloads;
-        private readonly string HOST = "10.0.0.4";
+        MasterViewModel masterViewModel => App.Global.masterViewModel;
+        public ObservableCollection<DownloadViewModel> Downloads => masterViewModel.Downloads;
 
         private CancellationTokenSource cts;
 
         public DownloadPage() {
             cts = new CancellationTokenSource();
 
-            this.Downloads = new ObservableCollection<DownloadViewModel>();
-            Downloads.Add(new DownloadViewModel("Basic") {
-                FileName = "BASIC",
-                FullFileName = "BASIC.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BASIC.zip",HOST),
-                Progress = 0,
-                Size = 85,
-            });
-            Downloads.Add(new DownloadViewModel("BRM") {
-                FileName = "BRM",
-                FullFileName = "BRM.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BRM.zip",HOST),
-                Progress = 0,
-                Size = 5,
-            });
-            Downloads.Add(new DownloadViewModel("GVG") {
-                FileName = "GVG",
-                FullFileName = "GVG.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=GVG.zip",HOST),
-                Progress = 0,
-                Size = 25,
-            });
-            Downloads.Add(new DownloadViewModel("LOE") {
-                FileName = "LOE",
-                FullFileName = "LOE.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=LOE.zip",HOST),
-                Progress = 0,
-                Size = 9,
-            });
-            Downloads.Add(new DownloadViewModel("NAX") {
-                FileName = "NAX",
-                FullFileName = "NAX.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=NAX.zip",HOST),
-                Progress = 0,
-                Size = 5,
-            });
-            Downloads.Add(new DownloadViewModel("OG") {
-                FileName = "OG",
-                FullFileName = "OG.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=OG.zip",HOST),
-                Progress = 0,
-                Size = 28,
-            });
-            Downloads.Add(new DownloadViewModel("AT") {
-                FileName = "AT",
-                FullFileName = "AT.zip",
-                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=AT.zip",HOST),
-                Progress = 0,
-                Size = 26,
-            });
-            this.Loaded += (s,e) => this.OnLoaded();
-
             this.InitializeComponent();
-        }
-
-        private async void OnLoaded() {
-            foreach (var set in Downloads) {
-                var s = await ApplicationData.Current.LocalFolder.TryGetItemAsync(set.FullFileName);
-                if (s != null) {
-                    var props = await s.GetBasicPropertiesAsync();
-                    set.Status = "Ready";
-                    set.Progress = 100;
-                    set.IsDownloadVisible = false;
-                    set.IsDeleteVisible = true;
-                }
-            }
         }
 
         private async void StartDownload_Click(object sender, RoutedEventArgs e) {
@@ -148,7 +83,7 @@ namespace HSDecks.Views {
                 // GetResponseInformation() returns null for non-HTTP transfers (e.g., FTP).
                 string statusCode = response != null ? response.StatusCode.ToString() : String.Empty;
 
-                // Completed
+                // download completed
                 Selected.Status = "decompressing...";
                 Selected.IsDownloadVisible = false;
 
@@ -157,18 +92,15 @@ namespace HSDecks.Views {
                 var unzipFolder = await FileHelper.GetFolderNotNullAsync(
                     ApplicationData.Current.LocalFolder, "cards");
                 await ZipHelper.UnZipFileAsync(zipFile, unzipFolder);
-                Selected.Status = "Ready";
-                Selected.IsDeleteVisible = true;
+
+                // end
+                Selected.Complete();
             } catch (TaskCanceledException) {
                 // LogStatus("Canceled: " + download.Guid, NotifyType.StatusMessage);
             } catch (Exception ) {
                 if (Selected != null)
                 {
-                    Selected.Progress = 0;
-                    Selected.Status = "Failed";
-                    Selected.IsDownloadVisible = true;
-                    await FileHelper.RemoveFileIfExistAsync(ApplicationData.Current.LocalFolder, 
-                        Selected.FullFileName);
+                    await Selected.Delete();
                 }
             } finally {
                 // activeDownloads.Remove(download);
@@ -222,16 +154,7 @@ namespace HSDecks.Views {
         private async void RemoveButton_Click(object sender, RoutedEventArgs e) {
             var SelectedSet = (sender as Button).DataContext as DownloadViewModel;
 
-            var file = await ApplicationData.Current.LocalFolder.TryGetItemAsync(SelectedSet.FullFileName);
-            if (file != null) {
-                await file.DeleteAsync();
-            }
-
-            // Init;
-            SelectedSet.Status = "";
-            SelectedSet.Progress = 0;
-            SelectedSet.IsDownloadVisible = true;
-            SelectedSet.IsDeleteVisible = false;
+            await SelectedSet.Delete();
         }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e)

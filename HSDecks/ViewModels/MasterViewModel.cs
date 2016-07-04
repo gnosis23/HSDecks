@@ -1,5 +1,6 @@
 ﻿using FuckUWP1.Common;
 using HSDecks.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks.ViewModels {
     public class MasterViewModel: BindableBase {
+        private readonly string HOST = "10.0.0.4";
+
         List<AbstractCard> Cards;
 
         DeckViewModel _selectedDeck = null;
@@ -57,6 +60,63 @@ namespace HSDecks.ViewModels {
         }
 
         public async void OnLoaded() {
+            this.Downloads = new ObservableCollection<DownloadViewModel>();
+            Downloads.Add(new DownloadViewModel("Basic") {
+                FileName = "BASIC",
+                FullFileName = "BASIC.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BASIC.zip", HOST),
+                Progress = 0,
+                Size = 85,
+            });
+            Downloads.Add(new DownloadViewModel("BRM") {
+                FileName = "BRM",
+                FullFileName = "BRM.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BRM.zip", HOST),
+                Progress = 0,
+                Size = 5,
+            });
+            Downloads.Add(new DownloadViewModel("GVG") {
+                FileName = "GVG",
+                FullFileName = "GVG.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=GVG.zip", HOST),
+                Progress = 0,
+                Size = 25,
+            });
+            Downloads.Add(new DownloadViewModel("LOE") {
+                FileName = "LOE",
+                FullFileName = "LOE.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=LOE.zip", HOST),
+                Progress = 0,
+                Size = 9,
+            });
+            Downloads.Add(new DownloadViewModel("NAX") {
+                FileName = "NAX",
+                FullFileName = "NAX.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=NAX.zip", HOST),
+                Progress = 0,
+                Size = 5,
+            });
+            Downloads.Add(new DownloadViewModel("OG") {
+                FileName = "OG",
+                FullFileName = "OG.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=OG.zip", HOST),
+                Progress = 0,
+                Size = 28,
+            });
+            Downloads.Add(new DownloadViewModel("AT") {
+                FileName = "AT",
+                FullFileName = "AT.zip",
+                Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=AT.zip", HOST),
+                Progress = 0,
+                Size = 26,
+            });
+            foreach (var set in Downloads) {
+                var s = await ApplicationData.Current.LocalFolder.TryGetItemAsync(set.FullFileName);
+                if (s != null) {
+                    set.Complete();
+                }
+            }
+
             await refreshPageAsync();
             await DeckInitializing();
         }
@@ -149,7 +209,8 @@ namespace HSDecks.ViewModels {
             IsSharedPage = false;
         }
 
- 
+        // Download Page
+        public ObservableCollection<DownloadViewModel> Downloads;
     }
 
     public class DetailViewModel {
