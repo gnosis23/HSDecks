@@ -98,6 +98,8 @@ namespace HSDecks.Views {
                     var props = await s.GetBasicPropertiesAsync();
                     set.Status = "Ready";
                     set.Progress = 100;
+                    set.IsDownloadVisible = false;
+                    set.IsDeleteVisible = true;
                 }
             }
         }
@@ -119,17 +121,19 @@ namespace HSDecks.Views {
             DownloadOperation download = downloader.CreateDownload(source, destinationFile);
 
             SelectedSets.guid = download.Guid;
+            SelectedSets.Status = "Downloading...";
+            SelectedSets.IsDownloadVisible = false;
 
             await HandleDownloadAsync(download, true);
         }
 
         private async Task HandleDownloadAsync(DownloadOperation download, bool start) {
+            DownloadViewModel Selected = Downloads.FirstOrDefault(p => p.Address == download.RequestedUri.ToString());
             try {
                 // LogStatus("Running: " + download.Guid, NotifyType.StatusMessage);
 
                 // Store the download so we can pause/resume.
                 // activeDownloads.Add(download);
-
                 Progress<DownloadOperation> progressCallback = new Progress<DownloadOperation>(DownloadProgress);
                 if (start) {
                     // Start the download and attach a progress handler.
@@ -145,20 +149,27 @@ namespace HSDecks.Views {
                 string statusCode = response != null ? response.StatusCode.ToString() : String.Empty;
 
                 // Completed
-                var Selected = Downloads.First(p => p.guid == download.Guid);
-                Selected.Status = "Ready";
+                Selected.Status = "decompressing...";
+                Selected.IsDownloadVisible = false;
 
                 // Unzip 
                 var zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Selected.FullFileName);
                 var unzipFolder = await FileHelper.GetFolderNotNullAsync(
                     ApplicationData.Current.LocalFolder, "cards");
                 await ZipHelper.UnZipFileAsync(zipFile, unzipFolder);
+                Selected.Status = "Ready";
+                Selected.IsDeleteVisible = true;
             } catch (TaskCanceledException) {
                 // LogStatus("Canceled: " + download.Guid, NotifyType.StatusMessage);
             } catch (Exception ) {
-                // if (!IsExceptionHandled("Execution error", ex, download)) {
-                //     throw;
-                // }
+                if (Selected != null)
+                {
+                    Selected.Progress = 0;
+                    Selected.Status = "Failed";
+                    Selected.IsDownloadVisible = true;
+                    await FileHelper.RemoveFileIfExistAsync(ApplicationData.Current.LocalFolder, 
+                        Selected.FullFileName);
+                }
             } finally {
                 // activeDownloads.Remove(download);
             }
@@ -168,7 +179,6 @@ namespace HSDecks.Views {
         // Note that this event is invoked on a background thread, so we cannot access the UI directly.
         private void DownloadProgress(DownloadOperation download) {
             var Selected = Downloads.First(p => p.guid == download.Guid);
-            Selected.Status = "Downloading";
 
             // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
             // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
@@ -178,7 +188,7 @@ namespace HSDecks.Views {
             // MarshalLog(String.Format(CultureInfo.CurrentCulture, "Progress: {0}, Status: {1}", download.Guid,
             //     currentProgress.Status));
 
-            double percent = 100;
+            double percent = 0;
             if (currentProgress.TotalBytesToReceive > 0) {
                 percent = currentProgress.BytesReceived * 100 / currentProgress.TotalBytesToReceive;
             }
@@ -220,6 +230,8 @@ namespace HSDecks.Views {
             // Init;
             SelectedSet.Status = "";
             SelectedSet.Progress = 0;
+            SelectedSet.IsDownloadVisible = true;
+            SelectedSet.IsDeleteVisible = false;
         }
 
         private void IconTextBlock_Click(object sender, RoutedEventArgs e)

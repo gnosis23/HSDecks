@@ -4,9 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HSDecks.Views"
     xmlns:vm="using:HSDecks.ViewModels"
+    xmlns:common="using:HSDecks.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <common:BoolToVisibility x:Key="BVConverter" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -54,9 +59,11 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Button Content="&#xE768;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
                                         Margin="0" Background="{x:Null}" FontSize="20"
+                                        Visibility="{x:Bind Path=IsDownloadVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
                                         Click="StartDownload_Click" FontFamily="Segoe MDL2 Assets"></Button>
                                 <Button Content="&#xE894;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
                                         Background="{x:Null}" FontSize="16" FontFamily="Segoe MDL2 Assets"
+                                        Visibility="{x:Bind Path=IsDeleteVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
                                         Click="RemoveButton_Click"></Button>
                             </StackPanel>
                             <TextBlock FontSize="12" Grid.Row="1" Foreground="Gray" Text="{x:Bind Path=Status,Mode=OneWay}"></TextBlock>

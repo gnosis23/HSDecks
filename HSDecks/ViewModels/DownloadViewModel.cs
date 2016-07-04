@@ -11,6 +11,9 @@ namespace HSDecks.ViewModels {
         public DownloadViewModel(string Title) {
             this.Title = Title;
             this.Size = 0;
+            // default not ready
+            this.IsDownloadVisible = true;
+            this.IsDeleteVisible = false;
         }
 
         double _progress;
@@ -38,5 +41,25 @@ namespace HSDecks.ViewModels {
         public string Address { get; set; }
 
         public Guid guid { get; set; }
+
+        public bool _isDownloadVisible;
+        public bool IsDownloadVisible
+        {
+            get { return _isDownloadVisible; }
+            set
+            {
+                SetProperty(ref _isDownloadVisible, value);
+            }
+        }
+
+        public bool _isDeleteVisible;
+        public bool IsDeleteVisible
+        {
+            get { return _isDeleteVisible; }
+            set
+            {
+                SetProperty(ref _isDeleteVisible, value);
+            }
+        }
     }
 }

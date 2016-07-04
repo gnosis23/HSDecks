@@ -30,5 +30,17 @@ namespace HSDecks.Common {
                 return await storageFolder.GetFolderAsync(subFolderName);
             }
         }
+
+        public static async Task
+        RemoveFileIfExistAsync(StorageFolder storageFolder, string fileName)
+        {
+            bool exist = await IfFolderExistsAsync(storageFolder, fileName);
+
+            if (exist)
+            {
+                var file = await storageFolder.GetFileAsync(fileName);
+                await file.DeleteAsync();
+            }
+        }
     }
 }
