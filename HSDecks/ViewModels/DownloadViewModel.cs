@@ -40,7 +40,9 @@ namespace HSDecks.ViewModels {
 
         public string FileName { get; set; }
         public string FullFileName { get; set; }
+        public string ChnName { get; set; }
         public string Address { get; set; }
+        public string Mode { get; set; }
 
         public Guid guid { get; set; }
 
@@ -64,7 +66,7 @@ namespace HSDecks.ViewModels {
             }
         }
 
-        public bool _ready;
+        public bool _ready = false;
         public bool Ready
         {
             get { return _ready; }

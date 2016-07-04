@@ -29,7 +29,9 @@ namespace HSDecks.Views {
     /// </summary>
     public sealed partial class DownloadPage : Page {
         MasterViewModel masterViewModel => App.Global.masterViewModel;
-        public ObservableCollection<DownloadViewModel> Downloads => masterViewModel.Downloads;
+        public List<DownloadViewModel> Downloads => masterViewModel.Downloads;
+        public List<DownloadViewModel> StandardSet => masterViewModel.StandardSet;
+        public List<DownloadViewModel> WildSet => masterViewModel.WildSet;
 
         private CancellationTokenSource cts;
 

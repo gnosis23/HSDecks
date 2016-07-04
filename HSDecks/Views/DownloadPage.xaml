@@ -11,10 +11,47 @@
 
     <Page.Resources>
         <common:BoolToVisibility x:Key="BVConverter" />
+        <Style TargetType="ListViewItem" x:Key="DownloadListStyle">
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="BorderBrush" Value="#FFCBCBCB"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+            <Setter Property="Height" Value="70"></Setter>
+        </Style>
+        <DataTemplate x:DataType="vm:DownloadViewModel" x:Key="DownloadTemplate">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ProgressBar Grid.RowSpan="2" Margin="-10" Maximum="100" 
+                                         Value="{x:Bind Path=Progress,Mode=OneWay}" VerticalAlignment="Stretch" 
+                                         Foreground="#FFD8819B" 
+                                         Opacity="0.8"></ProgressBar>
+                <TextBlock  TextWrapping="Wrap" MaxLines="2">
+                    <Run Text="{x:Bind Path=ChnName}"></Run>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="&#xE768;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
+                                        Margin="0" Background="{x:Null}" FontSize="20"
+                                        Visibility="{x:Bind Path=IsDownloadVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
+                                        Click="StartDownload_Click" FontFamily="Segoe MDL2 Assets"></Button>
+                    <Button Content="&#xE894;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
+                                        Background="{x:Null}" FontSize="16" FontFamily="Segoe MDL2 Assets"
+                                        Visibility="{x:Bind Path=IsDeleteVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
+                                        Click="RemoveButton_Click"></Button>
+                </StackPanel>
+                <TextBlock FontSize="12" Grid.Row="1" Foreground="Gray" Text="{x:Bind Path=Status,Mode=OneWay}"></TextBlock>
+                <TextBlock FontSize="12" Grid.Row="1" Foreground="Gray" HorizontalAlignment="Right">
+                                <Run Text="{x:Bind Path=Size,Mode=OneWay}"></Run>
+                                <Run Text="M"></Run>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -31,49 +68,28 @@
                            FontWeight="Bold"/>
         </RelativePanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1">
+        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="10,0,10,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="标准模式" FontSize="30"></TextBlock>
+                <TextBlock Text="{x:Bind Path=masterViewModel.StandardDownloadMsg,Mode=OneWay}" FontSize="18" 
+                           VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+            </StackPanel>
             <ListView x:Name="list_Downing" SelectionMode="Extended"
-                      ItemsSource="{x:Bind Downloads}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
-                        <Setter Property="BorderBrush" Value="#FFCBCBCB"></Setter>
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                        <Setter Property="Height" Value="70"></Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:DownloadViewModel">
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <ProgressBar Grid.RowSpan="2" Margin="-10" Maximum="100" 
-                                         Value="{x:Bind Path=Progress,Mode=OneWay}" VerticalAlignment="Stretch" 
-                                         Foreground="#FFD8819B" 
-                                         Opacity="0.8"></ProgressBar>
-                            <TextBlock  TextWrapping="Wrap" MaxLines="2">
-                                    <Run Text="{x:Bind Path=Title}"></Run>
-                            </TextBlock>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Content="&#xE768;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
-                                        Margin="0" Background="{x:Null}" FontSize="20"
-                                        Visibility="{x:Bind Path=IsDownloadVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
-                                        Click="StartDownload_Click" FontFamily="Segoe MDL2 Assets"></Button>
-                                <Button Content="&#xE894;" HorizontalAlignment="Right" Opacity="0.8" Width="60"
-                                        Background="{x:Null}" FontSize="16" FontFamily="Segoe MDL2 Assets"
-                                        Visibility="{x:Bind Path=IsDeleteVisible,Mode=OneWay,Converter={StaticResource BVConverter}}"
-                                        Click="RemoveButton_Click"></Button>
-                            </StackPanel>
-                            <TextBlock FontSize="12" Grid.Row="1" Foreground="Gray" Text="{x:Bind Path=Status,Mode=OneWay}"></TextBlock>
-                            <TextBlock FontSize="12" Grid.Row="1" Foreground="Gray" HorizontalAlignment="Right">
-                                <Run Text="{x:Bind Path=Size,Mode=OneWay}"></Run>
-                                <Run Text="M"></Run>
-                            </TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                      ItemsSource="{x:Bind StandardSet}" 
+                      ItemContainerStyle="{StaticResource DownloadListStyle}"
+                      ItemTemplate="{StaticResource DownloadTemplate}">
+            </ListView>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Margin="10,10,10,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="狂野模式" FontSize="30"></TextBlock>
+                <TextBlock Text="{x:Bind Path=masterViewModel.WildDownloadMsg,Mode=OneWay}" FontSize="18" 
+                           VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+            </StackPanel>
+            <ListView SelectionMode="Extended"
+                      ItemsSource="{x:Bind WildSet}" 
+                      ItemContainerStyle="{StaticResource DownloadListStyle}"
+                      ItemTemplate="{StaticResource DownloadTemplate}">
             </ListView>
         </StackPanel>
     </Grid>

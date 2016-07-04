@@ -3,6 +3,7 @@ using HSDecks.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
@@ -10,6 +11,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
+using System.ComponentModel;
 
 namespace HSDecks.ViewModels {
     public class MasterViewModel: BindableBase {
@@ -60,55 +62,69 @@ namespace HSDecks.ViewModels {
         }
 
         public async void OnLoaded() {
-            this.Downloads = new ObservableCollection<DownloadViewModel>();
+            this.Downloads = new List<DownloadViewModel>();
             Downloads.Add(new DownloadViewModel("Basic") {
                 FileName = "BASIC",
+                ChnName = "基础系列",
                 FullFileName = "BASIC.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BASIC.zip", HOST),
                 Progress = 0,
                 Size = 85,
+                Mode = "standard",
             });
             Downloads.Add(new DownloadViewModel("BRM") {
                 FileName = "BRM",
+                ChnName = "黑石山的火焰",
                 FullFileName = "BRM.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=BRM.zip", HOST),
                 Progress = 0,
                 Size = 5,
+                Mode = "standard",
             });
             Downloads.Add(new DownloadViewModel("GVG") {
                 FileName = "GVG",
+                ChnName = "地精大战侏儒",
                 FullFileName = "GVG.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=GVG.zip", HOST),
                 Progress = 0,
                 Size = 25,
+                Mode = "wild",
             });
             Downloads.Add(new DownloadViewModel("LOE") {
                 FileName = "LOE",
+                ChnName = "探险者协会",
                 FullFileName = "LOE.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=LOE.zip", HOST),
                 Progress = 0,
                 Size = 9,
+                Mode = "standard",
             });
             Downloads.Add(new DownloadViewModel("NAX") {
                 FileName = "NAX",
+                ChnName = "纳克萨玛斯",
                 FullFileName = "NAX.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=NAX.zip", HOST),
                 Progress = 0,
                 Size = 5,
+                Mode = "wild",
             });
             Downloads.Add(new DownloadViewModel("OG") {
                 FileName = "OG",
+                ChnName = "古神的低语",
                 FullFileName = "OG.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=OG.zip", HOST),
                 Progress = 0,
                 Size = 28,
+                Mode = "standard",
             });
             Downloads.Add(new DownloadViewModel("AT") {
                 FileName = "AT",
+                ChnName = "冠军的试炼",
                 FullFileName = "AT.zip",
                 Address = string.Format("http://{0}/HSDecks/Home/Download?ImageName=AT.zip", HOST),
                 Progress = 0,
                 Size = 26,
+                Mode = "standard",
             });
             foreach (var set in Downloads) {
                 var s = await ApplicationData.Current.LocalFolder.TryGetItemAsync(set.FullFileName);
@@ -116,9 +132,29 @@ namespace HSDecks.ViewModels {
                     set.Complete();
                 }
             }
+            StandardSet = Downloads.Where(p => p.Mode == "standard").ToList();
+            WildSet = Downloads.Where(p => p.Mode == "wild").ToList();
+            StandardSet.ForEach(p => p.PropertyChanged += this.NotifyStandardSetCount);
+            WildSet.ForEach(p => p.PropertyChanged += this.NotifyWildSetCount);
 
             await refreshPageAsync();
             await DeckInitializing();
+        }
+
+        private void NotifyWildSetCount(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DownloadViewModel.Ready))
+            {
+                OnPropertyChanged(nameof(WildDownloadMsg));
+            }
+        }
+
+        private void NotifyStandardSetCount(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DownloadViewModel.Ready))
+            {
+                OnPropertyChanged(nameof(StandardDownloadMsg));
+            }
         }
 
         public async Task DeckInitializing() {
@@ -210,7 +246,12 @@ namespace HSDecks.ViewModels {
         }
 
         // Download Page
-        public ObservableCollection<DownloadViewModel> Downloads;
+        public List<DownloadViewModel> Downloads;
+        public List<DownloadViewModel> StandardSet;
+        public List<DownloadViewModel> WildSet;
+
+        public string StandardDownloadMsg => string.Format("已下载({0}/5)", StandardSet.Count(p => p.Ready == true));
+        public string WildDownloadMsg => string.Format("已下载({0}/2)", WildSet.Count(p => p.Ready == true));
     }
 
     public class DetailViewModel {
