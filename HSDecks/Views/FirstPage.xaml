@@ -95,8 +95,10 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel  Style="{StaticResource TitleStyle}">
-                                <Image Source="ms-appx:///Assets/first-page/single.jpg" Stretch="Uniform" ></Image>
-                                <Button Content="单卡查询" Style="{StaticResource HeadButtonStyle}" ></Button>
+                                <Image Source="ms-appx:///Assets/first-page/single.jpg" Stretch="Uniform"
+                                       Name="SingleImage" Tapped="SingleImage_Tapped"></Image>
+                                <Button Content="单卡查询" Style="{StaticResource HeadButtonStyle}" 
+                                        Name="SingleBtn" Click="SingleBtn_Click"></Button>
                             </StackPanel>
 
                             <StackPanel  Grid.Column="1"  Style="{StaticResource TitleStyle}">

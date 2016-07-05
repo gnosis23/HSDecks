@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Bindbase.cs" />
+    <Compile Include="Common\BoolToInvisible.cs" />
     <Compile Include="Common\BoolToVisible.cs" />
     <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\RarityToBrush.cs" />
@@ -142,6 +143,12 @@
     <Compile Include="ViewModels\DeckItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
+    <Compile Include="Views\SetCardDetailPage.xaml.cs">
+      <DependentUpon>SetCardDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingleCard.xaml.cs">
+      <DependentUpon>SingleCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
@@ -1988,6 +1995,14 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SetCardDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SingleCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TestPage.xaml">
       <SubType>Designer</SubType>

@@ -19,7 +19,10 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace HSDecks {
     class CardData {
 
-        public async static Task GetCards(List<AbstractCard> cards, int cost, string heroClass) {
+        public async static Task GetCards(List<AbstractCard> cards, int cost, 
+            string heroClass = "All", 
+            string setName = "All")
+        {
             var uri = new Uri("ms-appx:///Assets/cards.json");
             var sampleFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
 
@@ -56,7 +59,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "BASIC";
+                aCard.cardSetName = "BASIC";
                 tempCards.Add(aCard);
             });
             Fuck.Classic.ForEach(p => {
@@ -76,7 +79,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "BASIC";
+                aCard.cardSetName = "BASIC";
                 tempCards.Add(aCard);
             });
             Fuck.Naxxramas.ForEach(p => {
@@ -96,7 +99,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "NAX";
+                aCard.cardSetName = "NAX";
                 tempCards.Add(aCard);
             });
             Fuck.GoblinsvsGnomes.ForEach(p => {
@@ -116,7 +119,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "GVG";
+                aCard.cardSetName = "GVG";
                 tempCards.Add(aCard);
             });
             Fuck.BlackrockMountain.ForEach(p => {
@@ -136,7 +139,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "BRM";
+                aCard.cardSetName = "BRM";
                 tempCards.Add(aCard);
             });
             Fuck.TheGrandTournament.ForEach(p => {
@@ -156,7 +159,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "AT";
+                aCard.cardSetName = "AT";
                 tempCards.Add(aCard);
             });
             Fuck.TheLeagueofExplorers.ForEach(p => {
@@ -176,7 +179,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "LOE";
+                aCard.cardSetName = "LOE";
                 tempCards.Add(aCard);
             });
             Fuck.WhispersoftheOldGods.ForEach(p => {
@@ -196,7 +199,7 @@ namespace HSDecks {
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
-                aCard.imageSetName = "OG";
+                aCard.cardSetName = "OG";
                 tempCards.Add(aCard);
             });
 
@@ -248,6 +251,11 @@ namespace HSDecks {
 
                     cards.AddRange(selected);
                 }
+            }
+
+            if (setName != "All")
+            {
+                cards.RemoveAll(p => p.cardSetName != setName);
             }
 
             cards.ForEach(p => {

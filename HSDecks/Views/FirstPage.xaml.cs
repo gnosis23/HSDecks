@@ -59,5 +59,15 @@ namespace HSDecks.Views
         {
             this.Frame.Navigate(typeof(DownloadPage));
         }
+
+        private void SingleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SingleCard));
+        }
+
+        private void SingleImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SingleCard));
+        }
     }
 }

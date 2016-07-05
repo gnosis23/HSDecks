@@ -17,7 +17,7 @@ namespace HSDecks.ViewModels {
     public class MasterViewModel: BindableBase {
         private readonly string HOST = "10.0.0.4";
 
-        List<AbstractCard> Cards;
+        public List<AbstractCard> Cards { get; set; }
 
         DeckViewModel _selectedDeck = null;
         public DeckViewModel SelectedDeck {
@@ -191,7 +191,7 @@ namespace HSDecks.ViewModels {
         private void FindCardImage(AbstractCard card)
         {
             Uri uri;
-            if (ImageSetReady(card.imageSetName))
+            if (ImageSetReady(card.cardSetName))
             {
                 uri = new Uri(String.Format("ms-appdata:///local/cards/{0}.png", card.cardId));
             }
@@ -295,6 +295,14 @@ namespace HSDecks.ViewModels {
         public bool ImageSetReady(string setName)
         {
             return Downloads.First(p => p.FileName == setName).Ready ;
+        }
+
+        public DownloadViewModel SelectedExpansion { get; set; }
+
+        public async Task FilterCards(string setName)
+        {
+            await CardData.GetCards(Cards, -1, "All", setName);
+            Cards.ForEach(p => FindCardImage(p));
         }
     }
 

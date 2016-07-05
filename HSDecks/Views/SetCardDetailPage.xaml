@@ -1,30 +1,26 @@
 ﻿<Page
-    x:Class="HSDecks.DeckDetail"
+    x:Class="HSDecks.Views.SetCardDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HSDecks"
-    xmlns:vm="using:HSDecks.ViewModels"
-    xmlns:cc="using:HSDecks.Controls"
+    xmlns:local="using:HSDecks.Views"
     xmlns:common="using:HSDecks.Common"
+    xmlns:vm="using:HSDecks.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Page.Resources>
         <common:BoolToVisibility x:Key="BoolToVisibilityConverter" />
-        <DataTemplate x:DataType="vm:DeckItemViewModel" x:Key="CardDetailDataTemplate">
+        <DataTemplate x:DataType="vm:AbstractCard" x:Key="CardDetailDataTemplate">
             <RelativePanel Height="80" BorderBrush="Black" BorderThickness="0,1,0,0">
                 <Image Name="CardImage" Width="100" Height="50" Stretch="Uniform"
-                                   Source="{x:Bind card.sImage}"
+                                   Source="{x:Bind sImage}"
                                    RelativePanel.AlignVerticalCenterWithPanel="True" />
                 <RelativePanel RelativePanel.RightOf="CardImage" RelativePanel.AlignTopWithPanel="True"
                                            RelativePanel.AlignBottomWithPanel="True"
                                            Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="2x" FontSize="24" Margin="0,0,10,0"
-                                               Visibility="{x:Bind Path=twoNumberVisible,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
-                        </TextBlock>
-                        <TextBlock x:Name="NameText" Text="{x:Bind card.name}" FontSize="24"/>
+                        <TextBlock x:Name="NameText" Text="{x:Bind name}" FontSize="24"/>
                     </StackPanel>
                     <TextBlock Text="更改时间: 07.01 16:00" FontSize="12" 
                                        RelativePanel.AlignBottomWithPanel="True"/>
@@ -35,7 +31,7 @@
                     <RelativePanel.Background>
                         <ImageBrush ImageSource="ms-appx:///Assets/cost.png" Stretch="None"/>
                     </RelativePanel.Background>
-                    <TextBlock Text="{x:Bind card.cost}" FontSize="28" Foreground="White"
+                    <TextBlock Text="{x:Bind cost}" FontSize="28" Foreground="White"
                                            RelativePanel.AlignVerticalCenterWithPanel="True"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold" FontFamily="Segoe UI Black"></TextBlock>
                 </RelativePanel>
@@ -51,43 +47,22 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="shit" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <RelativePanel  Background="#FF82B0F3">
             <Button Name="BackBtn" FontSize="30" Content="&#xE72B;" FontFamily="Segoe MDL2 Assets"
                     Click="BackBtn_Click"></Button>
-            <TextBlock Text="套牌详情" FontSize="30" 
+            <TextBlock Text="{x:Bind SelectedExpansion.ChnName}" FontSize="30" 
                        RelativePanel.AlignHorizontalCenterWithPanel="True"></TextBlock>
             <Button Name="EditBtn" Content="&#xE70F;" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Click="EditBtn_Click"></Button>
+                    RelativePanel.AlignRightWithPanel="True"></Button>
         </RelativePanel>
 
 
-        <RelativePanel Grid.Row="1" Height="80" BorderBrush="Black" BorderThickness="0,1,0,0" Margin="5">
-            <TextBlock x:Name="NameText" Text="{x:Bind masterViewModel.SelectedDeck.name}" FontSize="30"/>
-            <TextBlock Text="更改时间: 07.01 16:00" FontSize="16"
-                                       RelativePanel.AlignBottomWithPanel="True"/>
-            <Image  Height="60" Width="120" Source="{x:Bind masterViewModel.SelectedDeck.hImage}" 
-                                    RelativePanel.AlignVerticalCenterWithPanel="True"
-                                    RelativePanel.AlignRightWithPanel="True" Stretch="UniformToFill"/>
-        </RelativePanel>
-
-        <StackPanel Grid.Row="3" Orientation="Horizontal" DataContext="{x:Bind OneDeck}">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="50">
-                <TextBlock Text="{x:Bind Path=OneDeck.cardCount,Mode=OneWay}" />
-                <TextBlock Text="/ 30" />
-            </StackPanel>
-            <Button Name="RenameBtn" Content="Rename"  FontSize="14" Margin="5,0,5,0" Click="RenameBtn_Click"/>
-            <Button Name="ShareBtn" Content="Share"  FontSize="14" Click="ShareBtn_Click"/>
-        </StackPanel>
-
-        <Grid  Grid.Row="2" >
-            <ListView ItemsSource="{x:Bind Path=OneDeck.items,Mode=OneWay}" Name="DeckList"
+        <Grid  Grid.Row="1" >
+            <ListView ItemsSource="{x:Bind Path=Cards}" Name="DeckList"
                       ItemClick="DeckList_ItemClick" IsItemClickEnabled="True"
                       ItemTemplate="{StaticResource CardDetailDataTemplate}"
                       ItemContainerStyle="{StaticResource CardDetailListViewItemStyle}">

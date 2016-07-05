@@ -48,4 +48,30 @@ namespace HSDecks.Common
             throw new NotImplementedException();
         }
     }
+
+    public class BoolToBrush : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            Color c = Colors.Black;
+            if (value != null)
+            {
+                bool _isTrue = false;
+                if (Boolean.TryParse(value.ToString(), out _isTrue))
+                {
+                    if (!_isTrue)
+                    {
+                        c = Colors.Gray;
+                    }
+                }
+            }
+
+            return new SolidColorBrush(c);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
