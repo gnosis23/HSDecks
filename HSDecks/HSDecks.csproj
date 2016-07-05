@@ -1916,6 +1916,7 @@
     <Content Include="Assets\control\Warlock.jpg" />
     <Content Include="Assets\control\Warrior.jpg" />
     <Content Include="Assets\cost.png" />
+    <Content Include="Assets\empty.png" />
     <Content Include="Assets\Warbot.png" />
     <Content Include="Assets\cards.json" />
     <Content Include="Assets\yaoming.jpg" />

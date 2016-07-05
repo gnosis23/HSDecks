@@ -134,11 +134,27 @@ namespace HSDecks.ViewModels {
             }
             StandardSet = Downloads.Where(p => p.Mode == "standard").ToList();
             WildSet = Downloads.Where(p => p.Mode == "wild").ToList();
+
             StandardSet.ForEach(p => p.PropertyChanged += this.NotifyStandardSetCount);
             WildSet.ForEach(p => p.PropertyChanged += this.NotifyWildSetCount);
+            Downloads.ForEach(p => p.PropertyChanged += this.UpdateCardImage);
 
             await refreshPageAsync();
             await DeckInitializing();
+        }
+
+        private void UpdateCardImage(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DownloadViewModel.Ready))
+            {
+                foreach (var deck in Decks)
+                {
+                    foreach (var item in deck.items)
+                    {
+                        FindCardImage(item.card);
+                    }
+                }
+            }
         }
 
         private void NotifyWildSetCount(object sender, PropertyChangedEventArgs e)
@@ -162,7 +178,28 @@ namespace HSDecks.ViewModels {
             var oldDeckList = await DeckSaver.StringToDeckListAsync(str);
 
             Decks.Clear();
+            foreach (var deck in oldDeckList)
+            {
+                foreach (var item in deck.items)
+                {
+                    FindCardImage(item.card);
+                }
+            }
             oldDeckList.ForEach(p => Decks.Add(p));
+        }
+
+        private void FindCardImage(AbstractCard card)
+        {
+            Uri uri;
+            if (ImageSetReady(card.imageSetName))
+            {
+                uri = new Uri(String.Format("ms-appdata:///local/cards/{0}.png", card.cardId));
+            }
+            else
+            {
+                uri = new Uri(String.Format("ms-appx:///Assets/empty.png"));
+            }
+            card.image = new BitmapImage(uri);
         }
 
         public ObservableCollection<DetailViewModel> Board { get; set; }
@@ -179,7 +216,8 @@ namespace HSDecks.ViewModels {
             Board.Clear();
 
             for (int i = 0; i < Cards.Count; i++) {
-                    Board.Add(new DetailViewModel(Cards[i]));
+                FindCardImage(Cards[i]);
+                Board.Add(new DetailViewModel(Cards[i]));
             }
 
             OnPropertyChanged(nameof(this.Board));
@@ -252,6 +290,12 @@ namespace HSDecks.ViewModels {
 
         public string StandardDownloadMsg => string.Format("已下载({0}/5)", StandardSet.Count(p => p.Ready == true));
         public string WildDownloadMsg => string.Format("已下载({0}/2)", WildSet.Count(p => p.Ready == true));
+
+        
+        public bool ImageSetReady(string setName)
+        {
+            return Downloads.First(p => p.FileName == setName).Ready ;
+        }
     }
 
     public class DetailViewModel {
