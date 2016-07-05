@@ -8,11 +8,18 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="dictionary1.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Style TargetType="Button" x:Key="HeadButtonStyle">
+            <Setter Property="Width" Value="140" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Background" Value="LightCyan" />
+        </Style>
+        <Style TargetType="StackPanel" x:Key="TitleStyle">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="150" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -69,7 +76,53 @@
 
                 <SplitView.Content>
                     <Grid>
-                        <Button Content="Fuck" FontSize="30" Click="Button_Click"></Button>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Image Source="ms-appx:///Assets/logo.png" Height="200" Stretch="Uniform"></Image>
+
+                        <Grid Grid.Row="1"  Margin="10" BorderThickness="0,1,0,1" BorderBrush="Gray">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel  Style="{StaticResource TitleStyle}">
+                                <Image Source="ms-appx:///Assets/first-page/single.jpg" Stretch="Uniform" ></Image>
+                                <Button Content="单卡查询" Style="{StaticResource HeadButtonStyle}" ></Button>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Column="1"  Style="{StaticResource TitleStyle}">
+                                <Image Source="ms-appx:///Assets/first-page/db.jpg" Stretch="Uniform"
+                                       Name="DeckImage" Tapped="DeckImage_Tapped"></Image>
+                                <Button Content="数据库" Style="{StaticResource HeadButtonStyle}" 
+                                        Name="DeckBtn" Click="DeckBtn_Click"></Button>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="1" Grid.Column="1"  Style="{StaticResource TitleStyle}">
+                                <Image Source="ms-appx:///Assets/first-page/data.jpg" Stretch="Uniform"
+                                       Name="DataImage" Tapped="DataImage_Tapped"></Image>
+                                <Button Content="数据管理" Style="{StaticResource HeadButtonStyle}" 
+                                        Name="DataBtn" Click="DataBtn_Click"></Button>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="1"  Style="{StaticResource TitleStyle}">
+                                <Image Source="ms-appx:///Assets/first-page/jjc.jpg" Stretch="Uniform" ></Image>
+                                <Button Content="竞技场" Style="{StaticResource HeadButtonStyle}" ></Button>
+                            </StackPanel>
+
+
+                        </Grid>
+
+                        <Image Grid.Row="2" Source="ms-appx:///Assets/page-back.png" Height="100"
+                               Stretch="Fill" VerticalAlignment="Bottom" Opacity="0.8"></Image>
                     </Grid>
                 </SplitView.Content>
             </SplitView>

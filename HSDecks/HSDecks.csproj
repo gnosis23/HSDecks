@@ -1917,6 +1917,12 @@
     <Content Include="Assets\control\Warrior.jpg" />
     <Content Include="Assets\cost.png" />
     <Content Include="Assets\empty.png" />
+    <Content Include="Assets\first-page\data.jpg" />
+    <Content Include="Assets\first-page\db.jpg" />
+    <Content Include="Assets\first-page\jjc.jpg" />
+    <Content Include="Assets\first-page\single.jpg" />
+    <Content Include="Assets\logo.png" />
+    <Content Include="Assets\page-back.png" />
     <Content Include="Assets\Warbot.png" />
     <Content Include="Assets\cards.json" />
     <Content Include="Assets\yaoming.jpg" />

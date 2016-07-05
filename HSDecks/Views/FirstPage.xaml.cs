@@ -27,11 +27,6 @@ namespace HSDecks.Views
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(DeckMenu));
-        }
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DownloadListBoxItem.IsTapEnabled)
@@ -43,6 +38,26 @@ namespace HSDecks.Views
         private void IconTextBlock_Click(object sender, RoutedEventArgs e)
         {
             MenuView.IsPaneOpen = !MenuView.IsPaneOpen;
+        }
+
+        private void DataBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DownloadPage));
+        }
+
+        private void DeckBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DeckMenu));
+        }
+
+        private void DeckImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DeckMenu));
+        }
+
+        private void DataImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DownloadPage));
         }
     }
 }
