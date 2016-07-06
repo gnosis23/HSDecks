@@ -34,7 +34,8 @@
                        RelativePanel.AlignHorizontalCenterWithPanel="True"></TextBlock>
             <Button Name="QueryBtn" Content="&#xE71E;" FontSize="30" 
                     FontFamily="Segoe MDL2 Assets"
-                    RelativePanel.AlignRightWithPanel="True"></Button>
+                    RelativePanel.AlignRightWithPanel="True"
+                    Click="QueryBtn_Click"></Button>
         </RelativePanel>
 
         <Grid Grid.Row="1" Margin="5">

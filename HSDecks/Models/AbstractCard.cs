@@ -22,6 +22,7 @@ namespace HSDecks.Models {
         public string playerClass { get; set; }
         public string flavor { get; set; }
         public string artist { get; set; }
+        public string mode { get; set; }
 
         public string img { get; set; }
         public string imgGold { get; set; }

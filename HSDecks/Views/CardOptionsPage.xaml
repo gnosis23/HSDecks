@@ -1,0 +1,170 @@
+﻿<Page
+    x:Class="HSDecks.Views.CardOptionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HSDecks.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="StackPanel" x:Key="HeadStyle">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderThickness" Value="0,1,0,0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="HeadTextStyle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+        <local:NullableBooleanToBooleanConverter x:Key="NullableBooleanConverter" />
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <RelativePanel  Background="#FF82B0F3">
+            <Button Name="BackBtn" FontSize="30" Content="&#xE72B;" FontFamily="Segoe MDL2 Assets"
+                    Click="BackBtn_Click"></Button>
+            <TextBlock Text="卡牌查询" FontSize="30" 
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"></TextBlock>
+            <Button Name="EditBtn" Content="确定" FontSize="24" Background="Green" Foreground="White"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Click="EditBtn_Click"></Button>
+        </RelativePanel>
+
+        <ScrollViewer  Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="卡牌名" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <TextBox Text="{x:Bind Path=Query.name,Mode=TwoWay}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="阵营" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="德鲁伊" 
+                                  IsChecked="{x:Bind Path=Query.heroClassList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="法师"  
+                                  IsChecked="{x:Bind Path=Query.heroClassList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="猎人" 
+                                  IsChecked="{x:Bind Path=Query.heroClassList[2],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="牧师"
+                                  IsChecked="{x:Bind Path=Query.heroClassList[3],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="潜行者"
+                                  IsChecked="{x:Bind Path=Query.heroClassList[4],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="萨满" 
+                                  IsChecked="{x:Bind Path=Query.heroClassList[5],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="圣骑士"
+                                  IsChecked="{x:Bind Path=Query.heroClassList[6],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="术士" 
+                                  IsChecked="{x:Bind Path=Query.heroClassList[7],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="战士"
+                                  IsChecked="{x:Bind Path=Query.heroClassList[8],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="中立"
+                                  IsChecked="{x:Bind Path=Query.heroClassList[9],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="法力值" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="0"
+                                  IsChecked="{x:Bind Path=Query.costList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="1"
+                                  IsChecked="{x:Bind Path=Query.costList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="2"
+                                  IsChecked="{x:Bind Path=Query.costList[2],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="3"
+                                  IsChecked="{x:Bind Path=Query.costList[3],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="4"
+                                  IsChecked="{x:Bind Path=Query.costList[4],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="5"
+                                  IsChecked="{x:Bind Path=Query.costList[5],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="6"
+                                  IsChecked="{x:Bind Path=Query.costList[6],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="7+"
+                                  IsChecked="{x:Bind Path=Query.costList[7],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="类型" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="法术"
+                                  IsChecked="{x:Bind Path=Query.cardTypeList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="随从"
+                                  IsChecked="{x:Bind Path=Query.cardTypeList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="装备"
+                                  IsChecked="{x:Bind Path=Query.cardTypeList[2],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="稀有度" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="基本"
+                                  IsChecked="{x:Bind Path=Query.cardRarityList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="普通"
+                                  IsChecked="{x:Bind Path=Query.cardRarityList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="稀有"
+                                  IsChecked="{x:Bind Path=Query.cardRarityList[2],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="史诗"
+                                  IsChecked="{x:Bind Path=Query.cardRarityList[3],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="传说"
+                                  IsChecked="{x:Bind Path=Query.cardRarityList[4],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="赛制" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="标准"
+                                  IsChecked="{x:Bind Path=Query.modeList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="狂野"
+                                  IsChecked="{x:Bind Path=Query.modeList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Style="{StaticResource HeadStyle}">
+                        <TextBlock Text="系列" Style="{StaticResource HeadTextStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <CheckBox Content="基础系列"
+                                  IsChecked="{x:Bind Path=Query.expansionList[0],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="纳克萨玛斯"
+                                  IsChecked="{x:Bind Path=Query.expansionList[1],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="地精大战侏儒"
+                                  IsChecked="{x:Bind Path=Query.expansionList[2],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="冠军的试炼"
+                                  IsChecked="{x:Bind Path=Query.expansionList[3],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="黑石山的火焰"
+                                  IsChecked="{x:Bind Path=Query.expansionList[4],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="探险者协会"
+                                  IsChecked="{x:Bind Path=Query.expansionList[5],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                        <CheckBox Content="古神的低语"
+                                  IsChecked="{x:Bind Path=Query.expansionList[6],Mode=TwoWay,Converter={StaticResource NullableBooleanConverter}}"></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

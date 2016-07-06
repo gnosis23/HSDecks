@@ -113,12 +113,16 @@
     <Compile Include="data\CardData.cs" />
     <Compile Include="data\DeckSaver.cs" />
     <Compile Include="data\FileStuff.cs" />
+    <Compile Include="Models\CardQueryOption.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="Views\AppFrame.xaml.cs">
       <DependentUpon>AppFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CardDetailPage.xaml.cs">
       <DependentUpon>CardDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardOptionsPage.xaml.cs">
+      <DependentUpon>CardOptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DeckDetail.xaml.cs">
       <DependentUpon>DeckDetail.xaml</DependentUpon>
@@ -1964,6 +1968,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CardDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardOptionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

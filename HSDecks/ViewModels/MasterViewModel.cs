@@ -12,6 +12,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using System.ComponentModel;
+using HSDecks.Views;
 
 namespace HSDecks.ViewModels {
     public class MasterViewModel: BindableBase {
@@ -207,9 +208,15 @@ namespace HSDecks.ViewModels {
         public async Task refreshPageAsync() {
             if ((Cards.Count == 0)
                 || (Cards[0].cost != _cost)
-                || (Cards.Exists(p => p.playerClass != _class))) {
-                Task t = CardData.GetCards(Cards, _cost, _class);
-                await t;
+                || (Cards.Exists(p => p.playerClass != _class)))
+            {
+                var option = new CardQueryOption();
+                option.AddHero(_class);
+                // Neutral
+                option.AddHero("None");  
+                option.AddCost(_cost);
+
+                await CardData.GetCards(Cards, option);
             }
 
             AbstractCard empty = new AbstractCard();
@@ -299,11 +306,23 @@ namespace HSDecks.ViewModels {
 
         public DownloadViewModel SelectedExpansion { get; set; }
 
-        public async Task FilterCards(string setName)
+        public async Task FilterCardsAsync(string setName)
         {
-            await CardData.GetCards(Cards, -1, "All", setName);
+            var option = new CardQueryOption();
+            option.AddExpansion(setName);
+
+            await CardData.GetCards(Cards, option);
             Cards.ForEach(p => FindCardImage(p));
         }
+
+        public async Task FilterCardsAsync(CardQueryOption option)
+        {
+            await CardData.GetCards(Cards, option);
+            Cards.ForEach(p => FindCardImage(p));
+        }
+
+        // Page CardOption
+        public CardQueryOptionViewModel QueryViewModel = new CardQueryOptionViewModel();
     }
 
     public class DetailViewModel {

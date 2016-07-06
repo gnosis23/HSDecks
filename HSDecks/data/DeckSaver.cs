@@ -38,9 +38,12 @@ namespace HSDecks {
                 string id = pair[0];
                 int count = Int32.Parse(pair[1]);
 
-                var selected = CardsPool.First(p => p.cardId == id);
-                var t = new DeckItemViewModel(selected, count);
-                deck.Add(t);
+                var selected = CardsPool.FirstOrDefault(p => p.cardId == id);
+                if (selected != null)
+                {
+                    var t = new DeckItemViewModel(selected, count);
+                    deck.Add(t);
+                }
             }
 
             return deck;
@@ -49,7 +52,7 @@ namespace HSDecks {
         public async static Task<List<DeckViewModel>> StringToDeckListAsync(string code) {
             List<DeckViewModel> deckList = new List<DeckViewModel>();
             List<AbstractCard> CardsPool = new List<AbstractCard>();
-            await CardData.GetCards(CardsPool, -1, "All");
+            await CardData.GetCards(CardsPool, new CardQueryOption());
 
             if (code == "") {
                 return deckList;

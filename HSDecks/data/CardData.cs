@@ -19,9 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace HSDecks {
     class CardData {
 
-        public async static Task GetCards(List<AbstractCard> cards, int cost, 
-            string heroClass = "All", 
-            string setName = "All")
+        public async static Task GetCards(List<AbstractCard> cards, CardQueryOption option) 
         {
             var uri = new Uri("ms-appx:///Assets/cards.json");
             var sampleFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
@@ -55,11 +53,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "BASIC";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
             Fuck.Classic.ForEach(p => {
@@ -75,11 +74,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "BASIC";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
             Fuck.Naxxramas.ForEach(p => {
@@ -95,11 +95,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "NAX";
+                aCard.mode = "Wild";
                 tempCards.Add(aCard);
             });
             Fuck.GoblinsvsGnomes.ForEach(p => {
@@ -115,11 +116,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "GVG";
+                aCard.mode = "Wild";
                 tempCards.Add(aCard);
             });
             Fuck.BlackrockMountain.ForEach(p => {
@@ -135,11 +137,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "BRM";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
             Fuck.TheGrandTournament.ForEach(p => {
@@ -155,11 +158,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "AT";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
             Fuck.TheLeagueofExplorers.ForEach(p => {
@@ -175,11 +179,12 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "LOE";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
             Fuck.WhispersoftheOldGods.ForEach(p => {
@@ -195,70 +200,45 @@ namespace HSDecks {
                 aCard.race = p.race;
                 aCard.rarity = p.rarity;
                 aCard.text = p.text;
-                aCard.playerClass = p.playerClass;
+                aCard.playerClass = p.playerClass == null ? "None" : p.playerClass;
                 aCard.img = p.img;
                 aCard.flavor = p.flavor;
                 aCard.artist = p.artist;
                 aCard.cardSetName = "OG";
+                aCard.mode = "Standard";
                 tempCards.Add(aCard);
             });
 
-            if (heroClass == "All") {
-                if (cost == -1) {
-                    var selected = from p in tempCards
-                                   where p.img != null && p.collectable == true
-                                   && p.type != "Hero"
-                                   orderby p.name
-                                   select p;
-
-                    cards.AddRange(selected);
-                }
-                else if (cost == 7) {
-                    var selected = from p in tempCards
-                                   where p.cost >= 7 && p.img != null && p.collectable == true
-                                   && p.type != "Hero"
-                                   orderby p.name
-                                   select p;
-
-                    cards.AddRange(selected);
-                } else {
-                    var selected = from p in tempCards
-                                   where p.cost == cost && p.img != null && p.collectable == true
-                                   && p.type != "Hero"
-                                   orderby p.name
-                                   select p;
-
-                    cards.AddRange(selected);
-                }
-            } 
-            else {
-                if (cost == 7) {
-                    var selected = from p in tempCards
-                                   where p.cost >= 7 && p.img != null && p.collectable == true
-                                   && p.type != "Hero"
-                                   && (p.playerClass == heroClass || p.playerClass == null)
-                                   orderby p.playerClass descending, p.name
-                                   select p;
-
-                    cards.AddRange(selected);
-                } else {
-                    var selected = from p in tempCards
-                                   where p.cost == cost && p.img != null && p.collectable == true
-                                   && p.type != "Hero"
-                                   && (p.playerClass == heroClass || p.playerClass == null)
-                                   orderby p.playerClass descending, p.name
-                                   select p;
-
-                    cards.AddRange(selected);
-                }
-            }
-
-            if (setName != "All")
+            tempCards.RemoveAll(p => p.img == null || (p.collectable.GetValueOrDefault() == false) || p.type == "Hero");
+            if (option.heroClassList.Count != 0)
             {
-                cards.RemoveAll(p => p.cardSetName != setName);
+                tempCards.RemoveAll( p => !option.heroClassList.Contains(p.playerClass) );
+            }
+            if (option.costList.Count != 0)
+            {
+                tempCards.RemoveAll(p => !option.costList.Contains(p.cost < 7 ? p.cost.ToString() : "7"));
+            }
+            if (option.expansionList.Count != 0)
+            {
+                tempCards.RemoveAll(p => !option.expansionList.Contains(p.cardSetName));
+            }
+            if (option.cardTypeList.Count != 0)
+            {
+                tempCards.RemoveAll(p => !option.cardTypeList.Contains(p.type));
+            }
+            if (option.modeList.Count != 0)
+            {
+                tempCards.RemoveAll(p => !option.modeList.Contains(p.mode));
+            }
+            if (option.cardRarityList.Count != 0)
+            {
+                tempCards.RemoveAll(p => !option.cardRarityList.Contains(p.rarity));
             }
 
-            cards.ForEach(p => {
+            cards.AddRange(tempCards.OrderBy(p => p.playerClass));
+
+            cards.ForEach(p =>
+            {
                 uri = new Uri(String.Format("ms-appx:///Assets/bars/{0}.png", p.cardId));
                 var img = new BitmapImage(uri);
                 p.sImage = img;

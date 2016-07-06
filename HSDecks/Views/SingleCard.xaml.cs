@@ -39,9 +39,15 @@ namespace HSDecks.Views
         {
             var Selected = (DownloadViewModel)e.ClickedItem;
             masterViewModel.SelectedExpansion = Selected; 
-            await masterViewModel.FilterCards(Selected.FileName);
+            await masterViewModel.FilterCardsAsync(Selected.FileName);
 
             Frame.Navigate(typeof(SetCardDetailPage));
         }
+
+        private void QueryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CardOptionsPage));
+        }
     }
+
 }
