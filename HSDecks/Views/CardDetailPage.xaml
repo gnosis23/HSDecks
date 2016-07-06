@@ -32,14 +32,15 @@
             <StackPanel Orientation="Vertical">
                 <RelativePanel RelativePanel.AlignVerticalCenterWithPanel="True">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{x:Bind SelectedCard.card.cardSet}" FontSize="24" Height="50" Margin="10,10,10,0" />
+                        <TextBlock Text="{x:Bind SelectedCard.card.cardSet}" Foreground="Gray"
+                                   FontSize="16" Height="50" Margin="10,10,10,0" />
                     </StackPanel>
-                    <TextBlock Text="{x:Bind SelectedCard.card.name}" FontSize="30" Margin="10"
+                    <TextBlock Text="{x:Bind SelectedCard.card.name}" FontSize="16" Margin="10" Foreground="Gray"
                        RelativePanel.AlignRightWithPanel="True" MaxWidth="200" Height="50"/>
                 </RelativePanel>
 
                 <StackPanel BorderBrush="LightGray" BorderThickness="0,1,0,1" Margin="10,0,10,0">
-                    <Image Source="{x:Bind SelectedCard.card.image}" Stretch="UniformToFill" Width="150" Height="220"></Image>
+                    <Image Source="{x:Bind SelectedCard.card.image}" Stretch="None" />
                 </StackPanel>
 
                 <RelativePanel Height="100" BorderBrush="LightGray" BorderThickness="0,1,0,1" Margin="10,0,10,0">
