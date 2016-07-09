@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace HSDecks.Models {
     public class DeckViewModel : BindableBase {
         public int Id { get; set; }
+
         string _name;
         public string name {
             get { return _name; }
@@ -36,6 +38,20 @@ namespace HSDecks.Models {
             hImage = new BitmapImage(new Uri(String.Format("ms-appx:///Assets/control/{0}.jpg", 
                 playerClass.ToString())));
             this.items = new ObservableCollection<DeckItemViewModel>(xxx);
+        }
+
+        public Deck ToDeck()
+        {
+            List<DeckItem> items = this.items.Select(p => new DeckItem() {
+                cardId = p.cardId,
+                cardCount = p.cardCount,
+            }).ToList();
+            return new Deck() {
+                id = this.Id,
+                name = this.name,
+                playerClass = this.playerClass,
+                items = items,
+            };
         }
 
         public void Add(DeckItemViewModel item) {

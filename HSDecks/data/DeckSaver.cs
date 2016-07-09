@@ -1,75 +1,80 @@
-﻿using HSDecks.Models;
+﻿using HSDecks.Common;
+using HSDecks.Models;
 using HSDecks.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace HSDecks {
-    public class DeckSaver {
-        public static string DeckToString(List<DeckItemViewModel> deck) {
-            string str = "";
-            foreach (var item in deck) {
-                str += String.Format("{0}^{1} ", item.card.cardId, item.cardCount);
-            }
-
-            return str.Trim();
+    public class DeckDataSource {
+ 
+        public static async Task SaveDeckAsync(IEnumerable<Deck> p)
+        {
+            await SaveAsync(p);
         }
 
-        public static string DeckListToString(List<DeckViewModel> deckList) {
-            string str = "";
-            foreach (var deck in deckList) {
-                str += String.Format("{0}+{1}+{2}+{3};", 
-                    deck.Id, deck.name, (int)deck.playerClass, 
-                    DeckToString(deck.items.ToList()));
-            }
-
-            return str.Trim(new char[] { ' ', ';' });
+        private static async Task SaveAsync<T> (T p)
+        {
+            var file = await ApplicationData.Current.LocalFolder
+                .CreateFileAsync("deck.dat", CreationCollisionOption.ReplaceExisting);
+            byte[] array = Serializer.Serialize(p);
+            await FileIO.WriteBytesAsync(file, array);
         }
 
-        public static List<DeckItemViewModel> StringToDeck(string code, List<AbstractCard> CardsPool) {
-            List<DeckItemViewModel> deck = new List<DeckItemViewModel>();
-            if (code == "") return deck;
+        public static async Task<List<DeckViewModel>> GetDecksAsync()
+        {
+            IEnumerable<Deck> decks = await GetAsync<IEnumerable<Deck>>();
 
-            foreach (var name in code.Split(' ')) {
-                var pair = name.Split('^');
-                string id = pair[0];
-                int count = Int32.Parse(pair[1]);
-
-                var selected = CardsPool.FirstOrDefault(p => p.cardId == id);
-                if (selected != null)
-                {
-                    var t = new DeckItemViewModel(selected, count);
-                    deck.Add(t);
-                }
-            }
-
-            return deck;
-        }
-
-        public async static Task<List<DeckViewModel>> StringToDeckListAsync(string code) {
-            List<DeckViewModel> deckList = new List<DeckViewModel>();
-            List<AbstractCard> CardsPool = new List<AbstractCard>();
+            var deckList = new List<DeckViewModel>();
+            var CardsPool = new List<AbstractCard>();
             await CardData.GetCards(CardsPool, new CardQueryOption());
 
-            if (code == "") {
+            if (decks == null)
+            {
                 return deckList;
             }
 
-            foreach (var deckStr in code.Split(';')) {
-                var pair = deckStr.Split('+');
-                int Id = int.Parse(pair[0]);
-                string Name = pair[1];
-                PlayerClass pc =  (PlayerClass)int.Parse(pair[2]);
-                List<DeckItemViewModel> items = StringToDeck(pair[3], CardsPool);
+            foreach (var deck in decks)
+            {
+                var items = new List<DeckItemViewModel>();
 
-                DeckViewModel dk = new DeckViewModel(Id, Name, pc, items);
+                foreach (var item in deck.items)
+                {
+                    string id = item.cardId;
+                    int count = item.cardCount;
+
+                    var selected = CardsPool.FirstOrDefault(p => p.cardId == id);
+                    if (selected != null)
+                    {
+                        var t = new DeckItemViewModel(selected, count);
+                        items.Add(t);
+                    }
+                }
+
+
+                DeckViewModel dk = new DeckViewModel(deck.id, deck.name, deck.playerClass, items);
                 deckList.Add(dk);
             }
 
             return deckList;
+        }
+
+        private static async Task<T> GetAsync<T>()
+        {
+            T obj = default(T);
+            var file = await ApplicationData.Current.LocalFolder.TryGetItemAsync("deck.dat") as StorageFile;
+            if (file != null)
+            {
+                var bytes = (await FileIO.ReadBufferAsync(file)).ToArray();
+                obj = Serializer.Deserialize<T>(bytes);
+            }
+
+            return obj;
         }
     }
 }

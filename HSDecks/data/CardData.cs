@@ -235,7 +235,7 @@ namespace HSDecks {
                 tempCards.RemoveAll(p => !option.cardRarityList.Contains(p.rarity));
             }
 
-            cards.AddRange(tempCards.OrderBy(p => p.playerClass));
+            cards.AddRange(tempCards.OrderBy(p => p.cost));
 
             cards.ForEach(p =>
             {

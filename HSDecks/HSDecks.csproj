@@ -100,6 +100,7 @@
     <Compile Include="Common\BoolToVisible.cs" />
     <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\RarityToBrush.cs" />
+    <Compile Include="Common\Serializer.cs" />
     <Compile Include="Common\ZipHelper.cs" />
     <Compile Include="Controls\DeckHeadBlock.xaml.cs">
       <DependentUpon>DeckHeadBlock.xaml</DependentUpon>
@@ -114,6 +115,7 @@
     <Compile Include="data\DeckSaver.cs" />
     <Compile Include="data\FileStuff.cs" />
     <Compile Include="Models\CardQueryOption.cs" />
+    <Compile Include="Models\Deck.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="Views\AppFrame.xaml.cs">
       <DependentUpon>AppFrame.xaml</DependentUpon>

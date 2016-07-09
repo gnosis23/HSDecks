@@ -22,8 +22,8 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="NameText" Text="{x:Bind name}" FontSize="24"/>
                     </StackPanel>
-                    <TextBlock Text="更改时间: 07.01 16:00" FontSize="12" 
-                                       RelativePanel.AlignBottomWithPanel="True"/>
+                    <TextBlock Text="{x:Bind cardId}" FontSize="12" 
+                               RelativePanel.AlignBottomWithPanel="True"/>
                 </RelativePanel>
                 <RelativePanel Height="60" Width="50"
                                         RelativePanel.AlignVerticalCenterWithPanel="True"

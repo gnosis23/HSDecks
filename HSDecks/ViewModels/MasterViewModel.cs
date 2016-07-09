@@ -175,8 +175,7 @@ namespace HSDecks.ViewModels {
         }
 
         public async Task DeckInitializing() {
-            var str = await FileStuff.ReadFromFileAsync();
-            var oldDeckList = await DeckSaver.StringToDeckListAsync(str);
+            var oldDeckList = await DeckDataSource.GetDecksAsync();
 
             Decks.Clear();
             foreach (var deck in oldDeckList)
@@ -260,8 +259,8 @@ namespace HSDecks.ViewModels {
         }
 
         public async Task SaveDecks() {
-            var str = DeckSaver.DeckListToString(new List<DeckViewModel>(Decks));
-            await FileStuff.WriteToFileAsync(str);
+
+            await DeckDataSource.SaveDeckAsync(Decks.ToList().Select(p => p.ToDeck()));
         }
 
         public async Task SaveDecksAndExit() {
